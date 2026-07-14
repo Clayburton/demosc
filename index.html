@@ -185,7 +185,7 @@
      ►►►  YOUR "GET DEM-OSC" BUTTON LINK — CHANGE IT HERE, ONCE.  ◄◄◄
           Every button on the page (top bar, hero, sticky, final) uses it.
      ═══════════════════════════════════════════════════════════════════ */
-  window.DEMOSC_CART_LINK = "https://clayandkelsy.com/checkout/?add-to-cart=2042&quantity=1";
+  window.DEMOSC_CART_LINK = "https://clayandkelsy.com/checkout/?add-to-cart=6322&quantity=1";
   </script>
 
   <canvas id="scene"></canvas>
@@ -335,7 +335,7 @@
 
   /* apply the ONE buy link (window.DEMOSC_CART_LINK, set at the top of the HTML)
      to every button on the page, so there's only one place to ever change it */
-  var CART = window.DEMOSC_CART_LINK || 'https://clayandkelsy.com/checkout/?add-to-cart=2042&quantity=1';
+  var CART = window.DEMOSC_CART_LINK || 'https://clayandkelsy.com/checkout/?add-to-cart=6322&quantity=1';
   Array.prototype.forEach.call(document.querySelectorAll('[data-cart], .cta, .topcta'), function (a) {
     a.setAttribute('href', CART);
   });
