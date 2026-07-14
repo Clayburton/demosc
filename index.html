@@ -158,10 +158,29 @@
 
   /* ---------- desktop / large ---------- */
   @media(min-width:820px){
-    .hero{padding-top:104px;padding-bottom:56px;gap:20px}
-    .cassette-slot{height:min(52vh,520px);min-height:340px}
-    .headline{font-size:clamp(40px,4.6vw,60px)}
-    .subhead{font-size:18px;max-width:42ch}
+    /* two-column hero: cassette on the left, copy + CTA on the right, so the
+       whole hero fits one screen (single-column overflowed and the sheet hid
+       the headline/CTA). Scoped to desktop only — mobile layout is untouched. */
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+      grid-template-rows:1fr auto auto auto 1fr;
+      grid-template-areas:"cass ." "cass top" "cass bot" "cass vu" "cass .";
+      column-gap:clamp(28px,4vw,72px);
+      align-items:center;
+      text-align:left;
+      gap:0;
+      padding:96px clamp(32px,6vw,88px) 64px;
+    }
+    .hero-top{grid-area:top;align-items:flex-start;align-self:end;gap:16px;margin-bottom:4px}
+    .hero-bottom{grid-area:bot;align-items:flex-start;align-self:start;gap:20px}
+    .cassette-slot{grid-area:cass;height:min(66vh,560px);min-height:360px;align-self:center;padding-top:0}
+    #vu{grid-area:vu;height:40px;margin:14px 0 0}
+    .logo{width:min(30vw,320px)}
+    .headline{font-size:clamp(40px,4.4vw,62px);max-width:15ch;margin:0;text-align:left}
+    .subhead{font-size:18px;max-width:40ch;margin:0;text-align:left}
+    .cta{width:auto;min-width:300px;margin:0}
+    .microtrust{text-align:left}
     .stickybar{display:none}
     .band{padding:84px 22px}
     .inner{max-width:840px}
@@ -170,7 +189,6 @@
     .h2{font-size:clamp(30px,3.2vw,44px)}
     .shot{max-width:640px}
     .sheet{border-radius:40px 40px 0 0;margin-top:-40px}
-    #vu{height:40px}
   }
   @media(prefers-reduced-motion:reduce){
     .playhint .dot{animation:none}
@@ -537,6 +555,13 @@
 
     resize();
     window.addEventListener('resize', resize);
+    /* Re-sync once layout/fonts/iframe height settle — otherwise on some hosts
+       (notably inside a WordPress iframe) the slot has zero height on first paint
+       and the cassette stays invisible until a scroll forces a reflow. */
+    window.addEventListener('load', resize);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
+    setTimeout(resize, 120);
+    setTimeout(resize, 500);
     body.classList.remove('loading');
     animate();
   }
@@ -582,11 +607,13 @@
     targetPxH = Math.min(targetPxH, h * (isDesk ? 0.58 : 0.5));
     group.scale.setScalar(targetPxH * worldPerPx);
 
-    /* centre the cassette in the space below the play hint */
+    /* centre the cassette in the space below the play hint — track the slot on
+       BOTH axes so it follows the DOM (single-column centred on mobile, left
+       column on desktop's two-column hero) instead of always sitting mid-screen */
     var centerY = r.top + reserve + availH / 2;
-    var ndcY = 1 - 2 * (centerY / h);
-    group.position.y = ndcY * (vHW / 2);
-    group.position.x = 0;
+    var centerX = r.left + r.width / 2;
+    group.position.y = (h / 2 - centerY) * worldPerPx;
+    group.position.x = (centerX - w / 2) * worldPerPx;
   }
 
   var clock = (window.performance || Date);
