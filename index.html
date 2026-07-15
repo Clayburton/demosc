@@ -356,6 +356,13 @@
   var CART = window.DEMOSC_CART_LINK || 'https://clayandkelsy.com/checkout/?add-to-cart=6322&quantity=1';
   Array.prototype.forEach.call(document.querySelectorAll('[data-cart], .cta, .topcta'), function (a) {
     a.setAttribute('href', CART);
+    /* CRITICAL: this page runs inside an iframe on clayandkelsy.com/dem-osc/.
+       Without target=_top the checkout would load INSIDE the (github.io) iframe,
+       making WooCommerce's session cookie a blocked third-party cookie — guests
+       then get "your session has expired". _top navigates the whole tab so
+       checkout is first-party on clayandkelsy.com and the cart/session work.
+       (When the page is opened standalone, _top is just the current tab.) */
+    a.setAttribute('target', '_top');
   });
 
   /* ------------------------------------------------------------------ */
