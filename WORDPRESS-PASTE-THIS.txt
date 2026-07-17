@@ -1,0 +1,28 @@
+╔════════════════════════════════════════════════════════════════════╗
+║  DEM-Osc landing — paste THIS into your /demosc/ page (nothing else) ║
+╚════════════════════════════════════════════════════════════════════╝
+
+WHY: WordPress corrupts big pasted code (it broke the JavaScript every time).
+So the real page is hosted at its own URL, and your page just shows it in a
+frame. This one line can't be corrupted — there's no code in it for WP to touch.
+
+HOW:
+  1. Edit the /demosc/ page.  (Keep the "No header / footer" template.)
+  2. DELETE everything currently in the page (the old broken paste).
+  3. Add ONE "Custom HTML" block and paste the line below.
+  4. Update / Publish.
+
+────────────────────────────────────────────────────────────────────────
+<iframe src="https://clayburton.github.io/demosc/" style="position:fixed;inset:0;width:100%;height:100%;border:0" title="DEM-Osc" allow="autoplay; fullscreen"></iframe>
+────────────────────────────────────────────────────────────────────────
+
+The landing itself lives here (already live, already tested):
+  https://clayburton.github.io/demosc/
+
+TIP: you can also just point your TikTok ad straight at that URL and skip
+the WordPress page entirely — it's the fastest-loading option.
+
+To change the page later: edit files in this folder, run
+  python3 build_standalone.py
+then push the new index-standalone.html to the "demosc" GitHub repo. (Ask
+Claude to do this — it's one step.)
