@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Osc Collection — Clay & Kelsy Instruments</title>
+<meta name="description" content="Five distinctive synths, one shared interface. Pro, Chip, JX, Digi and Moo — plus the free DEM-Osc. Hover to hear the whole spectrum of sound.">
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   THE OSC COLLECTION — overview page.  Self-contained, zero external
+   requests (system + Courier fonts, one small canvas). Mobile-first.
+   ────────────────────────────────────────────────────────────────────
+   ►► EDIT LINKS ONCE, HERE-ISH: search "EDIT:" for copy, and the INST[]
+      array near the bottom for each instrument's product link + text.
+   ══════════════════════════════════════════════════════════════════════ */
+:root{
+  --paper:#ece2d0; --paper-2:#e7dcc4; --card:#f3ecdc; --card-2:#efe6d2;
+  --ink:#17120c; --ink-soft:#6d6353; --line:#d8ccb4;
+  --purple:#7a3ff2; --purple-2:#9a6bff;
+  --espresso:#171310; --cream:#f2ead9; --cream-dim:#c9bca4;
+  --mono:"Courier New",ui-monospace,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --acc:var(--purple);           /* live accent — JS swaps this per instrument */
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);background:var(--paper);color:var(--ink);
+     line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--purple);color:#fff}
+.mono{font-family:var(--mono)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+/* paper grain */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background:
+   radial-gradient(1200px 600px at 80% -10%, rgba(122,63,242,.05), transparent 60%),
+   radial-gradient(900px 500px at 0% 110%, rgba(201,153,46,.06), transparent 60%);}
+.wrap,section,header,footer{position:relative;z-index:1}
+
+/* ---------- top bar ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;
+     padding:18px 22px;max-width:1120px;margin:0 auto}
+.brand{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+.brand b{color:var(--ink)}
+.topcta{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  border:1.5px solid var(--ink);padding:9px 14px;border-radius:100px;transition:.2s;white-space:nowrap}
+.topcta:hover{background:var(--ink);color:var(--paper)}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding:34px 22px 8px;max-width:900px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--mono);font-weight:700;font-size:clamp(34px,7vw,68px);line-height:1.02;
+   letter-spacing:-.02em;margin:12px 0 0}
+h1 .spectrum{background:linear-gradient(90deg,#c9992e,#37b24d,#14a3b8,#4c63d2,#7a3ff2,#d06a54);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(15px,2.2vw,18px);color:var(--ink-soft);max-width:60ch;margin:16px auto 0}
+.lede b{color:var(--ink);font-weight:600}
+
+/* ══════════ THE CONSOLE (star of the page) ══════════ */
+.console{margin:26px auto 0;max-width:1000px}
+.scope-wrap{position:relative;border-radius:20px;overflow:hidden;
+  background:linear-gradient(180deg,#100d0a,#1c1712);border:1px solid #2c2419;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05)}
+#scope{display:block;width:100%;height:150px}
+.scope-label{position:absolute;top:12px;left:16px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);opacity:.7}
+.scope-note{position:absolute;top:12px;right:16px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--acc);transition:color .35s}
+
+/* selector chips */
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.chip{position:relative;font-family:var(--mono);text-align:left;cursor:pointer;
+  background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;
+  transition:transform .14s ease,border-color .2s,background .2s,box-shadow .2s;color:var(--ink)}
+.chip:hover,.chip:focus-visible{transform:translateY(-2px);outline:none}
+.chip .dot{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block;margin-right:8px;
+  box-shadow:0 0 0 0 var(--c)}
+.chip .nm{font-weight:700;font-size:15px;letter-spacing:.01em}
+.chip .tl{display:block;font-size:11px;color:var(--ink-soft);margin-top:3px;letter-spacing:.02em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip .pr{position:absolute;top:12px;right:13px;font-size:12px;font-weight:700;color:var(--ink-soft)}
+.chip.on{border-color:var(--c);background:var(--card-2);
+  box-shadow:0 10px 26px -12px var(--c),inset 0 0 0 1px var(--c)}
+.chip.on .dot{box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 22%,transparent)}
+.chip.on .pr{color:var(--c)}
+
+/* readout panel — updates on hover/select */
+.readout{margin-top:12px;background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+  padding:22px clamp(18px,3vw,30px);display:grid;grid-template-columns:1fr;gap:14px;
+  border-left:4px solid var(--acc);transition:border-color .35s}
+.ro-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ro-name{font-family:var(--mono);font-weight:700;font-size:clamp(22px,3.6vw,30px);letter-spacing:-.01em}
+.ro-name .free{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);
+  border:1px solid var(--purple);border-radius:100px;padding:3px 9px;margin-left:8px;vertical-align:middle}
+.ro-tag{font-family:var(--mono);font-style:italic;color:var(--acc);font-size:clamp(14px,2vw,16px);transition:color .35s}
+.ro-spec{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink-soft);text-transform:uppercase}
+.ro-spec b{color:var(--ink)}
+.ro-blurb{font-size:15.5px;color:#3a3226;max-width:66ch;min-height:3.2em}
+.ro-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.02em;
+  padding:12px 20px;border-radius:100px;cursor:pointer;border:1.5px solid var(--ink);
+  background:transparent;color:var(--ink);transition:.18s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translateY(-1px)}
+.btn.solid{background:var(--acc);border-color:transparent;color:#fff;
+  box-shadow:0 10px 24px -10px var(--acc)}
+.btn.hear{border-color:var(--acc);color:var(--acc)}
+.btn.hear .eq{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
+.btn.hear .eq i{width:2.5px;background:currentColor;height:5px;border-radius:2px;animation:none}
+.btn.hear.playing .eq i{animation:eq .6s infinite ease-in-out}
+.btn.hear .eq i:nth-child(2){animation-delay:.15s}
+.btn.hear .eq i:nth-child(3){animation-delay:.3s}
+@keyframes eq{0%,100%{height:4px}50%{height:12px}}
+
+/* ---------- section scaffolding ---------- */
+section{padding:56px 0}
+.kick{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink-soft);text-align:center}
+h2{font-family:var(--mono);font-weight:700;font-size:clamp(26px,4.6vw,40px);line-height:1.06;
+   text-align:center;letter-spacing:-.015em;margin:10px auto 0;max-width:20ch}
+.sub{text-align:center;color:var(--ink-soft);max-width:58ch;margin:14px auto 0;font-size:16px}
+
+/* one interface */
+.shared{background:var(--espresso);color:var(--cream);border-radius:26px;margin:8px auto 0;padding:44px 22px}
+.shared .kick{color:var(--purple-2)}.shared h2{color:var(--cream)}.shared .sub{color:var(--cream-dim)}
+.feat{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin:30px auto 0;max-width:820px;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden}
+.f{background:#1d1712;padding:20px 18px}
+.f .ft{font-family:var(--mono);font-weight:700;font-size:15px;color:#fff}
+.f .fd{font-size:13px;color:var(--cream-dim);margin-top:6px}
+
+/* at a glance table */
+.tablewrap{overflow-x:auto;margin:30px auto 0;max-width:900px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:14px}
+th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line)}
+thead th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+tbody td:first-child{font-family:var(--mono);font-weight:700}
+tbody tr:hover{background:var(--card)}
+.swatch{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
+
+/* bundle */
+.bundle{text-align:center;background:linear-gradient(180deg,var(--card),var(--card-2));
+  border:1.5px solid var(--line);border-radius:26px;padding:48px 24px;max-width:760px;margin:8px auto 0;
+  box-shadow:0 30px 60px -40px rgba(122,63,242,.4)}
+.price{font-family:var(--mono);font-weight:700;font-size:clamp(40px,9vw,72px);line-height:1;margin:14px 0 4px}
+.price .was{font-size:.42em;color:var(--ink-soft);text-decoration:line-through;margin-right:12px;font-weight:400}
+.price .acc{color:var(--purple)}
+.save{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--ink-soft)}
+.save b{color:var(--purple)}
+.bundle .cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;
+  font-size:18px;color:#fff;background:linear-gradient(180deg,var(--purple-2),var(--purple));
+  padding:18px 34px;border-radius:100px;margin:22px auto 0;transition:transform .12s;
+  box-shadow:0 14px 30px -10px rgba(122,63,242,.6)}
+.bundle .cta:hover{transform:translateY(-2px)}
+.bundle .free{display:block;margin-top:16px;font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
+.bundle .free a{color:var(--purple);border-bottom:1px solid color-mix(in srgb,var(--purple) 40%,transparent)}
+
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px auto 0;max-width:900px}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.stars{color:#e0a52e;letter-spacing:3px;font-size:15px}
+.rev .who{font-family:var(--mono);font-size:13px;margin-top:8px}
+.rev .what{font-size:12px;color:var(--ink-soft)}
+
+/* requirements */
+.reqs{max-width:760px;margin:0 auto;text-align:center;color:var(--ink-soft);font-size:14px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0 0}
+.badge{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:100px;padding:8px 13px;color:var(--ink-soft)}
+
+footer{background:var(--espresso);color:var(--cream-dim);text-align:center;padding:40px 22px}
+footer .fm{font-family:var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--cream);font-size:12px}
+footer .ft2{font-family:var(--mono);font-style:italic;color:var(--purple-2);margin:12px 0}
+footer .fine{font-size:12px;max-width:40ch;margin:6px auto 0}
+footer a{color:var(--cream)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(min-width:760px){
+  .chips{grid-template-columns:repeat(6,1fr)}
+  .chip .tl{display:none}          /* keep the strip tidy on desktop */
+  .chip{padding:12px}
+  .chip .pr{position:static;display:block;margin-top:4px}
+  .feat{grid-template-columns:repeat(4,1fr)}
+  .readout{grid-template-columns:1fr;gap:12px}
+}
+@media(max-width:520px){ .revs{grid-template-columns:1fr} }
+@media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none} }
+</style>
+</head>
+<body>
+
+  <div class="top">
+    <div class="brand">CLAY <b>&amp;</b> KELSY <b>·</b> THE OSC COLLECTION</div>
+    <a class="topcta" href="#bundle" >Get the collection</a>
+  </div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <header class="hero">
+    <div class="eyebrow">Five synths · one interface</div>
+    <!-- EDIT: headline -->
+    <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
+    <!-- EDIT: hero paragraph -->
+    <p class="lede">Five distinctive synths built from real oscillators — from <b>bit-crushed video games</b> to <b>analog that fills the room</b>. Every shade of synth, all sharing one interface. <b>Learn one, and you know them all.</b></p>
+
+    <!-- ═══════════ THE CONSOLE ═══════════ -->
+    <div class="console">
+      <div class="scope-wrap">
+        <div class="scope-label">Osc&nbsp;·&nbsp;live</div>
+        <div class="scope-note" id="scopeNote">the collection</div>
+        <canvas id="scope" width="1000" height="150" aria-hidden="true"></canvas>
+      </div>
+
+      <div class="chips" id="chips" role="tablist" aria-label="Choose an instrument"></div>
+
+      <div class="readout" id="readout" aria-live="polite">
+        <div class="ro-head">
+          <div class="ro-name" id="roName">The Osc Collection</div>
+          <div class="ro-tag mono" id="roTag">every shade of synth</div>
+        </div>
+        <div class="ro-spec" id="roSpec"><b>5</b> synths · <b>1</b> shared interface · <b>30</b> impulse responses each</div>
+        <p class="ro-blurb" id="roBlurb">Hover any instrument above to meet it. Each one is sampled from real hardware — vintage analog, 80s classics, digital hybrids, chiptune and eurorack — then wrapped in the same hand-built interface. Once you learn one, you already know the rest.</p>
+        <div class="ro-actions">
+          <button class="btn hear" id="hearBtn" type="button" aria-label="Hear it">
+            <span class="eq"><i></i><i></i><i></i></span> hear it
+          </button>
+          <a class="btn solid" id="roLink" href="#bundle" target="_top">Explore the collection →</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ ONE INTERFACE ═══════════ -->
+  <section class="wrap">
+    <div class="shared reveal">
+      <div class="kick">Learn one, know them all</div>
+      <h2>One interface. Five voices.</h2>
+      <p class="sub">Every Osc synth shares the exact same hand-drawn layout — so the muscle memory you build on one carries straight to the next.</p>
+      <div class="feat">
+        <div class="f"><div class="ft">3 Oscillators</div><div class="fd">Three selectable wave sources with their own pitch &amp; pan.</div></div>
+        <div class="f"><div class="ft">30 Impulse Responses</div><div class="fd">15 reverbs + 15 eurorack FX, convolved in.</div></div>
+        <div class="f"><div class="ft">Stepped Sequencer</div><div class="fd">Swaps the wave shape on every note you play.</div></div>
+        <div class="f"><div class="ft">Cut-Off LFO</div><div class="fd">Dedicated filter LFO with plenty of shapes.</div></div>
+        <div class="f"><div class="ft">Mod-Wheel Center</div><div class="fd">Map many parameters to your wheel at once.</div></div>
+        <div class="f"><div class="ft">Vibrato &amp; Glide</div><div class="fd">Vibrato, pitch slop and polyphonic glide.</div></div>
+        <div class="f"><div class="ft">80+ Presets Each</div><div class="fd">Leads, basses, pads, keys, brass, winds, FX.</div></div>
+        <div class="f"><div class="ft">Full NKS Support</div><div class="fd">Maschine &amp; Komplete Kontrol ready.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ AT A GLANCE ═══════════ -->
+  <section class="wrap">
+    <div class="kick reveal">At a glance</div>
+    <h2 class="reveal">The whole spectrum</h2>
+    <div class="tablewrap reveal">
+      <table id="glance">
+        <thead><tr><th>Synth</th><th>Character</th><th>Sampled from</th><th>Waves</th><th>Presets</th><th></th></tr></thead>
+        <tbody id="glanceBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════ BUNDLE ═══════════ -->
+  <section class="wrap" id="bundle">
+    <div class="bundle reveal">
+      <div class="kick">The full set</div>
+      <h2>Get the whole spectrum.</h2>
+      <div class="price"><span class="was">$145</span><span class="acc">$99</span></div>
+      <div class="save">All five synths — <b>save $45</b> vs. buying separately.</div>
+      <!-- EDIT: bundle cart link (target=_top so it works inside the site iframe) -->
+      <a class="cta" id="bundleCta" target="_top"
+         href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">
+         Buy the Osc Collection — $99 →</a>
+      <span class="free">New here? Start with <a href="https://clayandkelsy.com/dem-osc/" target="_top">DEM-Osc — free</a>, a native taste of all five.</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ REVIEWS ═══════════ -->
+  <section class="wrap">
+    <div class="kick reveal">From the studio</div>
+    <h2 class="reveal">Loved by producers</h2>
+    <div class="revs">
+      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Sean Tobin</div><div class="what">Verified buyer · Pro-Osc</div></div>
+      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">CarloAlberto Villani Rigo</div><div class="what">Verified buyer · Moo-Osc</div></div>
+      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Sean Tobin</div><div class="what">Verified buyer · Chip-Osc</div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ REQUIREMENTS ═══════════ -->
+  <section class="wrap">
+    <div class="reqs reveal">
+      <div class="kick">Runs where you work</div>
+      <div class="badges">
+        <span class="badge">Free Kontakt 6+ Player</span>
+        <span class="badge">Kontakt 6 &amp; 7</span>
+        <span class="badge">NKS · Maschine</span>
+        <span class="badge">Komplete Kontrol</span>
+        <span class="badge">macOS &amp; Windows</span>
+      </div>
+      <p style="margin-top:18px">Install through Native Access. DEM-Osc is a standalone native VST3/AU — no Kontakt needed.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fm">Clay &amp; Kelsy Instruments</div>
+    <div class="ft2">Every shade of synth.</div>
+    <div class="fine">Handmade in Los Angeles. <a href="https://clayandkelsy.com/" target="_top">clayandkelsy.com</a></div>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+  /* ══════════ INSTRUMENT DATA — EDIT text / links here ══════════ */
+  var INST = [
+    { id:'pro',  name:'Pro-Osc',  price:'$29', free:false, color:'#c9992e', wave:'saw',
+      tag:'The room-filling analog.', spec:'14 waves · 30 IRs · 83 presets',
+      from:'Curtis-filtered vintage analog',
+      blurb:'Raw oscillators sampled from a vintage-era analog synth, Curtis-filtered and warm. Classic cinematic textures and go-to producer tones that fill the room — leads, basses, pads, keys and brass, every one performable from the mod wheel.',
+      url:'https://clayandkelsy.com/pro-osc/' },
+    { id:'chip', name:'Chip-Osc', price:'$29', free:false, color:'#37b24d', wave:'pulse',
+      tag:'Byte-sized, then eerie.', spec:'20 waves · 30 IRs · 81 presets',
+      from:'A digital hybrid synth',
+      blurb:'Built from the raw oscillators of a digital hybrid synth. Ranges from bright, classic chiptune all the way to deep, dark cinematic soundscapes — surprisingly eerie when you push it. Byte-sized and delightful, with real character.',
+      url:'https://clayandkelsy.com/chip-osc/' },
+    { id:'jx',   name:'JX-Osc',   price:'$29', free:false, color:'#4c63d2', wave:'pwm',
+      tag:'Your 80s sci-fi sidekick.', spec:'12 waves · 30 IRs · 81 presets',
+      from:'An 80s-era analog synth',
+      blurb:"Sampled from an 80s-era analog synth — the sweet spot between vintage nostalgia and modern reshaping. Lush strings, brass and pads that beam you straight into your favorite sci-fi thriller soundtrack.",
+      url:'https://clayandkelsy.com/jx-osc/' },
+    { id:'digi', name:'Digi-Osc', price:'$29', free:false, color:'#14a3b8', wave:'fm',
+      tag:'A pixel-perfect playground.', spec:'22 waves · 30 IRs · 81 presets',
+      from:'3 digital synths + eurorack',
+      blurb:'Raw oscillators from three different digital outboard synths and eurorack modules. Bright, beautiful and electronic — a treasure trove for melodies and sonic exploration, with total control over your expression.',
+      url:'https://clayandkelsy.com/digi-osc/' },
+    { id:'moo',  name:'Moo-Osc',  price:'$29', free:false, color:'#d06a54', wave:'fat',
+      tag:'Utterly rich and creamy.', spec:'22 waves · 30 IRs · 84 presets',
+      from:'Rich analog',
+      blurb:'Heavy, rich and creamy, with no filler. Funky basses and timeless leads that instantly elevate a track — elegantly crafted synthesis designed for fluid, effortless innovation.',
+      url:'https://clayandkelsy.com/moo-osc/' },
+    { id:'dem',  name:'DEM-Osc',  price:'Free', free:true, color:'#7a3ff2', wave:'blend',
+      tag:'A free taste of all five.', spec:'5 waves · 4 IRs · 25 presets',
+      from:'One oscillator from each',
+      blurb:'The free demo — one oscillator from each of the five, living under one roof. A native VST3/AU plugin with no Kontakt required. The easiest way to hear where the whole collection can take you.',
+      url:'https://clayandkelsy.com/dem-osc/' }
+  ];
+  var DEFAULT = { name:'The Osc Collection', tag:'every shade of synth', color:'#7a3ff2', wave:'blend', note:'the collection',
+    spec:'<b>5</b> synths · <b>1</b> shared interface · <b>30</b> impulse responses each',
+    blurb:'Hover any instrument above to meet it. Each one is sampled from real hardware — vintage analog, 80s classics, digital hybrids, chiptune and eurorack — then wrapped in the same hand-built interface. Once you learn one, you already know the rest.',
+    url:'#bundle', link:'Explore the collection →' };
+
+  /* ══════════ build the chips + table ══════════ */
+  var chips = document.getElementById('chips');
+  INST.forEach(function(it,i){
+    var b=document.createElement('button');
+    b.className='chip'; b.type='button'; b.setAttribute('role','tab'); b.dataset.i=i;
+    b.style.setProperty('--c',it.color);
+    b.innerHTML='<span class="nm"><span class="dot"></span>'+it.name+'</span>'+
+                '<span class="tl">'+it.tag+'</span>'+
+                '<span class="pr">'+it.price+'</span>';
+    chips.appendChild(b);
+  });
+  var glanceBody=document.getElementById('glanceBody');
+  INST.forEach(function(it){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><span class="swatch" style="background:'+it.color+'"></span>'+it.name+'</td>'+
+      '<td>'+it.tag.replace(/\.$/,'')+'</td><td>'+it.from+'</td>'+
+      '<td>'+it.spec.split(' · ')[0]+'</td>'+
+      '<td>'+it.spec.split(' · ')[2].replace(' presets','')+'</td>'+
+      '<td><a class="mono" style="color:'+it.color+'" href="'+it.url+'" target="_top">view →</a></td>';
+    glanceBody.appendChild(tr);
+  });
+
+  /* ══════════ readout updates on hover / focus / tap ══════════ */
+  var root=document.documentElement, chipEls=[].slice.call(chips.children);
+  var roName=document.getElementById('roName'), roTag=document.getElementById('roTag'),
+      roSpec=document.getElementById('roSpec'), roBlurb=document.getElementById('roBlurb'),
+      roLink=document.getElementById('roLink'), scopeNote=document.getElementById('scopeNote'),
+      readout=document.getElementById('readout');
+  var cur=null;            // current instrument object (null = collection default)
+
+  function setActive(idx){
+    var it = idx==null ? DEFAULT : INST[idx];
+    cur = idx==null ? null : INST[idx];
+    root.style.setProperty('--acc', it.color);
+    scopeNote.textContent = idx==null ? DEFAULT.note : it.name;
+    roName.innerHTML = it.name + (it.free ? ' <span class="free">Free</span>' : '');
+    roTag.textContent = it.tag;
+    roSpec.innerHTML = idx==null ? DEFAULT.spec : it.spec.replace(/(\d+)/g,'<b>$1</b>');
+    roBlurb.textContent = it.blurb;
+    roLink.href = it.url;
+    roLink.textContent = idx==null ? DEFAULT.link : ('Explore '+it.name+' →');
+    chipEls.forEach(function(c,i){ c.classList.toggle('on', i===idx); });
+    waveType = it.wave; targetWave = it.wave;
+  }
+  chipEls.forEach(function(c,i){
+    c.addEventListener('mouseenter', function(){ setActive(i); });
+    c.addEventListener('focus', function(){ setActive(i); });
+    c.addEventListener('click', function(){ setActive(i); playHear(); });
+  });
+  // leaving the whole strip on desktop returns to the collection overview
+  chips.addEventListener('mouseleave', function(){ if(window.matchMedia('(min-width:760px)').matches && !lockSel) setActive(null); });
+  var lockSel=false;
+  chipEls.forEach(function(c,i){ c.addEventListener('click', function(){ lockSel=true; }); });
+  setActive(null);
+
+  /* ══════════ oscilloscope (tiny 2D canvas) ══════════ */
+  var cv=document.getElementById('scope'), ctx=cv.getContext('2d');
+  var waveType='blend', targetWave='blend', DPR=Math.min(2,window.devicePixelRatio||1);
+  function fit(){ var r=cv.getBoundingClientRect(); cv.width=r.width*DPR; cv.height=150*DPR; }
+  fit(); window.addEventListener('resize',fit);
+  function w(type,ph){
+    var t=Math.PI*2;
+    switch(type){
+      case 'saw':   return 2*(ph-Math.floor(ph+0.5));
+      case 'pulse': return (ph-Math.floor(ph))<0.30?0.92:-0.92;
+      case 'pwm':   { var d=0.5+0.34*Math.sin(t*ph*0.5+os*0.6); return (ph-Math.floor(ph))<d?0.9:-0.9; }
+      case 'fm':    return Math.sin(t*ph + 2.4*Math.sin(t*ph*2));
+      case 'fat':   return 0.72*Math.sin(t*ph)+0.28*Math.sin(t*ph*2+0.4);
+      case 'blend': return 0.5*Math.sin(t*ph)+0.3*(2*(ph-Math.floor(ph+0.5)))+0.2*((ph-Math.floor(ph))<0.4?1:-1);
+      default:      return Math.sin(t*ph);
+    }
+  }
+  var os=0, reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches, running=true;
+  function accent(){ return getComputedStyle(root).getPropertyValue('--acc').trim()||'#7a3ff2'; }
+  function draw(){
+    if(!running){ return; }
+    var W=cv.width, H=cv.height, mid=H/2, col=accent();
+    ctx.clearRect(0,0,W,H);
+    // faint centre grid
+    ctx.strokeStyle='rgba(255,255,255,.06)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(0,mid); ctx.lineTo(W,mid); ctx.stroke();
+    var cycles=3.2, amp=H*0.30, pts=Math.floor(W/(2*DPR));
+    // glow underlay
+    ctx.lineWidth=6*DPR; ctx.strokeStyle=col; ctx.globalAlpha=.18;
+    ctx.beginPath();
+    for(var g=0; g<=pts; g++){ var x=g/pts*W, ph=(g/pts)*cycles+os; var y=mid-w(waveType,ph)*amp; g?ctx.lineTo(x,y):ctx.moveTo(x,y); }
+    ctx.stroke();
+    // crisp line
+    ctx.globalAlpha=1; ctx.lineWidth=2.4*DPR; ctx.strokeStyle=col; ctx.lineJoin='round';
+    ctx.beginPath();
+    for(var i=0;i<=pts;i++){ var xx=i/pts*W, p=(i/pts)*cycles+os; var yy=mid-w(waveType,p)*amp; i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy); }
+    ctx.stroke();
+    os += reduce?0:0.010;
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+  document.addEventListener('visibilitychange', function(){ running=!document.hidden; if(running) requestAnimationFrame(draw); });
+
+  /* ══════════ WebAudio "hear it" — synthesized signature motif (asset-free) ══════════ */
+  var actx=null, hearBtn=document.getElementById('hearBtn');
+  var MOTIF={ // [semitone offsets], oscType, filter Hz, rootHz
+    pro:{n:[0,7,12,16],o:'sawtooth',f:1600,r:130.8,spread:6},
+    chip:{n:[0,12,7,19,12,24],o:'square',f:4200,r:523.2,spread:0,fast:true},
+    jx:{n:[0,4,7,11],o:'sawtooth',f:1300,r:174.6,spread:8},
+    digi:{n:[0,5,12,17,12,5],o:'triangle',f:5200,r:659.2,fast:true},
+    moo:{n:[0,7,0,10],o:'sawtooth',f:900,r:82.4,spread:4},
+    dem:{n:[0,7,12],o:'sawtooth',f:1800,r:196,spread:5},
+    coll:{n:[0,4,7,12],o:'sawtooth',f:1500,r:261.6,spread:6}
+  };
+  function midiHz(root,semi){ return root*Math.pow(2,semi/12); }
+  function playHear(){
+    try{
+      actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+      if(actx.state==='suspended') actx.resume();
+    }catch(e){ return; }
+    var key = cur?cur.id:'coll', m=MOTIF[key]||MOTIF.coll;
+    var now=actx.currentTime, bus=actx.createGain(); bus.gain.value=0.0001;
+    bus.connect(actx.destination);
+    var lp=actx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=m.f; lp.Q.value=6;
+    lp.connect(bus);
+    bus.gain.setValueAtTime(0.0001,now); bus.gain.exponentialRampToValueAtTime(0.5,now+0.03);
+    var step=m.fast?0.12:0.26, dur=m.fast?0.16:0.5;
+    m.n.forEach(function(semi,i){
+      var t0=now+i*step;
+      [0].concat(m.spread?[m.spread,-m.spread]:[]).forEach(function(cents){
+        var o=actx.createOsc?actx.createOsc():actx.createOscillator();
+        o.type=m.o; o.frequency.value=midiHz(m.r,semi); o.detune.value=cents;
+        var g=actx.createGain(); g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.32,t0+0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+        o.connect(g); g.connect(lp); o.start(t0); o.stop(t0+dur+0.05);
+      });
+    });
+    var end=now+m.n.length*step+dur;
+    bus.gain.setValueAtTime(0.5,end-0.15); bus.gain.exponentialRampToValueAtTime(0.0001,end+0.1);
+    // button eq animation
+    hearBtn.classList.add('playing');
+    setTimeout(function(){ hearBtn.classList.remove('playing'); }, (end-now)*1000);
+  }
+  hearBtn.addEventListener('click', playHear);
+
+  /* ══════════ reveal on scroll ══════════ */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.12});
+    [].forEach.call(document.querySelectorAll('.reveal'), function(el){ io.observe(el); });
+  } else { [].forEach.call(document.querySelectorAll('.reveal'), function(el){ el.classList.add('in'); }); }
+})();
+</script>
+</body>
+</html>
