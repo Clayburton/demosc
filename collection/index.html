@@ -21,6 +21,8 @@
   --mono:"Courier New",ui-monospace,"SF Mono",Menlo,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --acc:var(--purple);           /* live accent — JS swaps this per instrument */
+  /* the five synth signature colours (from each product page) */
+  --pro:#3c8ed0; --chip:#40b25f; --jx:#d85fa6; --digi:#e08a43; --moo:#9a6ad0; --dem:#16b5a6;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -55,10 +57,35 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-soft)}
 h1{font-family:var(--mono);font-weight:700;font-size:clamp(34px,7vw,68px);line-height:1.02;
    letter-spacing:-.02em;margin:12px 0 0}
-h1 .spectrum{background:linear-gradient(90deg,#c9992e,#37b24d,#14a3b8,#4c63d2,#7a3ff2,#d06a54);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .spectrum{background:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro));
+  background-size:280% 100%;background-position:0% center;
+  -webkit-background-clip:text;background-clip:text;color:transparent;cursor:default}
 .lede{font-size:clamp(15px,2.2vw,18px);color:var(--ink-soft);max-width:60ch;margin:16px auto 0}
 .lede b{color:var(--ink);font-weight:600}
+
+/* ══════════ playful hover effects ══════════ */
+/* "analog that fills the room" — grows on hover, springs back on leave */
+.fx-grow{display:inline-block;transition:transform .4s cubic-bezier(.2,.85,.25,1);transform-origin:center bottom}
+.fx-grow:hover{transform:scale(1.34)}
+/* "bit-crushed video games" — glitchy low-bit chromatic crush on hover */
+.fx-crush{display:inline-block}
+.fx-crush:hover{animation:crush .1s steps(1) infinite}
+@keyframes crush{
+  0%  {text-shadow:1.5px 0 #ff2d6b,-1.5px 0 #12e0ff;transform:translateY(0)   skewX(0deg)}
+  33% {text-shadow:-2px 0 #ff2d6b,2px 0 #12e0ff;   transform:translateY(-1px) skewX(-4deg)}
+  66% {text-shadow:2px 0 #12e0ff,-2px 0 #ff2d6b;   transform:translateY(1px)  skewX(3deg)}
+  100%{text-shadow:1.5px 0 #ff2d6b,-1.5px 0 #12e0ff;transform:translateY(0)   skewX(0deg)}}
+/* "you know them all" — echoes itself behind & to the right in every osc colour */
+.fx-echo{position:relative;transition:text-shadow .3s ease}
+.fx-echo:hover{text-shadow:
+  .16em .16em 0 var(--pro), .32em .32em 0 var(--chip), .48em .48em 0 var(--jx),
+  .64em .64em 0 var(--digi), .80em .80em 0 var(--moo), .96em .96em 0 var(--dem)}
+/* "Get the whole spectrum." — flowing rainbow on hover */
+h2.fx-rainbow{cursor:default;transition:color .2s}
+h2.fx-rainbow:hover{background:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro));
+  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 2.4s linear infinite}
+@keyframes flow{to{background-position:200% center}}
+@media(prefers-reduced-motion:reduce){ .fx-crush:hover,h2.fx-rainbow:hover{animation:none} }
 
 /* ══════════ THE CONSOLE (star of the page) ══════════ */
 .console{margin:26px auto 0;max-width:1000px}
@@ -201,7 +228,7 @@ footer a{color:var(--cream)}
     <!-- EDIT: headline -->
     <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
     <!-- EDIT: hero paragraph -->
-    <p class="lede">Five distinctive synths built from real oscillators — from <b>bit-crushed video games</b> to <b>analog that fills the room</b>. Every shade of synth, all sharing one interface. <b>Learn one, and you know them all.</b></p>
+    <p class="lede">Five distinctive synths built from real oscillators — from <b class="fx-crush">bit-crushed video games</b> to <b class="fx-grow">analog that fills the room</b>. Every shade of synth, all sharing one interface. <b class="fx-echo">Learn one, and you know them all.</b></p>
 
     <!-- ═══════════ THE CONSOLE ═══════════ -->
     <div class="console">
@@ -265,7 +292,7 @@ footer a{color:var(--cream)}
   <section class="wrap" id="bundle">
     <div class="bundle reveal">
       <div class="kick">The full set</div>
-      <h2>Get the whole spectrum.</h2>
+      <h2 class="fx-rainbow">Get the whole spectrum.</h2>
       <div class="price"><span class="was">$145</span><span class="acc">$99</span></div>
       <div class="save">All five synths — <b>save $45</b> vs. buying separately.</div>
       <!-- EDIT: bundle cart link (target=_top so it works inside the site iframe) -->
@@ -281,9 +308,9 @@ footer a{color:var(--cream)}
     <div class="kick reveal">From the studio</div>
     <h2 class="reveal">Loved by producers</h2>
     <div class="revs">
-      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Sean Tobin</div><div class="what">Verified buyer · Pro-Osc</div></div>
-      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">CarloAlberto Villani Rigo</div><div class="what">Verified buyer · Moo-Osc</div></div>
       <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Sean Tobin</div><div class="what">Verified buyer · Chip-Osc</div></div>
+      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">CarloAlberto Villani Rigo</div><div class="what">Verified buyer · Moo-Osc</div></div>
+      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Patrick C.</div><div class="what">Verified buyer · Pro-Osc</div></div>
     </div>
   </section>
 
@@ -305,7 +332,7 @@ footer a{color:var(--cream)}
   <footer>
     <div class="fm">Clay &amp; Kelsy Instruments</div>
     <div class="ft2">Every shade of synth.</div>
-    <div class="fine">Handmade in Los Angeles. <a href="https://clayandkelsy.com/" target="_top">clayandkelsy.com</a></div>
+    <div class="fine">Real oscillators, real character. <a href="https://clayandkelsy.com/" target="_top">clayandkelsy.com</a></div>
   </footer>
 
 <script>
@@ -317,37 +344,37 @@ footer a{color:var(--cream)}
       tag:'The room-filling analog.', spec:'14 waves · 30 IRs · 83 presets',
       from:'Curtis-filtered vintage analog',
       blurb:'Raw oscillators sampled from a vintage-era analog synth, Curtis-filtered and warm. Classic cinematic textures and go-to producer tones that fill the room — leads, basses, pads, keys and brass, every one performable from the mod wheel.',
-      audio:['audio/pro-1.mp3','audio/pro-2.mp3','audio/pro-3.mp3','audio/pro-4.mp3','audio/pro-5.mp3'], track:'Five sounds from the Pro oscillator',
+      audio:['audio/pro-1.mp3','audio/pro-2.mp3','audio/pro-3.mp3','audio/pro-4.mp3'], labels:['Balto\'s Beam · Lead','Don\'t Fret · Bass','Doubble Pluck · Pluck','Secret Garden · Pad'],
       url:'https://clayandkelsy.com/pro-osc/' },
     { id:'chip', name:'Chip-Osc', price:'$29', free:false, color:'#40b25f', wave:'pulse',
       tag:'Byte-sized, then eerie.', spec:'20 waves · 30 IRs · 81 presets',
       from:'A digital hybrid synth',
       blurb:'Built from the raw oscillators of a digital hybrid synth. Ranges from bright, classic chiptune all the way to deep, dark cinematic soundscapes — surprisingly eerie when you push it. Byte-sized and delightful, with real character.',
-      audio:['audio/chip-1.mp3','audio/chip-2.mp3','audio/chip-3.mp3','audio/chip-4.mp3','audio/chip-5.mp3'], track:'Five sounds from the Chip oscillator',
+      audio:['audio/chip-1.mp3','audio/chip-2.mp3','audio/chip-3.mp3','audio/chip-4.mp3'], labels:['Chip-Monk · Pluck','Game Over · Lead','Hot Sub · Bass','Photosynthesis · Pad'],
       url:'https://clayandkelsy.com/chip-osc/' },
     { id:'jx',   name:'JX-Osc',   price:'$29', free:false, color:'#d85fa6', wave:'pwm',
       tag:'Your 80s sci-fi sidekick.', spec:'12 waves · 30 IRs · 81 presets',
       from:'An 80s-era analog synth',
       blurb:"Sampled from an 80s-era analog synth — the sweet spot between vintage nostalgia and modern reshaping. Lush strings, brass and pads that beam you straight into your favorite sci-fi thriller soundtrack.",
-      audio:['audio/jx-1.mp3','audio/jx-2.mp3','audio/jx-3.mp3','audio/jx-4.mp3','audio/jx-5.mp3'], track:'Five sounds from the JX oscillator',
+      audio:['audio/jx-1.mp3','audio/jx-2.mp3','audio/jx-3.mp3','audio/jx-4.mp3'], labels:['Fingerbib · Bass','JX Pizz · Pluck','Low String Ensemble · Pad','Snoty Princess · Lead'],
       url:'https://clayandkelsy.com/jx-osc/' },
     { id:'digi', name:'Digi-Osc', price:'$29', free:false, color:'#e08a43', wave:'fm',
       tag:'A pixel-perfect playground.', spec:'22 waves · 30 IRs · 81 presets',
       from:'3 digital synths + eurorack',
       blurb:'Raw oscillators from three different digital outboard synths and eurorack modules. Bright, beautiful and electronic — a treasure trove for melodies and sonic exploration, with total control over your expression.',
-      audio:['audio/digi-1.mp3','audio/digi-2.mp3','audio/digi-3.mp3','audio/digi-4.mp3','audio/digi-5.mp3'], track:'Five sounds from the Digi oscillator',
+      audio:['audio/digi-1.mp3','audio/digi-2.mp3','audio/digi-3.mp3','audio/digi-4.mp3'], labels:['Brown Octave · Lead','ChewToy · Pad','Marimba · Pluck','Tech Bass 1 · Lead'],
       url:'https://clayandkelsy.com/digi-osc/' },
     { id:'moo',  name:'Moo-Osc',  price:'$29', free:false, color:'#9a6ad0', wave:'fat',
       tag:'Utterly rich and creamy.', spec:'22 waves · 30 IRs · 84 presets',
       from:'Rich analog',
       blurb:'Heavy, rich and creamy, with no filler. Funky basses and timeless leads that instantly elevate a track — elegantly crafted synthesis designed for fluid, effortless innovation.',
-      audio:['audio/moo-1.mp3','audio/moo-2.mp3','audio/moo-3.mp3','audio/moo-4.mp3','audio/moo-5.mp3'], track:'Five sounds from the Moo oscillator',
+      audio:['audio/moo-1.mp3','audio/moo-2.mp3','audio/moo-3.mp3','audio/moo-4.mp3'], labels:['Clean Viola Bass · Bass','Mini EP · Pluck','Noto Moto · Pad','Solo Trumpet · Lead'],
       url:'https://clayandkelsy.com/moo-osc/' },
     { id:'dem',  name:'DEM-Osc',  price:'Free', free:true, color:'#16b5a6', wave:'blend',
       tag:'A free taste of all five.', spec:'5 waves · 4 IRs · 25 presets',
       from:'One oscillator from each',
       blurb:'The free demo — one oscillator from each of the five, living under one roof. A native VST3/AU plugin with no Kontakt required. The easiest way to hear where the whole collection can take you.',
-      audio:['audio/dem-1.mp3','audio/dem-2.mp3','audio/dem-3.mp3','audio/dem-4.mp3','audio/dem-5.mp3'], track:'Five real DEM-Osc presets',
+      audio:['audio/dem-1.mp3','audio/dem-2.mp3','audio/dem-3.mp3','audio/dem-4.mp3'], labels:['Winter Pad · Pad','Dem EP · Keys','Big Stack · Bass','Tube Army · Lead'],
       url:'https://clayandkelsy.com/dem-osc/' }
   ];
   var DEFAULT = { name:'The Osc Collection', tag:'every shade of synth', color:'#7a3ff2', wave:'blend', note:'the collection',
@@ -438,7 +465,7 @@ footer a{color:var(--cream)}
     ctx.strokeStyle='rgba(255,255,255,.06)'; ctx.lineWidth=1;
     ctx.beginPath(); ctx.moveTo(0,mid); ctx.lineTo(W,mid); ctx.stroke();
     // when a demo is playing, draw the REAL audio waveform (AnalyserNode); else the stylized wave
-    var live = (playingId && analyser && audioEl && !audioEl.paused);
+    var live = (playingId && analyser && curSrc);
     if(live) analyser.getByteTimeDomainData(timeBuf);
     var cycles=3.2, amp=H*0.30, pts=Math.floor(W/(2*DPR));
     function yAt(i){
@@ -461,46 +488,95 @@ footer a{color:var(--cream)}
   requestAnimationFrame(draw);
   document.addEventListener('visibilitychange', function(){ running=!document.hidden; if(running) requestAnimationFrame(draw); });
 
-  /* ══════════ real demo-song playback + LIVE oscilloscope of the ACTUAL audio ══════════
-     Each synth's showcase track was made with ONLY that instrument, so what you hear IS
-     that synth. DEM round-robins through real DEM-Osc preset renders. To add more sounds,
-     drop mp3s in audio/ and append them to that instrument's audio[] array above. */
-  var actx=null, analyser=null, timeBuf=null, mediaSrc=null;
-  var audioEl=new Audio(); audioEl.preload='none'; audioEl.crossOrigin='anonymous';
-  var playingId=null, rr={};
-  var hearBtn=document.getElementById('hearBtn'), hearLbl=hearBtn.querySelector('.lbl');
+  /* ══════════ instant, click-free sample playback + LIVE oscilloscope ══════════
+     Real exported samples from each synth. Every sample is PREFETCHED + decoded up
+     front, so a click plays instantly (no network lag). Playback runs through a tiny
+     gain envelope (fade in / out / on-interrupt) so there is NEVER a pop at the start,
+     end, or when you tap again. Round-robin is a shuffle-bag: all of an instrument's
+     samples play once (in random order) before any repeats. Both the name button and
+     "hear it" trigger it. The oscilloscope reads this live audio via the analyser. */
+  var actx=null, analyser=null, timeBuf=null, master=null;
+  var raw={}, buf={}, bag={}, lastI={};          // fetched bytes, decoded buffers, shuffle bags
+  var curSrc=null, curGain=null, playingId=null;
+  var hearBtn=document.getElementById('hearBtn');
 
+  function makeCtx(){
+    if(actx) return;
+    try{ actx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return; }
+    analyser=actx.createAnalyser(); analyser.fftSize=1024; analyser.smoothingTimeConstant=0.72;
+    timeBuf=new Uint8Array(analyser.fftSize);
+    master=actx.createGain(); master.gain.value=0.92;
+    analyser.connect(master); master.connect(actx.destination);
+    Object.keys(raw).forEach(function(id){ (raw[id]||[]).forEach(function(_,i){ decode(id,i); }); });
+  }
+  function decode(id,i){
+    if(!actx||!raw[id]||!raw[id][i]||(buf[id]&&buf[id][i])) return;
+    try{ actx.decodeAudioData(raw[id][i].slice(0), function(b){ buf[id]=buf[id]||[]; buf[id][i]=b; }); }catch(e){}
+  }
+  function prefetch(){                            // fetch every sample's bytes immediately
+    INST.forEach(function(it){
+      if(!it.audio) return; raw[it.id]=new Array(it.audio.length); buf[it.id]=new Array(it.audio.length);
+      it.audio.forEach(function(url,i){
+        fetch(url).then(function(r){return r.arrayBuffer();}).then(function(ab){ raw[it.id][i]=ab; decode(it.id,i); }).catch(function(){});
+      });
+    });
+  }
+  function nextIndex(id,n){                        // shuffle-bag — no repeat until all n play
+    if(!bag[id]||!bag[id].length){
+      var a=[],k; for(k=0;k<n;k++)a.push(k);
+      for(k=n-1;k>0;k--){ var j=(Math.random()*(k+1))|0, t=a[k]; a[k]=a[j]; a[j]=t; }
+      if(n>1 && a[0]===lastI[id]) a.push(a.shift());   // avoid back-to-back repeat across refills
+      bag[id]=a;
+    }
+    var idx=bag[id].shift(); lastI[id]=idx; return idx;
+  }
+  function stopCur(){
+    if(!curSrc) return;
+    try{ var t=actx.currentTime; curGain.gain.cancelScheduledValues(t);
+      curGain.gain.setValueAtTime(Math.max(0.0002,curGain.gain.value||0.5),t);
+      curGain.gain.exponentialRampToValueAtTime(0.0002,t+0.01); curSrc.stop(t+0.03); }catch(e){}
+    curSrc=null;
+  }
+  function playBuffer(b,id,label){
+    stopCur();
+    var t=actx.currentTime, src=actx.createBufferSource(); src.buffer=b;
+    var g=actx.createGain();
+    g.gain.setValueAtTime(0.0002,t); g.gain.exponentialRampToValueAtTime(1,t+0.008);                       // fade IN
+    var end=t+b.duration;
+    g.gain.setValueAtTime(1,Math.max(t+0.02,end-0.05)); g.gain.exponentialRampToValueAtTime(0.0002,end);   // fade OUT
+    src.connect(g); g.connect(analyser);
+    src.start(t); src.stop(end+0.03);
+    curSrc=src; curGain=g; playingId=id;
+    src.onended=function(){ if(curSrc===src){ curSrc=null; playingId=null; if(scopeNote) scopeNote.textContent=(cur?cur.name:DEFAULT.note); syncHear(); } };
+    if(label && scopeNote) scopeNote.textContent=label;
+    syncHear();
+  }
   function syncHear(){
     if(!hearBtn) return;
     var it=cur, has=it&&it.audio&&it.audio.length;
-    hearBtn.style.display = has ? '' : 'none';
-    var on = it && playingId===it.id && audioEl && !audioEl.paused;
-    hearBtn.classList.toggle('playing', !!on);   // label stays "hear it"; each tap = next sample
+    hearBtn.style.display=has?'':'none';
+    hearBtn.classList.toggle('playing', !!(it&&playingId===it.id&&curSrc));
   }
-  function stopAudio(){ playingId=null; syncHear(); }   // on 'ended' — just clear the state/animation
   function playHear(){
     var it=cur; if(!it||!it.audio||!it.audio.length) return;
-    if(!actx){
-      try{
-        actx=new (window.AudioContext||window.webkitAudioContext)();
-        mediaSrc=actx.createMediaElementSource(audioEl);
-        analyser=actx.createAnalyser(); analyser.fftSize=1024; analyser.smoothingTimeConstant=0.72;
-        timeBuf=new Uint8Array(analyser.fftSize);
-        mediaSrc.connect(analyser); analyser.connect(actx.destination);
-      }catch(e){}
-    }
-    if(actx && actx.state==='suspended') actx.resume();
-    var i=rr[it.id]||0;
-    audioEl.src=it.audio[i%it.audio.length];       // play THIS sample
-    rr[it.id]=(i+1)%it.audio.length;               // …and queue the next one for the next tap (round-robin)
-    try{ audioEl.currentTime=0; }catch(e){}
-    var p=audioEl.play();
-    if(p&&p.then) p.then(function(){ playingId=it.id; syncHear(); }).catch(function(){});
-    else { playingId=it.id; syncHear(); }
+    makeCtx(); if(!actx) return; if(actx.state==='suspended') actx.resume();
+    var i=nextIndex(it.id, it.audio.length);
+    var label=(it.labels&&it.labels[i])||it.name;
+    if(buf[it.id]&&buf[it.id][i]) playBuffer(buf[it.id][i],it.id,label);
+    else if(raw[it.id]&&raw[it.id][i]){ try{ actx.decodeAudioData(raw[it.id][i].slice(0),function(b){ buf[it.id][i]=b; playBuffer(b,it.id,label); }); }catch(e){} }
   }
-  audioEl.addEventListener('ended', stopAudio);
   hearBtn.addEventListener('click', playHear);
-  syncHear();
+  prefetch(); syncHear();
+
+  /* ══════════ "spectrum" — colours shift to follow the cursor ══════════ */
+  var spec=document.querySelector('h1 .spectrum');
+  if(spec){
+    spec.addEventListener('mousemove', function(e){
+      var r=spec.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+      spec.style.transition='none'; spec.style.backgroundPosition=(x*100)+'% center';
+    });
+    spec.addEventListener('mouseleave', function(){ spec.style.transition='background-position .5s ease'; spec.style.backgroundPosition='0% center'; });
+  }
 
   /* ══════════ reveal on scroll ══════════ */
   if('IntersectionObserver' in window){
