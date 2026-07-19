@@ -82,16 +82,16 @@ h1 .spectrum{background:linear-gradient(90deg,var(--pro),var(--chip),var(--digi)
 .fx-echo:hover{transform:translate(-.05em,-.05em);text-shadow:
   .11em .11em 0 var(--pro), .24em .24em 0 var(--chip), .37em .37em 0 var(--jx),
   .50em .50em 0 var(--digi), .63em .63em 0 var(--moo), .76em .76em 0 var(--dem)}
-/* "Get the whole spectrum." — flows into a rainbow and STAYS lit after the first hover */
-h2.fx-rainbow{cursor:default;transition:color .3s}
-h2.fx-rainbow:hover,h2.fx-rainbow.lit{
-  background-image:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro));
-  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 3.5s linear infinite}
-@keyframes flow{to{background-position:200% center}}
-/* rotating "loved by …" word */
-h2.loved{font-size:clamp(22px,3.4vw,32px)}
-.rotw{color:var(--purple);display:inline-block;transition:opacity .28s ease,transform .28s ease}
-@media(prefers-reduced-motion:reduce){ .fx-crush:hover{animation:none} .fx-grow:hover{transition:transform .8s} h2.fx-rainbow:hover,h2.fx-rainbow.lit{animation:none} }
+/* "Get the whole spectrum." — same cursor-follow colour as the top word; stays lit after first hover */
+h2.fx-rainbow{cursor:default;transition:background-position .28s cubic-bezier(.2,.8,.2,1),color .3s}
+h2.fx-rainbow.lit{
+  background-image:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro),var(--chip),var(--digi));
+  background-size:320% 100%;background-position:50% center;
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+/* rotating "loved by …" word — forced to ONE line so the page height never shifts */
+h2.loved{font-size:clamp(20px,3.2vw,30px);white-space:nowrap}
+.rotw{display:inline-block;font-weight:700;transition:opacity .28s ease,transform .28s ease,color .28s ease}
+@media(prefers-reduced-motion:reduce){ .fx-crush:hover{animation:none} .fx-grow:hover{transition:transform .8s} }
 
 /* ══════════ THE CONSOLE (star of the page) ══════════ */
 .console{margin:26px auto 0;max-width:1000px}
@@ -583,17 +583,24 @@ footer a{color:var(--cream)}
       spec.style.backgroundPosition=(x*100)+'% center';
     });
   }
-  /* "Get the whole spectrum." — light up on first hover, then stay lit */
+  /* "Get the whole spectrum." — light up on first hover, then colours follow the cursor (like the top word) */
   var rain=document.querySelector('h2.fx-rainbow');
-  if(rain) rain.addEventListener('mouseenter', function(){ rain.classList.add('lit'); }, { once:true });
-  /* "Loved by …" — cycle the audience word every ~1.9s with a soft fade */
+  if(rain){
+    rain.addEventListener('mouseenter', function(){ rain.classList.add('lit'); });
+    rain.addEventListener('mousemove', function(e){
+      var r=rain.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+      rain.style.backgroundPosition=(x*100)+'% center';
+    });
+  }
+  /* "Loved by …" — cycle the audience word (soft fade) and cycle its colour through the synth palette */
   var lw=document.getElementById('lovedWord');
   if(lw){
     var WORDS=['producers','artists','composers','students','beat makers','sound designers','songwriters'];
-    var wi=0;
+    var COLORS=['#3c8ed0','#40b25f','#d85fa6','#e08a43','#9a6ad0','#16b5a6']; // pro, chip, jx, digi, moo, dem
+    var wi=0; lw.style.color=COLORS[0];
     setInterval(function(){
       lw.style.opacity='0'; lw.style.transform='translateY(-8px)';
-      setTimeout(function(){ wi=(wi+1)%WORDS.length; lw.textContent=WORDS[wi]; lw.style.opacity='1'; lw.style.transform='translateY(0)'; }, 280);
+      setTimeout(function(){ wi=(wi+1)%WORDS.length; lw.textContent=WORDS[wi]; lw.style.color=COLORS[wi%COLORS.length]; lw.style.opacity='1'; lw.style.transform='translateY(0)'; }, 280);
     }, 1900);
   }
 
