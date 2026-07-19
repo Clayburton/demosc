@@ -49,7 +49,9 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .topcta:hover{background:var(--ink);color:var(--paper)}
 
 /* ---------- hero ---------- */
-.hero{text-align:center;padding:34px 22px 8px;max-width:900px;margin:0 auto}
+/* generous top padding so the WordPress site menu (above the iframe) has room,
+   then a little breathing space, then the headline */
+.hero{text-align:center;padding:clamp(84px,13vh,132px) 22px 8px;max-width:900px;margin:0 auto}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-soft)}
 h1{font-family:var(--mono);font-weight:700;font-size:clamp(34px,7vw,68px);line-height:1.02;
    letter-spacing:-.02em;margin:12px 0 0}
@@ -196,7 +198,6 @@ footer a{color:var(--cream)}
 
   <!-- ═══════════ HERO ═══════════ -->
   <header class="hero">
-    <div class="eyebrow">Five synths · one interface</div>
     <!-- EDIT: headline -->
     <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
     <!-- EDIT: hero paragraph -->
@@ -316,37 +317,37 @@ footer a{color:var(--cream)}
       tag:'The room-filling analog.', spec:'14 waves · 30 IRs · 83 presets',
       from:'Curtis-filtered vintage analog',
       blurb:'Raw oscillators sampled from a vintage-era analog synth, Curtis-filtered and warm. Classic cinematic textures and go-to producer tones that fill the room — leads, basses, pads, keys and brass, every one performable from the mod wheel.',
-      audio:['audio/pro.mp3'], track:'"Terry Town" — made with Pro-Osc only',
+      audio:['audio/pro-1.mp3','audio/pro-2.mp3','audio/pro-3.mp3','audio/pro-4.mp3','audio/pro-5.mp3'], track:'Five sounds from the Pro oscillator',
       url:'https://clayandkelsy.com/pro-osc/' },
     { id:'chip', name:'Chip-Osc', price:'$29', free:false, color:'#40b25f', wave:'pulse',
       tag:'Byte-sized, then eerie.', spec:'20 waves · 30 IRs · 81 presets',
       from:'A digital hybrid synth',
       blurb:'Built from the raw oscillators of a digital hybrid synth. Ranges from bright, classic chiptune all the way to deep, dark cinematic soundscapes — surprisingly eerie when you push it. Byte-sized and delightful, with real character.',
-      audio:['audio/chip.mp3'], track:'"Chip Girl" — made with Chip-Osc only',
+      audio:['audio/chip-1.mp3','audio/chip-2.mp3','audio/chip-3.mp3','audio/chip-4.mp3','audio/chip-5.mp3'], track:'Five sounds from the Chip oscillator',
       url:'https://clayandkelsy.com/chip-osc/' },
     { id:'jx',   name:'JX-Osc',   price:'$29', free:false, color:'#d85fa6', wave:'pwm',
       tag:'Your 80s sci-fi sidekick.', spec:'12 waves · 30 IRs · 81 presets',
       from:'An 80s-era analog synth',
       blurb:"Sampled from an 80s-era analog synth — the sweet spot between vintage nostalgia and modern reshaping. Lush strings, brass and pads that beam you straight into your favorite sci-fi thriller soundtrack.",
-      audio:['audio/jx.mp3'], track:'JX-Osc demo — made with JX-Osc only',
+      audio:['audio/jx-1.mp3','audio/jx-2.mp3','audio/jx-3.mp3','audio/jx-4.mp3','audio/jx-5.mp3'], track:'Five sounds from the JX oscillator',
       url:'https://clayandkelsy.com/jx-osc/' },
     { id:'digi', name:'Digi-Osc', price:'$29', free:false, color:'#e08a43', wave:'fm',
       tag:'A pixel-perfect playground.', spec:'22 waves · 30 IRs · 81 presets',
       from:'3 digital synths + eurorack',
       blurb:'Raw oscillators from three different digital outboard synths and eurorack modules. Bright, beautiful and electronic — a treasure trove for melodies and sonic exploration, with total control over your expression.',
-      audio:['audio/digi.mp3'], track:'Digi-Osc demo — made with Digi-Osc only',
+      audio:['audio/digi-1.mp3','audio/digi-2.mp3','audio/digi-3.mp3','audio/digi-4.mp3','audio/digi-5.mp3'], track:'Five sounds from the Digi oscillator',
       url:'https://clayandkelsy.com/digi-osc/' },
     { id:'moo',  name:'Moo-Osc',  price:'$29', free:false, color:'#9a6ad0', wave:'fat',
       tag:'Utterly rich and creamy.', spec:'22 waves · 30 IRs · 84 presets',
       from:'Rich analog',
       blurb:'Heavy, rich and creamy, with no filler. Funky basses and timeless leads that instantly elevate a track — elegantly crafted synthesis designed for fluid, effortless innovation.',
-      audio:['audio/moo.mp3'], track:'Moo-Osc demo — made with Moo-Osc only',
+      audio:['audio/moo-1.mp3','audio/moo-2.mp3','audio/moo-3.mp3','audio/moo-4.mp3','audio/moo-5.mp3'], track:'Five sounds from the Moo oscillator',
       url:'https://clayandkelsy.com/moo-osc/' },
     { id:'dem',  name:'DEM-Osc',  price:'Free', free:true, color:'#16b5a6', wave:'blend',
       tag:'A free taste of all five.', spec:'5 waves · 4 IRs · 25 presets',
       from:'One oscillator from each',
       blurb:'The free demo — one oscillator from each of the five, living under one roof. A native VST3/AU plugin with no Kontakt required. The easiest way to hear where the whole collection can take you.',
-      audio:['audio/dem-pad.mp3','audio/dem-keys.mp3','audio/dem-bass.mp3'], track:'Real DEM-Osc presets — tap again to cycle',
+      audio:['audio/dem-1.mp3','audio/dem-2.mp3','audio/dem-3.mp3','audio/dem-4.mp3','audio/dem-5.mp3'], track:'Five real DEM-Osc presets',
       url:'https://clayandkelsy.com/dem-osc/' }
   ];
   var DEFAULT = { name:'The Osc Collection', tag:'every shade of synth', color:'#7a3ff2', wave:'blend', note:'the collection',
@@ -402,7 +403,7 @@ footer a{color:var(--cream)}
   chipEls.forEach(function(c,i){
     c.addEventListener('mouseenter', function(){ setActive(i); });
     c.addEventListener('focus', function(){ setActive(i); });
-    c.addEventListener('click', function(){ setActive(i); });   // "hear it" button does playback
+    c.addEventListener('click', function(){ setActive(i); playHear(); });   // name button also round-robins the samples
   });
   // leaving the whole strip on desktop returns to the collection overview
   chips.addEventListener('mouseleave', function(){ if(window.matchMedia('(min-width:760px)').matches && !lockSel) setActive(null); });
@@ -474,13 +475,11 @@ footer a{color:var(--cream)}
     var it=cur, has=it&&it.audio&&it.audio.length;
     hearBtn.style.display = has ? '' : 'none';
     var on = it && playingId===it.id && audioEl && !audioEl.paused;
-    hearBtn.classList.toggle('playing', !!on);
-    if(hearLbl) hearLbl.textContent = on ? 'stop' : 'hear it';
+    hearBtn.classList.toggle('playing', !!on);   // label stays "hear it"; each tap = next sample
   }
-  function stopAudio(){ if(audioEl) audioEl.pause(); playingId=null; syncHear(); }
+  function stopAudio(){ playingId=null; syncHear(); }   // on 'ended' — just clear the state/animation
   function playHear(){
     var it=cur; if(!it||!it.audio||!it.audio.length) return;
-    if(playingId===it.id && !audioEl.paused){ stopAudio(); return; }   // toggle off
     if(!actx){
       try{
         actx=new (window.AudioContext||window.webkitAudioContext)();
@@ -492,10 +491,11 @@ footer a{color:var(--cream)}
     }
     if(actx && actx.state==='suspended') actx.resume();
     var i=rr[it.id]||0;
-    audioEl.src=it.audio[i%it.audio.length];
-    rr[it.id]=(i+1)%it.audio.length;                                   // round-robin next tap
+    audioEl.src=it.audio[i%it.audio.length];       // play THIS sample
+    rr[it.id]=(i+1)%it.audio.length;               // …and queue the next one for the next tap (round-robin)
+    try{ audioEl.currentTime=0; }catch(e){}
     var p=audioEl.play();
-    if(p&&p.then) p.then(function(){ playingId=it.id; syncHear(); }).catch(function(){ syncHear(); });
+    if(p&&p.then) p.then(function(){ playingId=it.id; syncHear(); }).catch(function(){});
     else { playingId=it.id; syncHear(); }
   }
   audioEl.addEventListener('ended', stopAudio);
