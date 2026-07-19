@@ -57,16 +57,17 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-soft)}
 h1{font-family:var(--mono);font-weight:700;font-size:clamp(34px,7vw,68px);line-height:1.02;
    letter-spacing:-.02em;margin:12px 0 0}
-h1 .spectrum{background:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro));
-  background-size:280% 100%;background-position:0% center;
-  -webkit-background-clip:text;background-clip:text;color:transparent;cursor:default}
+h1 .spectrum{background:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro),var(--chip),var(--digi));
+  background-size:320% 100%;background-position:50% center;
+  -webkit-background-clip:text;background-clip:text;color:transparent;cursor:default;
+  transition:background-position .28s cubic-bezier(.2,.8,.2,1)}   /* smooth colour-follow, no reset glitch */
 .lede{font-size:clamp(15px,2.2vw,18px);color:var(--ink-soft);max-width:60ch;margin:16px auto 0}
 .lede b{color:var(--ink);font-weight:600}
 
-/* ══════════ playful hover effects ══════════ */
-/* "analog that fills the room" — grows on hover, springs back on leave */
-.fx-grow{display:inline-block;transition:transform .4s cubic-bezier(.2,.85,.25,1);transform-origin:center bottom}
-.fx-grow:hover{transform:scale(1.34)}
+/* ══════════ playful hover effects (all GPU-cheap CSS — no per-frame JS) ══════════ */
+/* "analog that fills the room" — slowly, continuously enlarges while hovered, springs back on leave */
+.fx-grow{display:inline-block;position:relative;transform-origin:center;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.fx-grow:hover{transform:scale(3);transition:transform 7s cubic-bezier(.3,.05,.5,1);z-index:6}
 /* "bit-crushed video games" — glitchy low-bit chromatic crush on hover */
 .fx-crush{display:inline-block}
 .fx-crush:hover{animation:crush .1s steps(1) infinite}
@@ -75,17 +76,22 @@ h1 .spectrum{background:linear-gradient(90deg,var(--pro),var(--chip),var(--digi)
   33% {text-shadow:-2px 0 #ff2d6b,2px 0 #12e0ff;   transform:translateY(-1px) skewX(-4deg)}
   66% {text-shadow:2px 0 #12e0ff,-2px 0 #ff2d6b;   transform:translateY(1px)  skewX(3deg)}
   100%{text-shadow:1.5px 0 #ff2d6b,-1.5px 0 #12e0ff;transform:translateY(0)   skewX(0deg)}}
-/* "you know them all" — echoes itself behind & to the right in every osc colour */
-.fx-echo{position:relative;transition:text-shadow .3s ease}
-.fx-echo:hover{text-shadow:
-  .16em .16em 0 var(--pro), .32em .32em 0 var(--chip), .48em .48em 0 var(--jx),
-  .64em .64em 0 var(--digi), .80em .80em 0 var(--moo), .96em .96em 0 var(--dem)}
-/* "Get the whole spectrum." — flowing rainbow on hover */
-h2.fx-rainbow{cursor:default;transition:color .2s}
-h2.fx-rainbow:hover{background:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro));
-  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 2.4s linear infinite}
+/* "you know them all" — blooms an echo of itself in every osc colour, down & to the right */
+.fx-echo{display:inline-block;position:relative;
+  transition:text-shadow .5s cubic-bezier(.2,.8,.2,1),transform .5s cubic-bezier(.2,.8,.2,1)}
+.fx-echo:hover{transform:translate(-.05em,-.05em);text-shadow:
+  .11em .11em 0 var(--pro), .24em .24em 0 var(--chip), .37em .37em 0 var(--jx),
+  .50em .50em 0 var(--digi), .63em .63em 0 var(--moo), .76em .76em 0 var(--dem)}
+/* "Get the whole spectrum." — flows into a rainbow and STAYS lit after the first hover */
+h2.fx-rainbow{cursor:default;transition:color .3s}
+h2.fx-rainbow:hover,h2.fx-rainbow.lit{
+  background-image:linear-gradient(90deg,var(--pro),var(--chip),var(--digi),var(--jx),var(--moo),var(--dem),var(--pro));
+  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 3.5s linear infinite}
 @keyframes flow{to{background-position:200% center}}
-@media(prefers-reduced-motion:reduce){ .fx-crush:hover,h2.fx-rainbow:hover{animation:none} }
+/* rotating "loved by …" word */
+h2.loved{font-size:clamp(22px,3.4vw,32px)}
+.rotw{color:var(--purple);display:inline-block;transition:opacity .28s ease,transform .28s ease}
+@media(prefers-reduced-motion:reduce){ .fx-crush:hover{animation:none} .fx-grow:hover{transition:transform .8s} h2.fx-rainbow:hover,h2.fx-rainbow.lit{animation:none} }
 
 /* ══════════ THE CONSOLE (star of the page) ══════════ */
 .console{margin:26px auto 0;max-width:1000px}
@@ -306,7 +312,7 @@ footer a{color:var(--cream)}
   <!-- ═══════════ REVIEWS ═══════════ -->
   <section class="wrap">
     <div class="kick reveal">From the studio</div>
-    <h2 class="reveal">Loved by producers</h2>
+    <h2 class="reveal loved">Loved by <span class="rotw" id="lovedWord">producers</span></h2>
     <div class="revs">
       <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Sean Tobin</div><div class="what">Verified buyer · Chip-Osc</div></div>
       <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">CarloAlberto Villani Rigo</div><div class="what">Verified buyer · Moo-Osc</div></div>
@@ -374,7 +380,7 @@ footer a{color:var(--cream)}
       tag:'A free taste of all five.', spec:'5 waves · 4 IRs · 25 presets',
       from:'One oscillator from each',
       blurb:'The free demo — one oscillator from each of the five, living under one roof. A native VST3/AU plugin with no Kontakt required. The easiest way to hear where the whole collection can take you.',
-      audio:['audio/dem-1.mp3','audio/dem-2.mp3','audio/dem-3.mp3','audio/dem-4.mp3'], labels:['Winter Pad · Pad','Dem EP · Keys','Big Stack · Bass','Tube Army · Lead'],
+      audio:['audio/dem-1.mp3','audio/dem-2.mp3','audio/dem-3.mp3','audio/dem-4.mp3','audio/dem-5.mp3'], labels:['Winter Pad · Pad','Dem EP · Keys','Big Stack · Bass','Tube Army · Lead','1984 · Brass'],
       url:'https://clayandkelsy.com/dem-osc/' }
   ];
   var DEFAULT = { name:'The Osc Collection', tag:'every shade of synth', color:'#7a3ff2', wave:'blend', note:'the collection',
@@ -571,11 +577,24 @@ footer a{color:var(--cream)}
   /* ══════════ "spectrum" — colours shift to follow the cursor ══════════ */
   var spec=document.querySelector('h1 .spectrum');
   if(spec){
+    // just set the position; the CSS transition smooths it, and we never reset → no glitch
     spec.addEventListener('mousemove', function(e){
       var r=spec.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
-      spec.style.transition='none'; spec.style.backgroundPosition=(x*100)+'% center';
+      spec.style.backgroundPosition=(x*100)+'% center';
     });
-    spec.addEventListener('mouseleave', function(){ spec.style.transition='background-position .5s ease'; spec.style.backgroundPosition='0% center'; });
+  }
+  /* "Get the whole spectrum." — light up on first hover, then stay lit */
+  var rain=document.querySelector('h2.fx-rainbow');
+  if(rain) rain.addEventListener('mouseenter', function(){ rain.classList.add('lit'); }, { once:true });
+  /* "Loved by …" — cycle the audience word every ~1.9s with a soft fade */
+  var lw=document.getElementById('lovedWord');
+  if(lw){
+    var WORDS=['producers','artists','composers','students','beat makers','sound designers','songwriters'];
+    var wi=0;
+    setInterval(function(){
+      lw.style.opacity='0'; lw.style.transform='translateY(-8px)';
+      setTimeout(function(){ wi=(wi+1)%WORDS.length; lw.textContent=WORDS[wi]; lw.style.opacity='1'; lw.style.transform='translateY(0)'; }, 280);
+    }, 1900);
   }
 
   /* ══════════ reveal on scroll ══════════ */
