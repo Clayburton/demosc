@@ -56,7 +56,7 @@ h1.grad{background:linear-gradient(90deg,#3c8ed0,#23b7c9,#4c63d2,#3c8ed0,#23b7c9
 .tinybuy a{color:var(--acc);border-bottom:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
 
 /* ---------- interface showpiece ---------- */
-.showpiece{max-width:1000px;margin:56px auto 0;padding:0 24px;perspective:1400px}
+.showpiece{max-width:600px;margin:52px auto 0;padding:0 24px;perspective:1400px}
 .sp-frame{position:relative;border-radius:20px;transform-style:preserve-3d;transition:transform .25s ease-out;
   animation:float 7s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
@@ -77,8 +77,23 @@ h1.grad{background:linear-gradient(90deg,#3c8ed0,#23b7c9,#4c63d2,#3c8ed0,#23b7c9
 /* ---------- sections ---------- */
 section{padding:clamp(72px,11vw,120px) 0}
 .kick{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--acc);text-align:center}
-h2{font-family:var(--mono);font-weight:700;font-size:clamp(30px,5vw,52px);line-height:1.05;text-align:center;letter-spacing:-.02em;margin:12px auto 0;max-width:18ch;text-wrap:balance}
+h2{font-family:var(--mono);font-weight:700;font-size:clamp(24px,4.6vw,50px);line-height:1.09;text-align:center;letter-spacing:-.02em;margin:12px auto 0;max-width:30ch}
+.nw{white-space:nowrap}
 .lead{text-align:center;color:var(--ink-soft);max-width:54ch;margin:18px auto 0;font-size:17px}
+/* blue gradient headline (matches the top Pro-Osc wordmark) */
+h2.grad2{background:linear-gradient(90deg,#3c8ed0,#23b7c9,#4c63d2,#3c8ed0,#23b7c9);background-size:280% 100%;background-position:50% center;
+  -webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position .28s cubic-bezier(.2,.8,.2,1)}
+/* rotating "loved by …" word */
+h2.loved{white-space:nowrap}
+.rotw{display:inline-block;font-weight:700;transition:opacity .28s ease,transform .28s ease,color .28s ease}
+/* reviews: show a little, fade, "read more" */
+.revwrap{position:relative;max-width:940px;margin:34px auto 0}
+.revwrap.clamped .revs{max-height:212px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 52%,transparent);mask-image:linear-gradient(to bottom,#000 52%,transparent)}
+.rq{font-size:14.5px;color:#3a3226;line-height:1.55;margin:10px 0 0}
+.showmore{display:block;margin:20px auto 0;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.05em;color:var(--acc);
+  background:transparent;border:1.5px solid color-mix(in srgb,var(--acc) 45%,var(--line));padding:12px 24px;border-radius:100px;cursor:pointer;transition:.18s}
+.showmore:hover{background:var(--acc);color:#fff;border-color:transparent;transform:translateY(-1px)}
+.revwrap:not(.clamped) .showmore{display:none}
 
 /* ---------- hear-it console ---------- */
 .console{max-width:960px;margin:38px auto 0}
@@ -166,7 +181,7 @@ h2{font-family:var(--mono);font-weight:700;font-size:clamp(30px,5vw,52px);line-h
 .bundle .free{display:block;margin-top:18px;font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
 .bundle .free a{color:var(--acc);border-bottom:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
 
-footer{background:var(--espresso);color:var(--cream-dim);text-align:center;padding:48px 22px}
+footer{background:var(--espresso);color:var(--cream-dim);text-align:center;padding:64px 22px 78px}
 footer .fm{font-family:var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--cream);font-size:12px}
 footer .ft2{font-family:var(--mono);font-style:italic;color:color-mix(in srgb,var(--acc) 78%,white);margin:14px 0}
 footer a{color:var(--cream)}
@@ -227,7 +242,7 @@ footer a{color:var(--cream)}
   <!-- ═══════════ HEAR IT ═══════════ -->
   <section id="hear" class="wrap">
     <div class="kick reveal">Hear it</div>
-    <h2 class="reveal">Real sounds, straight from Pro-Osc.</h2>
+    <h2 class="reveal">Real sounds,<br><span class="nw">straight from Pro-Osc.</span></h2>
     <p class="lead reveal">Four presets and a full track — every sound below was made with Pro-Osc alone.</p>
     <div class="console reveal">
       <div class="scope-wrap">
@@ -252,7 +267,7 @@ footer a{color:var(--cream)}
   <!-- ═══════════ FEATURES (alternating real UI) ═══════════ -->
   <section class="wrap" style="padding-bottom:20px">
     <div class="kick reveal">What's under the hood</div>
-    <h2 class="reveal">Familiar sounds. Refreshing interface.</h2>
+    <h2 class="reveal">Familiar sounds.<br><span class="nw">Refreshing interface.</span></h2>
 
     <div class="frow reveal">
       <div class="ftxt"><div class="fnum">14</div><h3>Wave shapes, three at a time</h3>
@@ -284,7 +299,7 @@ footer a{color:var(--cream)}
   <!-- ═══════════ VIDEO ═══════════ -->
   <section class="wrap">
     <div class="kick reveal">See it move</div>
-    <h2 class="reveal">Watch Pro-Osc in action.</h2>
+    <h2 class="reveal">Watch <span class="nw">Pro-Osc</span> in action.</h2>
     <div class="video reveal" id="video" data-yt="L5G_QbA4Lwg">
       <img loading="lazy" src="https://i.ytimg.com/vi/L5G_QbA4Lwg/hqdefault.jpg" alt="Pro-Osc video">
       <div class="pbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
@@ -319,19 +334,22 @@ footer a{color:var(--cream)}
   <!-- ═══════════ REVIEWS ═══════════ -->
   <section class="wrap">
     <div class="kick reveal">From the studio</div>
-    <h2 class="reveal">Loved by producers.</h2>
-    <div class="revs">
-      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Sean Tobin</div><div class="what">Verified buyer · Pro-Osc</div></div>
-      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">Patrick C.</div><div class="what">Verified buyer · Pro-Osc</div></div>
-      <div class="rev reveal"><div class="stars">★★★★★</div><div class="who">CarloAlberto Villani Rigo</div><div class="what">Verified buyer · Osc Collection</div></div>
+    <h2 class="reveal loved">Loved by <span class="rotw" id="lovedWord">producers</span></h2>
+    <div class="revwrap clamped reveal" id="revwrap">
+      <div class="revs">
+        <div class="rev"><div class="stars">★★★★★</div><p class="rq">"From the first chord struck I was speechless — finally soft-synths with soul, and they sound stellar."</p><div class="who">Sean Tobin</div><div class="what">Verified buyer · Pro-Osc</div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p class="rq">"Pro-Osc is packed full of analogue goodness — a lush, warm sound with a uniqueness reminiscent of when synths ruled the airwaves."</p><div class="who">Patrick C.</div><div class="what">Verified buyer · Pro-Osc</div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p class="rq">"True analog sounds. The graphics and design are top, and the presets are a great start point for sonic exploration. A work of love for sure."</p><div class="who">CarloAlberto Villani Rigo</div><div class="what">Verified buyer · Osc Collection</div></div>
+      </div>
+      <button class="showmore" id="showMore" type="button">Read the reviews &darr;</button>
     </div>
   </section>
 
   <!-- ═══════════ BUNDLE / BUY ═══════════ -->
-  <section class="wrap" id="get">
+  <section class="wrap" id="get" style="padding-bottom:clamp(104px,14vw,180px)">
     <div class="bundle reveal">
       <div class="kick">Make it yours</div>
-      <h2>Bring Pro-Osc home.</h2>
+      <h2 class="grad2" id="bundleTitle">Bring <span class="nw">Pro-Osc</span> home.</h2>
       <div class="p">$29</div>
       <a class="cta big" data-buy="pro" target="_top">Buy Pro-Osc &rarr;</a>
       <span class="free">Or get all five &mdash; <a data-buy="bundle" target="_top">the Osc Collection for $99</a> (save $45). New here? <a data-buy="dem" target="_top">DEM-Osc is free</a>.</span>
@@ -443,9 +461,25 @@ footer a{color:var(--cream)}
   if(v) v.addEventListener('click', function(){ var id=v.getAttribute('data-yt');
     v.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" title="Pro-Osc" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>'; });
 
-  /* ---- title cursor-follow gradient ---- */
-  var pt=document.getElementById('proTitle');
-  if(pt) pt.addEventListener('mousemove', function(e){ var r=pt.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)); pt.style.backgroundPosition=(x*100)+'% center'; });
+  /* ---- gradient headlines: colours follow the cursor ---- */
+  function follow(el){ if(el) el.addEventListener('mousemove', function(e){ var r=el.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)); el.style.backgroundPosition=(x*100)+'% center'; }); }
+  follow(document.getElementById('proTitle'));
+  follow(document.getElementById('bundleTitle'));
+
+  /* ---- "Loved by …" rotating word, cycling the synth colours ---- */
+  var lw=document.getElementById('lovedWord');
+  if(lw){
+    var WORDS=['producers','artists','composers','students','beat makers','sound designers','songwriters'];
+    var COLORS=['#3c8ed0','#40b25f','#d85fa6','#e08a43','#9a6ad0','#16b5a6'];
+    function tint(c){ lw.style.color=c; lw.style.webkitTextFillColor=c; }  /* text-fill wins over color */
+    var wi=0; tint(COLORS[0]);
+    setInterval(function(){ lw.style.opacity='0'; lw.style.transform='translateY(-8px)';
+      setTimeout(function(){ wi=(wi+1)%WORDS.length; lw.textContent=WORDS[wi]; tint(COLORS[wi%COLORS.length]); lw.style.opacity='1'; lw.style.transform='translateY(0)'; }, 280); }, 1900);
+  }
+
+  /* ---- reviews: show more ---- */
+  var sm=document.getElementById('showMore'), rw=document.getElementById('revwrap');
+  if(sm&&rw) sm.addEventListener('click', function(){ rw.classList.remove('clamped'); });
 
   /* ---- interface showpiece: subtle mouse tilt ---- */
   var sp=document.getElementById('showpiece'), spf=document.getElementById('spFrame');
