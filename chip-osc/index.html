@@ -348,7 +348,7 @@ footer a{color:var(--cream)}
   </section>
 
   <!-- ═══════════ BUNDLE / BUY ═══════════ -->
-  <section class="wrap" id="get" style="padding-bottom:clamp(104px,14vw,180px)">
+  <section class="wrap" id="get" style="padding-top:clamp(72px,10vw,112px);padding-bottom:clamp(104px,14vw,180px)">
     <div class="bundle reveal">
       <div class="kick">Make it yours</div>
       <h2 class="grad2" id="bundleTitle">Bring <span class="nw">Chip-Osc</span> home.</h2>
@@ -501,9 +501,11 @@ footer a{color:var(--cream)}
 
   /* ---- reveal + counters + sticky bar ---- */
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in');
-      if(e.target.classList.contains('stat')){ var n=e.target.querySelector('[data-to]'); if(n&&!n.dataset.done){n.dataset.done=1;countUp(n);} }
-      io.unobserve(e.target);} }); },{threshold:.15});
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ var t=e.target, isStat=t.classList.contains('stat');
+      if(e.isIntersecting){ t.classList.add('in');
+        if(isStat){ var n=t.querySelector('[data-to]'); if(n&&n.dataset.anim!=='1'){ n.dataset.anim='1'; n.textContent='0'; countUp(n); } }
+      } else if(isStat){ var n=t.querySelector('[data-to]'); if(n){ n.dataset.anim=''; n.textContent='0'; } }
+    }); },{threshold:.45});
     [].forEach.call(document.querySelectorAll('.reveal,.stat'), function(el){ io.observe(el); });
   } else { [].forEach.call(document.querySelectorAll('.reveal'), function(el){ el.classList.add('in'); });
     [].forEach.call(document.querySelectorAll('[data-to]'), function(el){ el.textContent=el.getAttribute('data-to'); }); }
