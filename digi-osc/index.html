@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digi-Osc — Clay & Kelsy Instruments</title>
+<meta name="description" content="Digi-Osc — three digital synths and eurorack sampled into one bright, electronic instrument. 22 wave shapes, 30 convolution spaces, 81 presets. Hear it, then make it yours.">
+<style>
+/* ══════════ DIGI-OSC premium sell page — CKI. Self-contained, snappy. ══════════ */
+:root{
+  --paper:#ece2d0; --paper-2:#e7dcc4; --card:#f4eddd; --card-2:#efe6d2;
+  --ink:#17120c; --ink-soft:#6d6353; --line:#dccfb6;
+  --purple:#7a3ff2; --espresso:#161009; --cream:#f2ead9; --cream-dim:#c9bca4;
+  --mono:"Courier New",ui-monospace,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --pro:#3c8ed0; --chip:#40b25f; --jx:#d85fa6; --digi:#e08a43; --moo:#9a6ad0; --dem:#16b5a6;
+  --acc:var(--digi); --acc2:#e6a84a;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+::selection{background:var(--acc);color:#fff}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+/* layered atmosphere */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+   radial-gradient(1200px 700px at 78% -12%,color-mix(in srgb,var(--acc) 16%,transparent),transparent 58%),
+   radial-gradient(1000px 620px at -8% 8%,color-mix(in srgb,var(--acc2) 10%,transparent),transparent 55%),
+   radial-gradient(900px 560px at 50% 118%,rgba(201,153,46,.07),transparent 60%)}
+.wrap,section,header,footer,.showpiece{position:relative;z-index:1}
+
+/* ---------- hero ---------- */
+.hero{max-width:960px;margin:0 auto;text-align:center;padding:clamp(90px,13vh,150px) 24px 0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-soft)}
+.eyebrow b{color:var(--acc)}
+h1{font-family:var(--mono);font-weight:700;font-size:clamp(58px,13vw,150px);line-height:.9;letter-spacing:-.035em;margin:14px 0 0;cursor:default}
+h1.grad{background:linear-gradient(90deg,#e08a43,#e6a84a,#d9707a,#e08a43,#e6a84a);background-size:280% 100%;
+  background-position:50% center;-webkit-background-clip:text;background-clip:text;color:transparent;
+  transition:background-position 0s linear;will-change:background-position;
+  filter:drop-shadow(0 20px 40px color-mix(in srgb,var(--acc) 28%,transparent))}
+.subhead{font-family:var(--mono);font-style:italic;color:var(--acc);font-size:clamp(16px,2.5vw,22px);margin:18px 0 0}
+.pitch{font-size:clamp(16px,2.1vw,19px);color:var(--ink-soft);max-width:58ch;margin:20px auto 0}
+.pitch b{color:var(--ink);font-weight:600}
+.buyrow{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;margin:32px auto 0}
+.price{font-family:var(--mono);font-weight:700;font-size:44px;line-height:1}
+.cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:16px;color:#fff;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 76%,white 8%),var(--acc));padding:17px 32px;border-radius:100px;
+  box-shadow:0 16px 34px -12px color-mix(in srgb,var(--acc) 75%,transparent),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .14s,box-shadow .2s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 22px 44px -12px color-mix(in srgb,var(--acc) 80%,transparent)}
+.cta.big{font-size:18px;padding:20px 38px}
+.ghost{font-family:var(--mono);font-weight:700;font-size:15px;border:1.5px solid var(--ink);padding:15px 26px;border-radius:100px;transition:.18s}
+.ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+.tinybuy{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-top:16px}
+.tinybuy a{color:var(--acc);border-bottom:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
+
+/* ---------- interface showpiece ---------- */
+.showpiece{max-width:600px;margin:52px auto 0;padding:0 24px;perspective:1400px}
+.sp-frame{position:relative;border-radius:20px;transform-style:preserve-3d;transition:transform .25s ease-out;
+  animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.sp-frame::before{content:"";position:absolute;inset:-6% -3% -12%;border-radius:30px;z-index:-1;
+  background:radial-gradient(60% 60% at 50% 40%,color-mix(in srgb,var(--acc) 40%,transparent),transparent 70%);
+  filter:blur(28px);opacity:.85}
+.sp-img{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);
+  box-shadow:0 50px 90px -40px rgba(0,0,0,.55),0 8px 24px -12px color-mix(in srgb,var(--acc) 40%,transparent)}
+.sp-cap{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:20px}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:920px;margin:70px auto 0;padding:0 24px}
+.stat{text-align:center;padding:22px 10px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.stat .sn{font-family:var(--mono);font-weight:700;font-size:clamp(34px,6vw,52px);line-height:1;
+  background:linear-gradient(180deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .sl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px}
+
+/* ---------- sections ---------- */
+section{padding:clamp(72px,11vw,120px) 0}
+.kick{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--acc);text-align:center}
+h2{font-family:var(--mono);font-weight:700;font-size:clamp(24px,4.6vw,50px);line-height:1.09;text-align:center;letter-spacing:-.02em;margin:12px auto 0;max-width:30ch}
+.nw{white-space:nowrap}
+.fx-decode{display:inline-block}
+.lead{text-align:center;color:var(--ink-soft);max-width:54ch;margin:18px auto 0;font-size:17px}
+/* blue gradient headline (matches the top Digi-Osc wordmark) */
+h2.grad2{background:linear-gradient(90deg,#e08a43,#e6a84a,#d9707a,#e08a43,#e6a84a);background-size:280% 100%;background-position:50% center;
+  -webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 0s linear;will-change:background-position}
+/* rotating "loved by …" word */
+h2.loved{white-space:nowrap}
+.rotw{display:inline-block;font-weight:700;transition:opacity .28s ease,transform .28s ease,color .28s ease}
+/* reviews: show a little, fade, "read more" */
+.revwrap{position:relative;max-width:940px;margin:34px auto 0}
+.revwrap.clamped .revs{max-height:212px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 52%,transparent);mask-image:linear-gradient(to bottom,#000 52%,transparent)}
+.rq{font-size:14.5px;color:#3a3226;line-height:1.55;margin:10px 0 0}
+.showmore{display:block;margin:20px auto 0;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.05em;color:var(--acc);
+  background:transparent;border:1.5px solid color-mix(in srgb,var(--acc) 45%,var(--line));padding:12px 24px;border-radius:100px;cursor:pointer;transition:.18s}
+.showmore:hover{background:var(--acc);color:#fff;border-color:transparent;transform:translateY(-1px)}
+.revwrap:not(.clamped) .showmore{display:none}
+
+/* ---------- hear-it console ---------- */
+.console{max-width:960px;margin:38px auto 0}
+.scope-wrap{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#0f0c09,#1d1811);
+  border:1px solid #2c2419;box-shadow:0 40px 80px -40px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.05),0 0 60px -30px color-mix(in srgb,var(--acc) 55%,transparent)}
+#scope{display:block;width:100%;height:160px}
+.scope-label{position:absolute;top:14px;left:18px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim);opacity:.7}
+.scope-note{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.now{position:absolute;left:16px;bottom:15px;display:flex;align-items:center;gap:11px;padding:9px 17px 9px 14px;border-radius:100px;
+  max-width:calc(100% - 32px);pointer-events:none;background:rgba(255,255,255,.05);
+  border:1px solid color-mix(in srgb,var(--acc) 45%,transparent);
+  box-shadow:0 8px 26px -10px color-mix(in srgb,var(--acc) 65%,transparent),inset 0 1px 0 rgba(255,255,255,.07);
+  -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);opacity:0;transform:translateY(10px) scale(.98);
+  transition:opacity .45s ease,transform .45s cubic-bezier(.2,.85,.25,1)}
+.now.show{opacity:1;transform:none}
+.now-eq{display:inline-flex;gap:2.5px;align-items:flex-end;height:15px}
+.now-eq i{width:3px;border-radius:2px;height:5px;background:var(--acc);animation:neq .72s infinite ease-in-out}
+.now-eq i:nth-child(2){animation-delay:.11s}.now-eq i:nth-child(3){animation-delay:.22s}.now-eq i:nth-child(4){animation-delay:.33s}
+@keyframes neq{0%,100%{height:4px}50%{height:15px}}
+.now-txt{display:flex;flex-direction:column;line-height:1.12;min-width:0}
+.now-name{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+.now-type{font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--acc);margin-top:2px}
+.sounds{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.snd{position:relative;font-family:var(--mono);text-align:left;cursor:pointer;background:var(--card);border:1.5px solid var(--line);
+  border-radius:15px;padding:15px 16px;transition:transform .14s ease,border-color .2s,box-shadow .2s;color:var(--ink)}
+.snd:hover{transform:translateY(-3px);border-color:var(--acc);box-shadow:0 14px 30px -18px color-mix(in srgb,var(--acc) 70%,transparent)}
+.snd.on{border-color:var(--acc);background:var(--card-2);box-shadow:0 12px 30px -14px var(--acc),inset 0 0 0 1px var(--acc)}
+.snd .play{display:inline-flex;width:16px;height:16px;margin-right:9px;vertical-align:-2px;color:var(--acc)}
+.snd .nm{font-weight:700;font-size:15px} .snd .ty{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px}
+.snd.on .ty{color:var(--acc)}
+.song{display:flex;align-items:center;gap:16px;margin-top:12px;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px}
+.songbtn{flex:none;width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;color:#fff;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 80%,white 5%),var(--acc));display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 22px -8px color-mix(in srgb,var(--acc) 70%,transparent);transition:transform .12s}
+.songbtn:hover{transform:scale(1.06)}
+.songmeta{flex:1;min-width:0}.songttl{font-family:var(--mono);font-weight:700;font-size:15px}.songsub{font-size:12.5px;color:var(--ink-soft)}
+.songbar{height:6px;border-radius:100px;background:var(--line);margin-top:10px;overflow:hidden;cursor:pointer}
+.songfill{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:100px}
+.songtime{flex:none;font-family:var(--mono);font-size:12px;color:var(--ink-soft);min-width:42px;text-align:right}
+
+/* ---------- feature rows (alternating, real UI) ---------- */
+.frow{display:grid;grid-template-columns:1fr;gap:26px;align-items:center;max-width:1000px;margin:0 auto;padding:clamp(34px,5vw,52px) 0}
+.frow .ftxt .fnum{font-family:var(--mono);font-weight:700;font-size:clamp(40px,7vw,64px);line-height:1;
+  background:linear-gradient(180deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.frow .ftxt h3{font-family:var(--mono);font-weight:700;font-size:clamp(20px,2.6vw,26px);margin:6px 0 0;letter-spacing:-.01em}
+.frow .ftxt p{color:var(--ink-soft);font-size:16px;margin:12px 0 0;max-width:44ch}
+.fimg{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fbf6ea;
+  box-shadow:0 34px 60px -34px rgba(0,0,0,.4),0 0 40px -26px color-mix(in srgb,var(--acc) 55%,transparent);
+  transition:transform .25s ease,box-shadow .25s ease}
+.fimg:hover{transform:translateY(-4px);box-shadow:0 44px 70px -34px rgba(0,0,0,.45),0 0 50px -22px color-mix(in srgb,var(--acc) 65%,transparent)}
+.fimg img{width:100%;height:auto}
+
+/* ---------- video ---------- */
+.video{max-width:900px;margin:30px auto 0;position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:0 44px 80px -38px rgba(0,0,0,.55),0 0 60px -30px color-mix(in srgb,var(--acc) 45%,transparent);background:#0d0b09;cursor:pointer}
+.video img{width:100%;height:100%;object-fit:cover;opacity:.8;transition:opacity .3s,transform .6s}
+.video:hover img{opacity:.6;transform:scale(1.04)}
+.video .pbtn{position:absolute;inset:0;margin:auto;width:82px;height:82px;border-radius:50%;background:color-mix(in srgb,var(--acc) 92%,black);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 14px 40px -8px color-mix(in srgb,var(--acc) 85%,transparent);transition:transform .15s}
+.video:hover .pbtn{transform:scale(1.09)}.video .pbtn svg{width:32px;height:32px;color:#fff;margin-left:4px}
+.video iframe{width:100%;height:100%;border:0;display:block}
+.videocap{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:16px}
+
+/* ---------- dark specs band ---------- */
+.dark{background:var(--espresso);color:var(--cream);border-radius:30px;margin:8px auto 0;padding:clamp(46px,7vw,70px) 30px;max-width:1040px;
+  box-shadow:0 50px 90px -50px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05)}
+.dark .kick{color:color-mix(in srgb,var(--acc) 75%,white)}.dark h2{color:var(--cream)}
+.cols{display:grid;grid-template-columns:1fr;gap:30px;margin:34px auto 0;max-width:840px}
+.col h3{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--acc) 75%,white);margin:0 0 14px}
+.col ul{list-style:none;margin:0;padding:0}.col li{font-size:14.5px;color:var(--cream-dim);padding:8px 0 8px 24px;position:relative;line-height:1.5}
+.col li::before{content:"▸";position:absolute;left:0;color:var(--acc)}.col li b{color:var(--cream)}
+.col a{color:color-mix(in srgb,var(--acc) 80%,white);border-bottom:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
+
+/* ---------- reviews ---------- */
+.revs{display:grid;grid-template-columns:1fr;gap:16px;margin:34px auto 0;max-width:940px}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;transition:transform .18s,box-shadow .2s}
+.rev:hover{transform:translateY(-3px);box-shadow:0 20px 40px -26px color-mix(in srgb,var(--acc) 55%,transparent)}
+.stars{color:#e0a52e;letter-spacing:4px;font-size:16px}.rev .who{font-family:var(--mono);font-size:14px;margin-top:10px}.rev .what{font-size:12px;color:var(--ink-soft)}
+
+/* ---------- bundle ---------- */
+.bundle{text-align:center;background:linear-gradient(180deg,var(--card),var(--card-2));border:1.5px solid var(--line);border-radius:30px;
+  padding:clamp(56px,8vw,86px) clamp(32px,6vw,60px);max-width:780px;margin:0 auto;box-shadow:0 40px 80px -48px color-mix(in srgb,var(--acc) 50%,transparent)}
+.bundle .p{font-family:var(--mono);font-weight:700;font-size:clamp(48px,11vw,84px);line-height:1;margin:14px 0 6px;
+  background:linear-gradient(180deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bundle .free{display:block;margin-top:18px;font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
+.bundle .free a{color:var(--acc);border-bottom:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
+
+footer{background:var(--espresso);color:var(--cream-dim);text-align:center;padding:64px 22px 78px}
+footer .fm{font-family:var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--cream);font-size:12px}
+footer .ft2{font-family:var(--mono);font-style:italic;color:color-mix(in srgb,var(--acc) 78%,white);margin:14px 0}
+footer a{color:var(--cream)}
+
+/* ---------- sticky buy bar ---------- */
+.buybar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+  padding:12px 20px calc(env(safe-area-inset-bottom,0) + 12px);
+  background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);box-shadow:0 -12px 30px -20px rgba(0,0,0,.4);
+  transform:translateY(120%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.buybar.show{transform:none}
+.buybar .bb-name{font-family:var(--mono);font-weight:700;font-size:15px}.buybar .bb-name b{color:var(--acc)}
+.buybar .cta{padding:12px 26px;font-size:15px}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(min-width:760px){
+  .sounds{grid-template-columns:repeat(4,1fr)}
+  .frow{grid-template-columns:.85fr 1.15fr;gap:44px}
+  .frow.rev .ftxt{order:2}.frow.rev .fimg{order:1}
+  .cols{grid-template-columns:1fr 1fr}
+  .revs{grid-template-columns:repeat(2,1fr);max-width:700px;margin-left:auto;margin-right:auto}
+}
+@media(max-width:520px){ .stats{grid-template-columns:repeat(2,1fr)} }
+@media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none} .sp-frame{animation:none} .now-eq i{animation:none;height:9px} }
+</style>
+</head>
+<body>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <header class="hero">
+    <div class="eyebrow">The Osc Collection &middot; <b>Digital</b></div>
+    <h1 class="grad" id="proTitle">Digi-Osc</h1>
+    <p class="subhead">Three digital synths &amp; eurorack &mdash; a pixel-perfect playground.</p>
+    <p class="pitch">Built from the <b>raw oscillators of three digital synths and eurorack modules</b> — then wrapped in a hand-drawn interface. Bright, beautiful and <b class="fx-decode">digital</b>, across <b>81 handcrafted presets</b> with no filler.</p>
+    <div class="buyrow">
+      <div class="price">$29</div>
+      <a class="cta big" data-buy="pro" target="_top">Buy Digi-Osc &rarr;</a>
+      <a class="ghost" href="#hear">Hear it first</a>
+    </div>
+    <div class="tinybuy">Or get all five in the <a data-buy="bundle" target="_top">Osc Collection &mdash; $99</a> &middot; new here? <a data-buy="dem" target="_top">try DEM-Osc free</a></div>
+  </header>
+
+  <!-- ═══════════ INTERFACE SHOWPIECE ═══════════ -->
+  <div class="showpiece" id="showpiece">
+    <div class="sp-frame" id="spFrame"><img class="sp-img" src="interface.webp" width="900" height="743" alt="The Digi-Osc interface" fetchpriority="high"></div>
+    <div class="sp-cap">Every knob, on one hand-drawn screen</div>
+  </div>
+
+  <!-- ═══════════ STATS ═══════════ -->
+  <section class="stats" style="padding-top:0">
+    <div class="stat"><div class="sn" data-to="22">0</div><div class="sl">Wave shapes</div></div>
+    <div class="stat"><div class="sn" data-to="30">0</div><div class="sl">Convolution spaces</div></div>
+    <div class="stat"><div class="sn" data-to="81">0</div><div class="sl">Handcrafted presets</div></div>
+    <div class="stat"><div class="sn">NKS</div><div class="sl">Ready</div></div>
+  </section>
+
+  <!-- ═══════════ HEAR IT ═══════════ -->
+  <section id="hear" class="wrap">
+    <div class="kick reveal">Hear it</div>
+    <h2 class="reveal">Real sounds,<br><span class="nw">straight from Digi-Osc.</span></h2>
+    <p class="lead reveal">Four presets, straight from the synth — every sound below was made with Digi-Osc alone.</p>
+    <div class="console reveal">
+      <div class="scope-wrap">
+        <div class="scope-label">Digi-Osc &middot; live</div>
+        <div class="scope-note" id="scopeNote">tap a sound</div>
+        <canvas id="scope" width="1000" height="160" aria-hidden="true"></canvas>
+        <div class="now" id="nowPlaying"><span class="now-eq"><i></i><i></i><i></i><i></i></span>
+          <span class="now-txt"><span class="now-name" id="nowName"></span><span class="now-type" id="nowType"></span></span></div>
+      </div>
+      <div class="sounds" id="sounds"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FEATURES (alternating real UI) ═══════════ -->
+  <section class="wrap" style="padding-bottom:20px">
+    <div class="kick reveal">What's under the hood</div>
+    <h2 class="reveal">Familiar sounds.<br><span class="nw">Refreshing interface.</span></h2>
+
+    <div class="frow reveal">
+      <div class="ftxt"><div class="fnum">22</div><h3>Wave shapes, three at a time</h3>
+        <p>Three oscillator selectors, each with 22 digital shapes from three synths and eurorack — plus per-oscillator pitch and pan.</p></div>
+      <div class="fimg"><img loading="lazy" src="feat-wave.webp" width="820" height="295" alt="Oscillator wave selectors"></div>
+    </div>
+    <div class="frow rev reveal">
+      <div class="ftxt"><div class="fnum">30</div><h3>Convolution spaces built in</h3>
+        <p>Cross-synthesis through our favorite outboard reverbs and eurorack effects — 15 reverbs and 15 FX, ready to convolve your sound.</p></div>
+      <div class="fimg"><img loading="lazy" src="feat-ir.webp" width="820" height="245" alt="Reverb and effects"></div>
+    </div>
+    <div class="frow reveal">
+      <div class="ftxt"><div class="fnum">↻</div><h3>A stepped sequencer with a twist</h3>
+        <p>It only steps when a note arrives — swapping the loaded wave shape per note to bring melodies and chords to life.</p></div>
+      <div class="fimg"><img loading="lazy" src="feat-step.webp" width="820" height="249" alt="Stepped sequencer"></div>
+    </div>
+    <div class="frow rev reveal">
+      <div class="ftxt"><div class="fnum">∿</div><h3>Cut-Off LFO &amp; a mod-wheel command center</h3>
+        <p>A dedicated filter LFO with plenty of shapes, plus a control center that maps many parameters to your mod wheel at once.</p></div>
+      <div class="fimg"><img loading="lazy" src="feat-mod.webp" width="820" height="245" alt="Cut-Off LFO and mod wheel"></div>
+    </div>
+    <div class="frow reveal">
+      <div class="ftxt"><div class="fnum">≈</div><h3>Vibrato, glide, slop &amp; spread</h3>
+        <p>Classic vibrato with speed and fade-in, plus polyphonic glide, pitch slop and pan spread to keep everything alive and human.</p></div>
+      <div class="fimg"><img loading="lazy" src="feat-vib.webp" width="820" height="247" alt="Vibrato and misc"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ VIDEO ═══════════ -->
+  <section class="wrap">
+    <div class="kick reveal">See it move</div>
+    <h2 class="reveal">Watch <span class="nw">Digi-Osc</span> in action.</h2>
+    <div class="video reveal" id="video" data-yt="NpmGiXKpUf4">
+      <img loading="lazy" src="https://i.ytimg.com/vi/NpmGiXKpUf4/hqdefault.jpg" alt="Digi-Osc video">
+      <div class="pbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+    <div class="videocap">A closer look at Digi-Osc &mdash; bright, electronic, endlessly playable.</div>
+  </section>
+
+  <!-- ═══════════ SPECS / REQUIREMENTS ═══════════ -->
+  <section class="wrap">
+    <div class="dark reveal">
+      <div class="kick">The details</div>
+      <h2>Everything in the box.</h2>
+      <div class="cols">
+        <div class="col"><h3>Key features</h3><ul>
+          <li><b>81</b> handcrafted presets, no filler</li>
+          <li><b>20</b> digital wave shapes from a digital hybrid synth</li>
+          <li><b>30</b> custom impulse responses (15 reverbs + 15 eurorack FX)</li>
+          <li>Note-triggered <b>stepped sequencer</b></li>
+          <li>Cut-Off LFO, Vibrato, Pitch Slop &amp; polyphonic Glide</li>
+          <li>Full <b>NKS</b> support — Maschine &amp; Komplete Kontrol</li>
+        </ul></div>
+        <div class="col"><h3>Requirements</h3><ul>
+          <li>Install &amp; download through <b>Native Access</b></li>
+          <li>Runs in the <b>free Kontakt 6+ Player</b>, full Kontakt 6 &amp; 7, Komplete Kontrol or Maschine 2</li>
+          <li>macOS &amp; Windows</li>
+          <li><a href="https://www.native-instruments.com/en/products/komplete/samplers/kontakt-7-player/" target="_top">Get the free Kontakt Player &rarr;</a></li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ REVIEWS ═══════════ -->
+  <section class="wrap">
+    <div class="kick reveal">From the studio</div>
+    <h2 class="reveal loved">Loved by <span class="rotw" id="lovedWord">producers</span></h2>
+    <div class="revwrap reveal" id="revwrap">
+      <div class="revs">
+        <div class="rev"><div class="stars">★★★★★</div><p class="rq">"The quality, sound and sheer joy these synths bring to producing music is seriously a breath of fresh air — the barn find of the decade."</p><div class="who">Sean Tobin</div><div class="what">Verified buyer · Osc Collection</div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p class="rq">"True analog sounds. The graphics and design are top, and the presets are a great start point for sonic exploration. A work of love for sure."</p><div class="who">CarloAlberto Villani Rigo</div><div class="what">Verified buyer · Osc Collection</div></div>
+      </div>
+      <button class="showmore" id="showMore" type="button">Read the reviews &darr;</button>
+    </div>
+  </section>
+
+  <!-- ═══════════ BUNDLE / BUY ═══════════ -->
+  <section class="wrap" id="get" style="padding-top:clamp(72px,10vw,112px);padding-bottom:clamp(104px,14vw,180px)">
+    <div class="bundle reveal">
+      <div class="kick">Make it yours</div>
+      <h2 class="grad2" id="bundleTitle">Bring <span class="nw">Digi-Osc</span> home.</h2>
+      <div class="p">$29</div>
+      <a class="cta big" data-buy="pro" target="_top">Buy Digi-Osc &rarr;</a>
+      <span class="free">Or get all five &mdash; <a data-buy="bundle" target="_top">the Osc Collection for $99</a> (save $45). New here? <a data-buy="dem" target="_top">DEM-Osc is free</a>.</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fm">Clay &amp; Kelsy Instruments</div>
+    <div class="ft2">Real oscillators, real character.</div>
+    <div><a href="https://clayandkelsy.com/" target="_top">clayandkelsy.com</a></div>
+  </footer>
+
+  <!-- sticky buy bar -->
+  <div class="buybar" id="buybar">
+    <span class="bb-name">Digi-Osc <b>$29</b></span>
+    <a class="cta" data-buy="pro" target="_top">Buy Digi-Osc &rarr;</a>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var BUY={
+    pro:'https://clayandkelsy.com/cart/?add-to-cart=2041',
+    bundle:'https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1',
+    dem:'https://clayandkelsy.com/dem-osc/'
+  };
+  [].forEach.call(document.querySelectorAll('[data-buy]'), function(a){ a.setAttribute('href', BUY[a.getAttribute('data-buy')]||'#'); });
+
+  var SAMPLES=[
+    {f:'audio/digi-1.mp3', name:'Brown Octave', type:'Lead'},
+    {f:'audio/digi-2.mp3', name:'ChewToy',      type:'Pad'},
+    {f:'audio/digi-3.mp3', name:'Marimba',      type:'Pluck'},
+    {f:'audio/digi-4.mp3', name:'Tech Bass 1',  type:'Lead'}
+  ];
+  var soundsEl=document.getElementById('sounds');
+  var PLAY='<svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  SAMPLES.forEach(function(s,i){ var b=document.createElement('button'); b.className='snd'; b.type='button';
+    b.innerHTML='<span class="nm">'+PLAY+s.name+'</span><span class="ty">'+s.type+'</span>'; soundsEl.appendChild(b); });
+  var sndEls=[].slice.call(soundsEl.children);
+
+  /* ---- audio engine ---- */
+  var actx=null, analyser=null, timeBuf=null, master=null, mediaWired=false;
+  var raw=[], buf=[], curSrc=null, curGain=null, playing=false;
+  var scopeNote=document.getElementById('scopeNote');
+  var nowEl=document.getElementById('nowPlaying'), nowName=document.getElementById('nowName'), nowType=document.getElementById('nowType');
+  function makeCtx(){ if(actx) return; try{ actx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return; }
+    analyser=actx.createAnalyser(); analyser.fftSize=1024; analyser.smoothingTimeConstant=0.72; timeBuf=new Uint8Array(analyser.fftSize);
+    master=actx.createGain(); master.gain.value=0.92; analyser.connect(master); master.connect(actx.destination);
+    raw.forEach(function(_,i){ decode(i); }); wireSong(); }
+  function decode(i){ if(!actx||!raw[i]||buf[i]) return; try{ actx.decodeAudioData(raw[i].slice(0), function(b){ buf[i]=b; }); }catch(e){} }
+  SAMPLES.forEach(function(s,i){ fetch(s.f).then(function(r){return r.arrayBuffer();}).then(function(ab){ raw[i]=ab; decode(i); }).catch(function(){}); });
+  function stopCur(){ if(!curSrc) return; try{ var t=actx.currentTime; curGain.gain.cancelScheduledValues(t);
+    curGain.gain.setValueAtTime(Math.max(0.0002,curGain.gain.value||0.5),t); curGain.gain.exponentialRampToValueAtTime(0.0002,t+0.01); curSrc.stop(t+0.03);}catch(e){} curSrc=null; }
+  function showNow(n,ty){ if(!nowEl) return; nowName.textContent=n||''; nowType.textContent=ty||''; nowEl.classList.add('show'); }
+  function hideNow(){ if(nowEl) nowEl.classList.remove('show'); }
+  function playBufferAt(i){ var b=buf[i]; if(!b) return;
+    if(songEl && !songEl.paused){ songEl.pause(); } stopCur();
+    var t=actx.currentTime, src=actx.createBufferSource(); src.buffer=b; var g=actx.createGain();
+    g.gain.setValueAtTime(0.0002,t); g.gain.exponentialRampToValueAtTime(1,t+0.008);
+    var end=t+b.duration; g.gain.setValueAtTime(1,Math.max(t+0.02,end-0.05)); g.gain.exponentialRampToValueAtTime(0.0002,end);
+    src.connect(g); g.connect(analyser); src.start(t); src.stop(end+0.03);
+    curSrc=src; curGain=g; playing=true;
+    sndEls.forEach(function(el,k){ el.classList.toggle('on', k===i); });
+    scopeNote.textContent='Digi-Osc'; showNow(SAMPLES[i].name, SAMPLES[i].type);
+    src.onended=function(){ if(curSrc===src){ curSrc=null; playing=false; hideNow(); sndEls.forEach(function(el){el.classList.remove('on');}); } };
+  }
+  function hearSample(i){ makeCtx(); if(!actx) return; if(actx.state==='suspended') actx.resume();
+    if(buf[i]) playBufferAt(i); else if(raw[i]){ try{ actx.decodeAudioData(raw[i].slice(0), function(b){ buf[i]=b; playBufferAt(i); }); }catch(e){} } }
+  sndEls.forEach(function(el,i){ el.addEventListener('click', function(){ hearSample(i); }); });
+
+  /* ---- song: none for Digi-Osc ---- */
+  var songEl=null;
+  function wireSong(){}
+  function songPlaying(){ return false; }
+
+  /* ---- oscilloscope ---- */
+  var cv=document.getElementById('scope'), ctx=cv.getContext('2d'), DPR=Math.min(2,window.devicePixelRatio||1);
+  function fit(){ var r=cv.getBoundingClientRect(); cv.width=r.width*DPR; cv.height=160*DPR; } fit(); window.addEventListener('resize',fit);
+  var os=0, fmT=0.5, reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches, running=true;
+  function fm(ph,idx){ var q=ph*6.2831853; return Math.sin(q+idx*Math.sin(q*2.5)); }  /* FM synthesis */
+  function draw(){ if(!running) return;
+    var W=cv.width,H=cv.height,mid=H/2,col='#e08a43'; ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,mid);ctx.lineTo(W,mid);ctx.stroke();
+    var live=(analyser && (curSrc || songPlaying())); if(live) analyser.getByteTimeDomainData(timeBuf);
+    var cycles=1.7, amp=H*0.30, pts=Math.floor(W/(2*DPR)), idx=1.4+1.3*Math.sin(fmT);
+    function yAt(i){ if(live){ var s=timeBuf[Math.floor(i/pts*(timeBuf.length-1))]/128-1; return mid-s*amp*1.5; } return mid-fm((i/pts)*cycles+os,idx)*amp; }
+    ctx.lineWidth=6*DPR;ctx.strokeStyle=col;ctx.globalAlpha=.18;ctx.beginPath();
+    for(var g=0;g<=pts;g++){var x=g/pts*W;g?ctx.lineTo(x,yAt(g)):ctx.moveTo(x,yAt(g));}ctx.stroke();
+    ctx.globalAlpha=1;ctx.lineWidth=2.4*DPR;ctx.strokeStyle=col;ctx.lineJoin='round';ctx.beginPath();
+    for(var i=0;i<=pts;i++){var xx=i/pts*W;i?ctx.lineTo(xx,yAt(i)):ctx.moveTo(xx,yAt(i));}ctx.stroke();
+    os+=reduce?0:0.008; fmT+=reduce?0:0.035; requestAnimationFrame(draw); }
+  requestAnimationFrame(draw);
+  document.addEventListener('visibilitychange', function(){ running=!document.hidden; if(running) requestAnimationFrame(draw); });
+
+  /* ---- video facade ---- */
+  var v=document.getElementById('video');
+  if(v) v.addEventListener('click', function(){ var id=v.getAttribute('data-yt');
+    v.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" title="Digi-Osc" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>'; });
+
+  /* ---- gradient headlines: colours follow the cursor ---- */
+  function follow(el){ if(!el) return; var cur=50, tgt=50, raf=0;
+    function tick(){ cur+=(tgt-cur)*0.22; el.style.backgroundPosition=cur+'% center';
+      if(Math.abs(tgt-cur)>0.3){ raf=requestAnimationFrame(tick); } else { cur=tgt; el.style.backgroundPosition=cur+'% center'; raf=0; } }
+    el.addEventListener('mousemove', function(e){ var r=el.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+      tgt=x*150-25; if(!raf) raf=requestAnimationFrame(tick); }); }
+  follow(document.getElementById('proTitle'));
+  follow(document.getElementById('bundleTitle'));
+
+  /* ---- digital decode/scramble on hover (Digi nod) ---- */
+  (function(){ var el=document.querySelector('.fx-decode'); if(!el) return;
+    var real=el.textContent, chars='ABCDEFGHKMNPRSTUVWXYZ0123456789#%&/<>', t=null;
+    el.addEventListener('mouseenter', function(){ if(t) return; var f=0, n=real.length;
+      t=setInterval(function(){ var o=''; for(var i=0;i<n;i++){ o += (i < f/2) ? real[i] : chars[(Math.random()*chars.length)|0]; }
+        el.textContent=o; f++; if(f/2>=n){ clearInterval(t); t=null; el.textContent=real; } }, 40); }); })();
+
+  /* ---- "Loved by …" rotating word, cycling the synth colours ---- */
+  var lw=document.getElementById('lovedWord');
+  if(lw){
+    var WORDS=['producers','artists','composers','students','beat makers','sound designers','songwriters'];
+    var COLORS=['#3c8ed0','#40b25f','#d85fa6','#e08a43','#9a6ad0','#16b5a6'];
+    function tint(c){ lw.style.color=c; lw.style.webkitTextFillColor=c; }  /* text-fill wins over color */
+    var wi=0; tint(COLORS[0]);
+    setInterval(function(){ lw.style.opacity='0'; lw.style.transform='translateY(-8px)';
+      setTimeout(function(){ wi=(wi+1)%WORDS.length; lw.textContent=WORDS[wi]; tint(COLORS[wi%COLORS.length]); lw.style.opacity='1'; lw.style.transform='translateY(0)'; }, 280); }, 1900);
+  }
+
+  /* ---- reviews: show more ---- */
+  var sm=document.getElementById('showMore'), rw=document.getElementById('revwrap');
+  if(sm&&rw) sm.addEventListener('click', function(){ rw.classList.remove('clamped'); });
+
+  /* ---- interface showpiece: subtle mouse tilt ---- */
+  var sp=document.getElementById('showpiece'), spf=document.getElementById('spFrame');
+  if(sp&&spf&&!reduce){ sp.addEventListener('mousemove', function(e){ var r=sp.getBoundingClientRect();
+    var rx=((e.clientY-r.top)/r.height-0.5)*-6, ry=((e.clientX-r.left)/r.width-0.5)*8;
+    spf.style.transform='rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)'; });
+    sp.addEventListener('mouseleave', function(){ spf.style.transform=''; }); }
+
+  /* ---- stat counters (animate on reveal) ---- */
+  function countUp(el){ var to=+el.getAttribute('data-to'), d=1100, t0=null;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/d), e=1-Math.pow(1-p,3); el.textContent=Math.round(e*to); if(p<1)requestAnimationFrame(step); }
+    requestAnimationFrame(step); }
+
+  /* ---- reveal + counters + sticky bar ---- */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ var t=e.target, isStat=t.classList.contains('stat');
+      if(e.isIntersecting){ t.classList.add('in');
+        if(isStat){ var n=t.querySelector('[data-to]'); if(n&&n.dataset.anim!=='1'){ n.dataset.anim='1'; n.textContent='0'; countUp(n); } }
+      } else if(isStat){ var n=t.querySelector('[data-to]'); if(n){ n.dataset.anim=''; n.textContent='0'; } }
+    }); },{threshold:.45});
+    [].forEach.call(document.querySelectorAll('.reveal,.stat'), function(el){ io.observe(el); });
+  } else { [].forEach.call(document.querySelectorAll('.reveal'), function(el){ el.classList.add('in'); });
+    [].forEach.call(document.querySelectorAll('[data-to]'), function(el){ el.textContent=el.getAttribute('data-to'); }); }
+
+  var buybar=document.getElementById('buybar'), hero=document.querySelector('.hero');
+  window.addEventListener('scroll', function(){ var past=window.scrollY>(hero.offsetHeight+120);
+    var nearEnd=(window.innerHeight+window.scrollY)>(document.body.scrollHeight-260);
+    buybar.classList.toggle('show', past && !nearEnd); }, {passive:true});
+})();
+</script>
+</body>
+</html>
