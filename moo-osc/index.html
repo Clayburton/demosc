@@ -65,7 +65,6 @@ h1.grad{background:linear-gradient(90deg,#9a6ad0,#b268c8,#7d6ad8,#9a6ad0,#b268c8
   filter:blur(28px);opacity:.85}
 .sp-img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line);
   box-shadow:0 50px 90px -40px rgba(0,0,0,.55),0 8px 24px -12px color-mix(in srgb,var(--acc) 40%,transparent)}
-.sp-frame::after{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;background:linear-gradient(160deg,color-mix(in srgb,var(--acc) 12%,transparent),color-mix(in srgb,var(--acc2) 6%,transparent))}
 .sp-cap{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:20px}
 
 /* ---------- stats ---------- */
@@ -184,6 +183,13 @@ h2.loved{white-space:nowrap}
   background:linear-gradient(180deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .bundle .free{display:block;margin-top:18px;font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
 .bundle .free a{color:var(--acc);border-bottom:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
+/* ---- Moo finale: synth-cow revealed behind the buy card ---- */
+.moo-finale{position:relative;overflow:hidden;background:var(--paper)}
+.finale-cow{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;z-index:0}
+.finale-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 55%,transparent) 20%,transparent 44%,transparent 66%,color-mix(in srgb,var(--paper) 26%,transparent) 100%)}
+.moo-finale > #get,.moo-finale > footer{position:relative;z-index:2}
+.moo-finale .bundle{background:color-mix(in srgb,var(--card) 66%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.15);backdrop-filter:blur(16px) saturate(1.15);border-color:rgba(255,255,255,.55);box-shadow:0 44px 100px -44px rgba(60,35,80,.55)}
+.moo-finale footer *{text-shadow:0 1px 4px color-mix(in srgb,var(--paper) 85%,transparent)}
 
 footer{background:var(--espresso);color:var(--cream-dim);text-align:center;padding:64px 22px 78px}
 footer .fm{font-family:var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--cream);font-size:12px}
@@ -231,8 +237,8 @@ footer a{color:var(--cream)}
 
   <!-- ═══════════ INTERFACE SHOWPIECE ═══════════ -->
   <div class="showpiece" id="showpiece">
-    <div class="sp-frame" id="spFrame"><video class="sp-img" id="cowVid" src="cow.mp4" poster="cow-poster.webp" width="960" height="540" autoplay muted loop playsinline preload="metadata" aria-label="The Moo-Osc synth-cow"></video></div>
-    <div class="sp-cap">Meet the synth-cow</div>
+    <div class="sp-frame" id="spFrame"><img class="sp-img" src="interface.webp" width="900" height="745" alt="The Moo-Osc interface" fetchpriority="high"></div>
+    <div class="sp-cap">Every knob, on one hand-drawn screen</div>
   </div>
 
   <!-- ═══════════ STATS ═══════════ -->
@@ -349,7 +355,10 @@ footer a{color:var(--cream)}
   </section>
 
   <!-- ═══════════ BUNDLE / BUY ═══════════ -->
-  <section class="wrap" id="get" style="padding-top:clamp(72px,10vw,112px);padding-bottom:clamp(104px,14vw,180px)">
+  <div class="moo-finale">
+  <video class="finale-cow" id="mooCow" src="cow.mp4" poster="cow-poster.webp" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <div class="finale-scrim" aria-hidden="true"></div>
+  <section class="wrap" id="get" style="padding-top:clamp(96px,15vw,168px);padding-bottom:clamp(190px,24vw,320px)">
     <div class="bundle reveal">
       <div class="kick">Make it yours</div>
       <h2 class="grad2" id="bundleTitle">Bring <span class="nw">Moo-Osc</span> home.</h2>
@@ -364,6 +373,7 @@ footer a{color:var(--cream)}
     <div class="ft2">Real oscillators, real character.</div>
     <div><a href="https://clayandkelsy.com/" target="_top">clayandkelsy.com</a></div>
   </footer>
+  </div><!-- /moo-finale -->
 
   <!-- sticky buy bar -->
   <div class="buybar" id="buybar">
@@ -475,7 +485,7 @@ footer a{color:var(--cream)}
   follow(document.getElementById('bundleTitle'));
 
   /* ---- cow showpiece video: guarantee playback (autoplay is blocked on iOS/Safari) ---- */
-  (function(){ var v=document.getElementById('cowVid'); if(!v) return;
+  (function(){ var v=document.getElementById('mooCow'); if(!v) return;
     function play(){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
     play(); v.addEventListener('canplay', play);
     ['pointerdown','touchstart','keydown','scroll'].forEach(function(ev){ window.addEventListener(ev, play, {once:true, passive:true}); });
