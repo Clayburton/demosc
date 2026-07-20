@@ -38,7 +38,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 h1{font-family:var(--mono);font-weight:700;font-size:clamp(58px,13vw,150px);line-height:.9;letter-spacing:-.035em;margin:14px 0 0;cursor:default}
 h1.grad{background:linear-gradient(90deg,#3c8ed0,#23b7c9,#4c63d2,#3c8ed0,#23b7c9);background-size:280% 100%;
   background-position:50% center;-webkit-background-clip:text;background-clip:text;color:transparent;
-  transition:background-position .28s cubic-bezier(.2,.8,.2,1);
+  transition:background-position 0s linear;will-change:background-position;
   filter:drop-shadow(0 20px 40px color-mix(in srgb,var(--acc) 28%,transparent))}
 .subhead{font-family:var(--mono);font-style:italic;color:var(--acc);font-size:clamp(16px,2.5vw,22px);margin:18px 0 0}
 .pitch{font-size:clamp(16px,2.1vw,19px);color:var(--ink-soft);max-width:58ch;margin:20px auto 0}
@@ -82,7 +82,7 @@ h2{font-family:var(--mono);font-weight:700;font-size:clamp(24px,4.6vw,50px);line
 .lead{text-align:center;color:var(--ink-soft);max-width:54ch;margin:18px auto 0;font-size:17px}
 /* blue gradient headline (matches the top Pro-Osc wordmark) */
 h2.grad2{background:linear-gradient(90deg,#3c8ed0,#23b7c9,#4c63d2,#3c8ed0,#23b7c9);background-size:280% 100%;background-position:50% center;
-  -webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position .28s cubic-bezier(.2,.8,.2,1)}
+  -webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 0s linear;will-change:background-position}
 /* rotating "loved by …" word */
 h2.loved{white-space:nowrap}
 .rotw{display:inline-block;font-weight:700;transition:opacity .28s ease,transform .28s ease,color .28s ease}
@@ -175,7 +175,7 @@ h2.loved{white-space:nowrap}
 
 /* ---------- bundle ---------- */
 .bundle{text-align:center;background:linear-gradient(180deg,var(--card),var(--card-2));border:1.5px solid var(--line);border-radius:30px;
-  padding:clamp(48px,7vw,72px) 26px;max-width:780px;margin:0 auto;box-shadow:0 40px 80px -48px color-mix(in srgb,var(--acc) 50%,transparent)}
+  padding:clamp(56px,8vw,86px) clamp(32px,6vw,60px);max-width:780px;margin:0 auto;box-shadow:0 40px 80px -48px color-mix(in srgb,var(--acc) 50%,transparent)}
 .bundle .p{font-family:var(--mono);font-weight:700;font-size:clamp(48px,11vw,84px);line-height:1;margin:14px 0 6px;
   background:linear-gradient(180deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .bundle .free{display:block;margin-top:18px;font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
@@ -462,7 +462,11 @@ footer a{color:var(--cream)}
     v.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" title="Pro-Osc" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>'; });
 
   /* ---- gradient headlines: colours follow the cursor ---- */
-  function follow(el){ if(el) el.addEventListener('mousemove', function(e){ var r=el.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)); el.style.backgroundPosition=(x*100)+'% center'; }); }
+  function follow(el){ if(!el) return; var cur=50, tgt=50, raf=0;
+    function tick(){ cur+=(tgt-cur)*0.22; el.style.backgroundPosition=cur+'% center';
+      if(Math.abs(tgt-cur)>0.3){ raf=requestAnimationFrame(tick); } else { cur=tgt; el.style.backgroundPosition=cur+'% center'; raf=0; } }
+    el.addEventListener('mousemove', function(e){ var r=el.getBoundingClientRect(), x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+      tgt=x*150-25; if(!raf) raf=requestAnimationFrame(tick); }); }
   follow(document.getElementById('proTitle'));
   follow(document.getElementById('bundleTitle'));
 
