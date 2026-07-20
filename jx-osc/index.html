@@ -79,12 +79,15 @@ section{padding:clamp(72px,11vw,120px) 0}
 .kick{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--acc);text-align:center}
 h2{font-family:var(--mono);font-weight:700;font-size:clamp(24px,4.6vw,50px);line-height:1.09;text-align:center;letter-spacing:-.02em;margin:12px auto 0;max-width:30ch}
 .nw{white-space:nowrap}
-.shooting-star{position:absolute;top:9%;right:2%;width:130px;height:2px;pointer-events:none;opacity:0;z-index:0;border-radius:2px;
-  background:linear-gradient(90deg,transparent,rgba(216,95,166,.9),#fff);transform:translate(0,0) rotate(20deg) scaleX(.3);
-  filter:drop-shadow(0 0 6px rgba(216,95,166,.8));animation:shoot 11s ease-in 3s infinite}
-@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(20deg) scaleX(.3)}3%{opacity:.9}
-  16%{opacity:.9;transform:translate(-58vw,30vh) rotate(20deg) scaleX(1)}20%{opacity:0;transform:translate(-64vw,33vh) rotate(20deg) scaleX(1)}
-  100%{opacity:0;transform:translate(-64vw,33vh) rotate(20deg) scaleX(1)}}
+.shooting-star{position:absolute;top:4%;right:-6%;width:130px;height:auto;pointer-events:none;opacity:0;z-index:0;
+  transform:translate(6vw,-3vh) rotate(-11deg) scale(.55);
+  filter:drop-shadow(0 0 7px rgba(216,95,166,.5));animation:shoot 11s cubic-bezier(.32,.5,.6,1) 2.5s infinite}
+@keyframes shoot{
+  0%{opacity:0;transform:translate(6vw,-3vh) rotate(-11deg) scale(.55)}
+  5%{opacity:.95}
+  15%{opacity:.95}
+  21%{opacity:0;transform:translate(-72vw,33vh) rotate(-11deg) scale(1)}
+  100%{opacity:0;transform:translate(-72vw,33vh) rotate(-11deg) scale(1)}}
 .fx-chorus{display:inline-block}
 .fx-chorus:hover{animation:chorus 1.2s ease-in-out infinite}
 @keyframes chorus{0%{text-shadow:0 0 0 transparent}25%{text-shadow:-3px 0 0 rgba(216,95,166,.55),3px 0 0 rgba(106,134,216,.55)}50%{text-shadow:-6px 0 0 rgba(216,95,166,.5),6px 0 0 rgba(106,134,216,.5)}75%{text-shadow:-3px 0 0 rgba(216,95,166,.55),3px 0 0 rgba(106,134,216,.55)}100%{text-shadow:0 0 0 transparent}}
@@ -222,7 +225,7 @@ footer a{color:var(--cream)}
 
   <!-- ═══════════ HERO ═══════════ -->
   <header class="hero">
-    <span class="shooting-star" aria-hidden="true"></span>
+    <img class="shooting-star" src="star.webp" alt="" aria-hidden="true">
     <div class="eyebrow">The Osc Collection &middot; <b>80s Analog</b></div>
     <h1 class="grad" id="proTitle">JX-Osc</h1>
     <p class="subhead">An 80s-era analog synth &mdash; your vintage sci-fi sidekick.</p>
@@ -237,7 +240,7 @@ footer a{color:var(--cream)}
 
   <!-- ═══════════ INTERFACE SHOWPIECE ═══════════ -->
   <div class="showpiece" id="showpiece">
-    <div class="sp-frame" id="spFrame"><img class="sp-img" src="interface.webp" width="900" height="462" alt="The JX-Osc interface" fetchpriority="high"></div>
+    <div class="sp-frame" id="spFrame"><img class="sp-img" src="interface.webp" width="900" height="742" alt="The JX-Osc interface" fetchpriority="high"></div>
     <div class="sp-cap">Every knob, on one hand-drawn screen</div>
   </div>
 
