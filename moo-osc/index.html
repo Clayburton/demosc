@@ -187,7 +187,7 @@ h2.loved{white-space:nowrap}
 .moo-finale{position:relative;background:var(--paper)}
 .cow-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:0}
 .finale-cow{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
-.finale-scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,color-mix(in srgb,var(--paper) 72%,transparent) 0%,transparent 20%,transparent 76%,color-mix(in srgb,var(--paper) 34%,transparent) 100%)}
+.finale-fade{position:absolute;top:0;left:0;width:100%;height:78vh;z-index:1;pointer-events:none;background:linear-gradient(180deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 78%,transparent) 12%,color-mix(in srgb,var(--paper) 42%,transparent) 30%,transparent 58%)}
 .moo-finale > #get{position:relative;z-index:2;margin-top:-82vh}
 .moo-finale > .cow-gap{height:clamp(340px,66vh,760px)}
 .moo-finale > footer{position:relative;z-index:2}
@@ -361,8 +361,8 @@ footer a{color:var(--cream)}
   <div class="moo-finale">
   <div class="cow-stage" aria-hidden="true">
     <video class="finale-cow" id="mooCow" src="cow.mp4" poster="cow-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
-    <div class="finale-scrim"></div>
   </div>
+  <div class="finale-fade" aria-hidden="true"></div>
   <section class="wrap" id="get" style="padding-top:0;padding-bottom:clamp(28px,5vh,64px)">
     <div class="bundle reveal">
       <div class="kick">Make it yours</div>
