@@ -42,7 +42,14 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   html{-webkit-text-size-adjust:100%}
-  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.5;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+  html{overflow-x:clip}
+  /* CLIP, not hidden: `hidden` would make <html> a scroll container and that
+     kills `position:sticky` — and .hero is sticky (the cassette that holds while
+     the sheet scrolls over it). `clip` clips without creating a scroller.
+     It has to be on html AND body: with it on body alone the overflow propagates
+     to the viewport and iOS Safari scrolls sideways anyway, which is why this
+     looked perfect on a laptop and broken on Clay's phone. */
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.5;overflow-x:clip;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
   a{color:inherit}
   img{max-width:100%;display:block;border:0}
   ::selection{background:var(--purple);color:#fff}
@@ -115,7 +122,7 @@
   .lead{text-align:center;font-size:16px;color:var(--ink-soft);max-width:42ch;margin:0 auto;line-height:1.55}
 
   /* sound selector — 2 rows of 3 on mobile, all readable */
-  .tastes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px auto 0;max-width:380px}
+  .tastes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px auto 0;max-width:380px}
   .taste{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);background:var(--paper-soft);border:1px solid var(--line);padding:12px 6px;border-radius:14px;cursor:pointer;transition:transform .12s ease,background .2s,border-color .2s;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1}
   .taste small{font-size:9px;font-weight:400;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase}
   .taste:active{transform:scale(.96)}
@@ -123,7 +130,7 @@
   .taste[aria-pressed="true"] small{color:rgba(255,255,255,.85)}
 
   /* specs (on the dark band — high contrast) */
-  .specs{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:26px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden}
+  .specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin-top:26px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden}
   .spec{background:var(--espresso-2);padding:22px 16px;text-align:center}
   .spec .n{font-family:var(--mono);font-weight:700;font-size:32px;color:#fff;line-height:1}
   .spec .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#d8ccb4;margin-top:9px}
@@ -185,7 +192,7 @@
     .band{padding:84px 22px}
     .inner{max-width:840px}
     .tastes{max-width:560px;gap:12px}
-    .specs{grid-template-columns:repeat(4,1fr)}
+    .specs{grid-template-columns:repeat(4,minmax(0,1fr))}
     .h2{font-size:clamp(30px,3.2vw,44px)}
     .shot{max-width:640px}
     .sheet{border-radius:40px 40px 0 0;margin-top:-40px}
