@@ -307,6 +307,20 @@ footer a{color:var(--cream)}
   text-align:center;padding:24px;font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--purple);
   background:color-mix(in srgb,var(--purple) 5%,var(--card))}
 
+/* --- hero visual: the interface, standing in for the living-art video (#1) --- */
+.herovis{position:relative;max-width:660px;margin:30px auto 8px}
+.herovis-frame{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 44px 84px -44px rgba(0,0,0,.5),0 0 66px -32px color-mix(in srgb,var(--purple) 48%,transparent)}
+.herovis-frame img{width:100%;height:auto;display:block}
+.herovis .vidnote{position:absolute;left:0;right:0;bottom:0;padding:11px 15px;text-align:left;
+  font-family:var(--mono);font-size:11.5px;line-height:1.45;color:#f2ead9;
+  background:rgba(24,18,20,.82);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.herovis .vidnote b{color:#c9b3ff}
+.herovis .vidtag{display:inline-block;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--purple);color:#fff;border-radius:100px;padding:4px 10px;margin-right:8px;vertical-align:1px}
+/* bolder console centerpiece (#2) */
+#scope{height:200px}
+
 /* --- the makers (high on the page) --- */
 .makers-card{max-width:820px;margin:0 auto;text-align:center;background:linear-gradient(180deg,var(--card),var(--card-2));
   border:1.5px solid var(--line);border-radius:26px;padding:clamp(40px,6vw,64px) clamp(26px,5vw,54px);
@@ -320,8 +334,7 @@ footer a{color:var(--cream)}
 /* --- by the numbers strip --- */
 .numbers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:940px;margin:26px auto 0}
 .num{text-align:center;padding:22px 12px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
-.num .n{font-family:var(--mono);font-weight:700;font-size:clamp(30px,6vw,50px);line-height:1;
-  background:linear-gradient(180deg,var(--purple-2),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.num .n{font-family:var(--mono);font-weight:700;font-size:clamp(30px,6vw,50px);line-height:1;color:var(--purple)}
 .num .l{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:9px}
 @media(min-width:760px){ .numbers{grid-template-columns:repeat(4,minmax(0,1fr))} }
 
@@ -387,7 +400,15 @@ footer a{color:var(--cream)}
     <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
     <!-- EDIT: hero paragraph -->
     <p class="lede">Five distinctive synths built from real oscillators — from <b class="fx-crush">bit-crushed video games</b> to <b class="fx-grow">analog that fills the room</b>. Every shade of synth, all sharing one interface. <b class="fx-echo">Learn one, and you know them all.</b></p>
-    <p class="promise">Five character synths sampled from real hardware &mdash; <b>90 wave shapes</b>, <b>410 presets</b>, one hand-drawn interface, now <b>fully standalone</b> &mdash; no Kontakt needed.</p>
+    <!-- hero visual (the interface — placeholder for the living-art video) -->
+    <div class="herovis">
+      <div class="herovis-frame">
+        <img src="interface.webp" width="1100" height="908" alt="The hand-drawn Osc Collection interface" fetchpriority="high">
+        <div class="vidnote"><span class="vidtag">&#9654; Video</span>The shared interface, <b>alive</b> — the living-art clip goes here (see the capture brief).</div>
+      </div>
+    </div>
+
+    <p class="promise"><b>90 wave shapes.</b> <b>410 presets.</b> One hand-drawn interface, now fully standalone.</p>
 
     <!-- premium price lockup, up top -->
     <div class="pricelock">
@@ -701,7 +722,7 @@ footer a{color:var(--cream)}
   /* ══════════ oscilloscope (tiny 2D canvas) ══════════ */
   var cv=document.getElementById('scope'), ctx=cv.getContext('2d');
   var waveType='blend', targetWave='blend', DPR=Math.min(2,window.devicePixelRatio||1);
-  function fit(){ var r=cv.getBoundingClientRect(); cv.width=r.width*DPR; cv.height=150*DPR; }
+  function fit(){ var r=cv.getBoundingClientRect(); cv.width=r.width*DPR; cv.height=200*DPR; }
   fit(); window.addEventListener('resize',fit);
   function w(type,ph){
     var t=Math.PI*2;
