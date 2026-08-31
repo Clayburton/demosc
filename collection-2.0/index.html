@@ -178,7 +178,7 @@ h2.loved{font-size:clamp(20px,3.2vw,30px);white-space:nowrap}
 @keyframes eq{0%,100%{height:4px}50%{height:12px}}
 
 /* ---------- section scaffolding ---------- */
-section{padding:56px 0}
+section{padding:clamp(64px,8.5vw,96px) 0}
 .kick{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
   color:var(--ink-soft);text-align:center}
 h2{font-family:var(--mono);font-weight:700;font-size:clamp(26px,4.6vw,40px);line-height:1.06;
@@ -323,9 +323,9 @@ footer a{color:var(--cream)}
 @media(min-width:760px){ .numbers{grid-template-columns:repeat(4,minmax(0,1fr))} }
 
 /* --- reviewer marquee (re-skinned, CKI) --- */
-.arc-line{text-align:center;font-family:var(--mono);font-weight:700;font-size:clamp(20px,3.4vw,32px);letter-spacing:-.01em;
-  margin:8px auto 0;max-width:24ch}
-.arc-line .rd{background:linear-gradient(90deg,var(--pro),var(--jx),var(--moo));-webkit-background-clip:text;background-clip:text;color:transparent}
+.arc-line{text-align:center;font-family:var(--mono);font-weight:400;font-size:clamp(15px,2.1vw,20px);line-height:1.55;
+  color:var(--ink-soft);margin:16px auto 0;max-width:46ch}
+.arc-line .rd{font-weight:700;background:linear-gradient(90deg,var(--pro),var(--jx),var(--moo));-webkit-background-clip:text;background-clip:text;color:transparent}
 .voices-marq{margin-top:clamp(24px,4vw,40px)}
 .vmarquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
@@ -464,6 +464,8 @@ footer a{color:var(--cream)}
       <div class="wn"><div class="wnt">MIDI-Learn anything</div><div class="wnd">Right-click any control to bind it to a CC. The mapping saves with the session and travels inside shared presets.</div></div>
       <div class="wn"><div class="wnt">A living interface</div><div class="wnd">The artwork reacts to how hard you play — colors bloom and cycle as you hold notes. MPE-aware. Dark mode too.</div></div>
       <div class="wn"><div class="wnt">Share presets as files</div><div class="wnd">Make a patch, send the file to a bandmate, drop it in a folder. Sessions recall the patch, your MIDI maps, everything.</div></div>
+      <div class="wn"><div class="wnt">True legato &amp; glide</div><div class="wnd">Mono &amp; legato modes with real legato, plus key glide / portamento in three modes.</div></div>
+      <div class="wn"><div class="wnt">Loads instantly</div><div class="wnd">A tiny native footprint — none of the wait of pulling a big sample library into Kontakt.</div></div>
     </div>
   </section>
 
