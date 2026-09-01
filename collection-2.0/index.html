@@ -345,6 +345,25 @@ footer a{color:var(--cream)}
 .makers-p b{color:var(--purple)}
 .makers-sub{font-family:var(--mono);font-size:13.5px;color:var(--ink-soft);margin:16px auto 0;max-width:60ch}
 .makers-sub b{color:var(--ink)}
+/* makers side-by-side (photo + text) */
+.makers-row{display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,46px);align-items:center;max-width:1000px;margin:0 auto;text-align:center}
+.makers-photo{display:flex;justify-content:center}
+.makers-photo-frame{position:relative;width:100%;max-width:380px;aspect-ratio:4/5;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);background:linear-gradient(160deg,var(--card),var(--card-2));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px;
+  box-shadow:0 1px 0 rgba(255,255,255,.55) inset, 0 22px 48px -28px rgba(0,0,0,.3), 0 16px 46px -22px color-mix(in srgb,var(--purple) 42%,transparent)}
+.makers-photo-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.makers-photo-tag{display:inline-block;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--purple);color:#fff;border-radius:100px;padding:4px 11px}
+.makers-photo-note{font-family:var(--mono);font-size:12.5px;line-height:1.55;color:var(--ink-soft);max-width:24ch}
+.makers-photo-note b{color:var(--ink)}
+.makers-text .kick{color:var(--purple)}
+@media(min-width:820px){
+  .makers-row{grid-template-columns:.82fr 1.18fr;text-align:left}
+  .makers-row .kick{text-align:left}
+  .makers-row h2{text-align:left;margin-left:0;max-width:none}
+  .makers-text .makers-p,.makers-text .makers-sub{margin-left:0;margin-right:0}
+}
 
 /* --- by the numbers strip --- */
 .numbers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:940px;margin:26px auto 0}
@@ -471,11 +490,19 @@ footer a{color:var(--cream)}
 
   <!-- ═══════════ THE MAKERS (high — the thing competitors can't copy) ═══════════ -->
   <section class="wrap">
-    <div class="makers-card reveal">
-      <div class="kick">Who makes this</div>
-      <h2>Built by two people,<br>not a plugin factory.</h2>
-      <p class="makers-p">We're <b>Clay &amp; Kelsy</b> — a queer, woman-owned, two-artist duo. We don't just build these synths; we make the music with them. Every wave shape was sampled in our own studio, every preset played until it felt right. That's the part Arturia and Native Instruments can't copy: these instruments have taste because they were made by people with something to say.</p>
-      <p class="makers-sub">The <b>music we make</b> has been featured in Music Connection, EARMILK, Naluda, V13 &amp; Apricot — Music Connection even called the Osc Collection &ldquo;worthy of your attention.&rdquo;</p>
+    <div class="makers-row reveal">
+      <div class="makers-photo">
+        <div class="makers-photo-frame">
+          <span class="makers-photo-tag">&#9654; Photo</span>
+          <p class="makers-photo-note">A warm photo of <b>Clay &amp; Kelsy</b> goes here — Spitfire-style, but real. Drop it in when ready.</p>
+        </div>
+      </div>
+      <div class="makers-text">
+        <div class="kick">Who makes this</div>
+        <h2>Built by two people, not a plugin factory.</h2>
+        <p class="makers-p">We're <b>Clay &amp; Kelsy</b> — a queer, woman-owned, two-artist duo. We don't just build these synths; we make the music with them. Every wave shape was sampled in our own studio, every preset played until it felt right. That's the part Arturia and Native Instruments can't copy: these instruments have taste because they were made by people with something to say.</p>
+        <p class="makers-sub">The <b>music we make</b> has been featured in Music Connection, EARMILK, Naluda, V13 &amp; Apricot — Music Connection even called the Osc Collection &ldquo;worthy of your attention.&rdquo;</p>
+      </div>
     </div>
   </section>
 
