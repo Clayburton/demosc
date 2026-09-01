@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Osc Collection 2.0 — Clay & Kelsy Instruments</title>
 <meta name="description" content="The Osc Collection 2.0 — five character synths, one hand-drawn interface, now fully standalone (VST3/AU, no Kontakt). 410 presets. Tap to hear the whole spectrum of sound.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════════════════════════
    THE OSC COLLECTION — overview page.  Self-contained, zero external
@@ -18,7 +21,7 @@
   --ink:#17120c; --ink-soft:#6d6353; --line:#d8ccb4;
   --purple:#7a3ff2; --purple-2:#9a6bff;
   --espresso:#171310; --cream:#f2ead9; --cream-dim:#c9bca4;
-  --mono:"Courier New",ui-monospace,"SF Mono",Menlo,monospace;
+  --mono:"Courier Prime","Courier New",ui-monospace,"SF Mono",Menlo,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --acc:var(--purple);           /* live accent — JS swaps this per instrument */
   /* the five synth signature colours (from each product page) */
@@ -274,6 +277,11 @@ footer a{color:var(--cream)}
 .hghost{font-family:var(--mono);font-weight:700;font-size:14px;border:1.5px solid var(--ink);padding:13px 22px;
   border-radius:100px;transition:.18s}
 .hghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+/* "coming soon" — inert, muted, dashed (product not for sale yet) */
+.soonbtn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:.02em;
+  color:var(--ink-soft);background:transparent;border:1.5px dashed color-mix(in srgb,var(--purple) 32%,var(--line));
+  padding:14px 24px;border-radius:100px;cursor:default}
+.soonbtn-lg{font-size:17px;padding:17px 30px}
 .kontakt{display:block;text-align:center;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin:16px auto 0}
 .kontakt b{color:var(--ink)}
 
@@ -345,6 +353,11 @@ footer a{color:var(--cream)}
 .makers-p b{color:var(--purple)}
 .makers-sub{font-family:var(--mono);font-size:13.5px;color:var(--ink-soft);margin:16px auto 0;max-width:60ch}
 .makers-sub b{color:var(--ink)}
+.makers-sub a{color:var(--ink);white-space:nowrap;border-bottom:1px solid color-mix(in srgb,var(--purple) 38%,transparent);
+  transition:color .18s,border-color .18s}
+.makers-sub a:hover{color:var(--purple);border-bottom-color:var(--purple)}
+.makers-sub a::after{content:"\2197";font-size:.82em;margin-left:1px;opacity:0;transition:opacity .18s}
+.makers-sub a:hover::after{opacity:.7}
 /* makers side-by-side (photo + text) */
 .makers-row{display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,46px);align-items:center;max-width:1000px;margin:0 auto;text-align:center}
 .makers-photo{display:flex;justify-content:center}
@@ -440,8 +453,8 @@ footer a{color:var(--cream)}
           <div class="pl-price"><span class="amt">$99</span></div>
           <div class="pl-save">All five synths &middot; one interface &middot; <b>one price, no subscription</b></div>
           <div class="pl-cta">
-            <a class="hcta" href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1" target="_top">Buy the Collection &rarr;</a>
-            <a class="hghost" href="https://clayandkelsy.com/dem-osc/" target="_top">Try DEM-Osc free</a>
+            <span class="soonbtn">Coming soon</span>
+            <a class="hcta" href="https://clayandkelsy.com/dem-osc/" target="_top">Try DEM-Osc free &rarr;</a>
           </div>
           <div class="pl-note"><b>Fully standalone</b> &mdash; no Kontakt, no Native Access. Just drag &amp; drop &middot; macOS &amp; Windows</div>
         </div>
@@ -501,7 +514,7 @@ footer a{color:var(--cream)}
         <div class="kick">Who makes this</div>
         <h2>Built by two people, not a plugin factory.</h2>
         <p class="makers-p">We're <b>Clay &amp; Kelsy</b> — a queer, woman-owned, two-artist duo. We don't just build these synths; we make the music with them. Every wave shape was sampled in our own studio, every preset played until it felt right. That's the part Arturia and Native Instruments can't copy: these instruments have taste because they were made by people with something to say.</p>
-        <p class="makers-sub">The <b>music we make</b> has been featured in Music Connection, EARMILK, Naluda, V13 &amp; Apricot — Music Connection even called the Osc Collection &ldquo;worthy of your attention.&rdquo;</p>
+        <p class="makers-sub">The <b>music we make</b> has been featured in <a href="https://www.musicconnection.com/new-music-critique-clay-and-kelsy/" target="_blank" rel="noopener">Music Connection</a>, <a href="https://earmilk.com/2024/11/15/premiere-clay-and-kelsy-light-up-the-synth-pop-scene-with-debut-ep-i-am/" target="_blank" rel="noopener">EARMILK</a>, <a href="https://www.naludamagazine.com/clay-and-kelsy-interview-unveiling-i-am/" target="_blank" rel="noopener">Naluda</a>, <a href="https://v13.net/2025/01/clay-and-kelsy-mirror-single-premiere/" target="_blank" rel="noopener">V13</a> &amp; <a href="https://apricot-magazine.com/industrynews/exclusive-interview-with-clay-and-kelsy-discuss-their-debut-ep-i-am/" target="_blank" rel="noopener">Apricot</a> — Music Connection even called the Osc Collection &ldquo;worthy of your attention.&rdquo;</p>
       </div>
     </div>
   </section>
@@ -629,9 +642,7 @@ footer a{color:var(--cream)}
       <div class="price"><span class="acc">$99</span></div>
       <div class="save">All five synths, one interface — one price, no subscription.</div>
       <div class="anchor">410 presets across five real machines — <b>yours to keep</b>.</div>
-      <a class="cta" id="bundleCta" target="_top"
-         href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">
-         Buy the Osc Collection — $99 &rarr;</a>
+      <span class="soonbtn soonbtn-lg" style="margin-top:22px">Coming soon &middot; $99</span>
       <span class="free">New here? Start with <a href="https://clayandkelsy.com/dem-osc/" target="_top">DEM-Osc — free</a>, a native taste of all five.</span>
     </div>
   </section>
@@ -659,8 +670,8 @@ footer a{color:var(--cream)}
 
   <!-- sticky buy bar (conversion — especially on phones) -->
   <div class="buybar" id="buybar">
-    <span class="bb-name">Osc Collection <b>$99</b></span>
-    <a class="bb-cta" target="_top" href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">Buy all five &rarr;</a>
+    <span class="bb-name">Osc Collection <b>$99</b> &middot; coming soon</span>
+    <a class="bb-cta" target="_top" href="https://clayandkelsy.com/dem-osc/">Try DEM-Osc free &rarr;</a>
   </div>
 
 <script>
