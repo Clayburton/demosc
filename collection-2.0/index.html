@@ -345,11 +345,12 @@ footer a{color:var(--cream)}
 .voices-marq{margin-top:clamp(24px,4vw,40px)}
 .vmarquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.vtrack{display:flex;gap:14px;width:max-content;margin:0;padding:6px 0;list-style:none;animation:vmarq 78s linear infinite}
+.vtrack{display:flex;gap:14px;width:max-content;margin:0;padding:16px 0 36px;list-style:none;animation:vmarq 78s linear infinite}
 .vmarquee:hover .vtrack{animation-play-state:paused}
 @keyframes vmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .vcard{flex:0 0 min(82vw,340px);display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
-  border-radius:16px;padding:20px 20px 17px;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 16px 30px -24px rgba(0,0,0,.4)}
+  border-radius:16px;padding:20px 20px 17px;
+  box-shadow:0 1px 0 rgba(255,255,255,.55) inset, 0 16px 30px -22px rgba(0,0,0,.26), 0 14px 40px -20px color-mix(in srgb,var(--purple) 42%,transparent)}
 .vq{margin:0;font-family:var(--sans);font-size:15.5px;line-height:1.5;color:var(--ink)}
 .vwho{display:flex;align-items:center;gap:11px;margin:16px 0 0;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
 .vwho b{color:var(--ink);font-weight:700}
