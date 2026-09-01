@@ -308,7 +308,7 @@ footer a{color:var(--cream)}
   background:color-mix(in srgb,var(--purple) 5%,var(--card))}
 
 /* --- hero visual: the interface, standing in for the living-art video (#1) --- */
-.herovis{position:relative;max-width:660px;margin:30px auto 8px}
+.herovis{position:relative;max-width:460px;margin:0 auto}
 .herovis-frame{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);
   box-shadow:0 44px 84px -44px rgba(0,0,0,.5),0 0 66px -32px color-mix(in srgb,var(--purple) 48%,transparent)}
 .herovis-frame img{width:100%;height:auto;display:block}
@@ -320,6 +320,21 @@ footer a{color:var(--cream)}
   background:var(--purple);color:#fff;border-radius:100px;padding:4px 10px;margin-right:8px;vertical-align:1px}
 /* bolder console centerpiece (#2) */
 #scope{height:200px}
+
+/* --- two-column hero: copy left, visual right on desktop (Hook-style) --- */
+.hero{max-width:1120px}
+.hero-top{display:grid;grid-template-columns:1fr;gap:clamp(24px,3.5vw,44px);align-items:center;margin:0 auto}
+.hero-vis{display:flex;justify-content:center}
+@media(min-width:900px){
+  .hero-top{grid-template-columns:1.02fr .98fr;text-align:left}
+  .hero-copy .lede{max-width:52ch}
+  .hero-copy .lede,.hero-copy .promise{margin-left:0;margin-right:0}
+  .hero-copy .pricelock{margin:26px 0 0;text-align:left;max-width:none}
+  .hero-copy .pl-price{justify-content:flex-start}
+  .hero-copy .pl-save,.hero-copy .pl-note{margin-left:0;margin-right:0}
+  .hero-copy .pl-cta{justify-content:flex-start}
+  .herovis{margin:0}
+}
 
 /* --- the makers (high on the page) --- */
 .makers-card{max-width:820px;margin:0 auto;text-align:center;background:linear-gradient(180deg,var(--card),var(--card-2));
@@ -396,30 +411,30 @@ footer a{color:var(--cream)}
 
   <!-- ═══════════ HERO ═══════════ -->
   <header class="hero">
-    <div class="eyebrow">The Osc Collection <span class="badge-2">2.0</span></div>
-    <!-- EDIT: headline -->
-    <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
-    <!-- EDIT: hero paragraph -->
-    <p class="lede">Five distinctive synths built from real oscillators — from <b class="fx-crush">bit-crushed video games</b> to <b class="fx-grow">analog that fills the room</b>. Every shade of synth, all sharing one interface. <b class="fx-echo">Learn one, and you know them all.</b></p>
-    <!-- hero visual (the interface — placeholder for the living-art video) -->
-    <div class="herovis">
-      <div class="herovis-frame">
-        <img src="interface.webp" width="1100" height="908" alt="The hand-drawn Osc Collection interface" fetchpriority="high">
-        <div class="vidnote"><span class="vidtag">&#9654; Video</span>The shared interface, <b>alive</b> — the living-art clip goes here (see the capture brief).</div>
+    <div class="hero-top">
+      <div class="hero-copy">
+        <div class="eyebrow">The Osc Collection <span class="badge-2">2.0</span></div>
+        <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
+        <p class="lede">Five distinctive synths built from real oscillators — from <b class="fx-crush">bit-crushed video games</b> to <b class="fx-grow">analog that fills the room</b>. Every shade of synth, all sharing one interface. <b class="fx-echo">Learn one, and you know them all.</b></p>
+        <p class="promise"><b>90 wave shapes.</b> <b>410 presets.</b> One hand-drawn interface, now fully standalone.</p>
+        <div class="pricelock">
+          <div class="pl-price"><span class="amt">$99</span></div>
+          <div class="pl-save">All five synths &middot; one interface &middot; <b>one price, no subscription</b></div>
+          <div class="pl-cta">
+            <a class="hcta" href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1" target="_top">Buy the Collection &rarr;</a>
+            <a class="hghost" href="https://clayandkelsy.com/dem-osc/" target="_top">Try DEM-Osc free</a>
+          </div>
+          <div class="pl-note"><b>Fully standalone</b> &mdash; no Kontakt, no Native Access. Just drag &amp; drop &middot; macOS &amp; Windows</div>
+        </div>
       </div>
-    </div>
-
-    <p class="promise"><b>90 wave shapes.</b> <b>410 presets.</b> One hand-drawn interface, now fully standalone.</p>
-
-    <!-- premium price lockup, up top -->
-    <div class="pricelock">
-      <div class="pl-price"><span class="amt">$99</span></div>
-      <div class="pl-save">All five synths &middot; one interface &middot; <b>one price, no subscription</b></div>
-      <div class="pl-cta">
-        <a class="hcta" href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1" target="_top">Buy the Collection &rarr;</a>
-        <a class="hghost" href="https://clayandkelsy.com/dem-osc/" target="_top">Try DEM-Osc free</a>
+      <div class="hero-vis">
+        <div class="herovis">
+          <div class="herovis-frame">
+            <img src="interface.webp" width="1100" height="908" alt="The hand-drawn Osc Collection interface" fetchpriority="high">
+            <div class="vidnote"><span class="vidtag">&#9654; Video</span>The shared interface, <b>alive</b> — the living-art clip goes here (see the capture brief).</div>
+          </div>
+        </div>
       </div>
-      <div class="pl-note"><b>Fully standalone</b> &mdash; no Kontakt, no Native Access. Just drag &amp; drop &middot; macOS &amp; Windows</div>
     </div>
 
     <div class="hearline">Hear all five &mdash; tap any synth &darr;</div>
