@@ -300,9 +300,25 @@ footer a{color:var(--cream)}
 .hero-try{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--ink);background:transparent;
   border:1.5px solid var(--ink);padding:15px 26px;border-radius:100px;transition:.18s}
 .hero-try:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+
+/* ══════════ EXPERIMENTAL: minimal soft living-gradient background (may revert) ══════════
+   A dialed-way-back take on the oklch hue-drift idea — very low chroma, slow, warm→purple
+   (on-brand), sits behind everything and can't touch the content. */
+@property --hue1{ syntax:"<angle>"; inherits:false; initial-value:70deg; }
+@property --hue2{ syntax:"<angle>"; inherits:false; initial-value:300deg; }
+.softbg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.62;
+  background:linear-gradient(in oklch longer hue 135deg,
+     oklch(0.95 0.026 var(--hue1)),
+     oklch(0.935 0.03 var(--hue2)));
+  animation:softdrift 24s ease-in-out infinite alternate}
+@keyframes softdrift{ from{--hue1:58deg;--hue2:286deg} to{--hue1:96deg;--hue2:322deg} }
+@supports not (background: linear-gradient(in oklch longer hue 90deg, red, blue)){
+  .softbg{background:linear-gradient(135deg,#efe7d6,#ece2ea);animation:none} }  /* fallback */
+@media(prefers-reduced-motion:reduce){ .softbg{animation:none} }
 </style>
 </head>
 <body>
+  <div class="softbg" aria-hidden="true"></div>
 
   <!-- (site header/menu is provided by the WordPress theme around this iframe) -->
 
