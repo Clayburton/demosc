@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>JX-Osc — Clay & Kelsy Instruments</title>
 <meta name="description" content="JX-Osc — an 80s-era analog synth sampled into a modern instrument. Lush strings, brass and pads with that signature chorus. 12 wave shapes, 30 convolution spaces, 81 presets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ══════════ JX-OSC premium sell page — CKI. Self-contained, snappy. ══════════ */
 :root{
   --paper:#ece2d0; --paper-2:#e7dcc4; --card:#f4eddd; --card-2:#efe6d2;
   --ink:#17120c; --ink-soft:#6d6353; --line:#dccfb6;
   --purple:#7a3ff2; --espresso:#161009; --cream:#f2ead9; --cream-dim:#c9bca4;
-  --mono:"Courier New",ui-monospace,"SF Mono",Menlo,monospace;
+  --mono:"Courier Prime","Courier New",ui-monospace,"SF Mono",Menlo,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --pro:#3c8ed0; --chip:#40b25f; --jx:#d85fa6; --digi:#e08a43; --moo:#9a6ad0; --dem:#16b5a6;
   --acc:var(--jx); --acc2:#6a86d8;
@@ -220,6 +223,18 @@ footer a{color:var(--cream)}
 }
 @media(max-width:520px){ .stats{grid-template-columns:repeat(2,1fr)} }
 @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none} .sp-frame{animation:none} .now-eq i{animation:none;height:9px} .shooting-star{animation:none;opacity:0} }
+
+/* ══════════ makers + press (brand block, lifted from the collection) ══════════ */
+.makers-card{max-width:820px;margin:0 auto;text-align:center;background:linear-gradient(180deg,var(--card),var(--card-2));border:1.5px solid var(--line);border-radius:26px;padding:clamp(40px,6vw,64px) clamp(26px,5vw,54px);box-shadow:0 30px 60px -46px rgba(0,0,0,.4)}
+.makers-card .kick{color:var(--purple)}
+.makers-p{font-size:clamp(16px,2.1vw,19px);color:var(--ink);line-height:1.62;max-width:56ch;margin:18px auto 0}
+.makers-p b{color:var(--purple)}
+.makers-sub{font-family:var(--mono);font-size:13.5px;color:var(--ink-soft);margin:16px auto 0;max-width:62ch}
+.makers-sub b{color:var(--ink)}
+.makers-sub a{color:var(--ink);white-space:nowrap;border-bottom:1px solid color-mix(in srgb,var(--purple) 38%,transparent);transition:color .18s,border-color .18s}
+.makers-sub a:hover{color:var(--purple);border-bottom-color:var(--purple)}
+.makers-sub a::after{content:"\2197";font-size:.82em;margin-left:1px;opacity:0;transition:opacity .18s}
+.makers-sub a:hover::after{opacity:.7}
 </style>
 </head>
 <body>
@@ -366,6 +381,16 @@ footer a{color:var(--cream)}
       <div class="p">$29</div>
       <a class="cta big" data-buy="pro" target="_top">Buy JX-Osc &rarr;</a>
       <span class="free">Or get all five &mdash; <a data-buy="bundle" target="_top">the Osc Collection for $99</a> (save $45). New here? <a data-buy="dem" target="_top">DEM-Osc is free</a>.</span>
+    </div>
+  </section>
+
+    <!-- ═══════════ THE MAKERS ═══════════ -->
+  <section class="wrap">
+    <div class="makers-card">
+      <div class="kick">Who makes this</div>
+      <h2>Built by two people, not a plugin factory.</h2>
+      <p class="makers-p">We're <b>Clay &amp; Kelsy</b> — a queer, woman-owned, two-artist duo. We don't just build these synths; we make the music with them. Every wave shape was sampled in our own studio, every preset played until it felt right. That's the part Arturia and Native Instruments can't copy: these instruments have taste because they were made by people with something to say.</p>
+      <p class="makers-sub">The <b>music we make</b> has been featured in <a href="https://www.musicconnection.com/new-music-critique-clay-and-kelsy/" target="_blank" rel="noopener">Music Connection</a>, <a href="https://earmilk.com/2024/11/15/premiere-clay-and-kelsy-light-up-the-synth-pop-scene-with-debut-ep-i-am/" target="_blank" rel="noopener">EARMILK</a>, <a href="https://www.naludamagazine.com/clay-and-kelsy-interview-unveiling-i-am/" target="_blank" rel="noopener">Naluda</a>, <a href="https://v13.net/2025/01/clay-and-kelsy-mirror-single-premiere/" target="_blank" rel="noopener">V13</a> &amp; <a href="https://apricot-magazine.com/industrynews/exclusive-interview-with-clay-and-kelsy-discuss-their-debut-ep-i-am/" target="_blank" rel="noopener">Apricot</a> — Music Connection even called the Osc Collection &ldquo;worthy of your attention.&rdquo;</p>
     </div>
   </section>
 
