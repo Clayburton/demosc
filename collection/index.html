@@ -286,6 +286,15 @@ footer a{color:var(--cream)}
 .vwho b{color:var(--ink);font-weight:700}
 .vchip{flex:0 0 auto;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:12px;color:#fff}
 .vchip[data-c="pro"]{background:var(--pro)}.vchip[data-c="chip"]{background:var(--chip)}.vchip[data-c="jx"]{background:var(--jx)}.vchip[data-c="digi"]{background:var(--digi)}.vchip[data-c="moo"]{background:var(--moo)}.vchip[data-c="dem"]{background:var(--dem)}
+/* top-of-page buy CTAs (in the hero) */
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;margin:30px auto 0}
+.hero-buy{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:700;font-size:16px;color:#fff;
+  background:linear-gradient(180deg,var(--purple-2),var(--purple));padding:16px 30px;border-radius:100px;
+  box-shadow:0 14px 30px -12px rgba(122,63,242,.6);transition:transform .13s}
+.hero-buy:hover{transform:translateY(-2px)}
+.hero-try{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--ink);background:transparent;
+  border:1.5px solid var(--ink);padding:15px 26px;border-radius:100px;transition:.18s}
+.hero-try:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
 </style>
 </head>
 <body>
@@ -324,9 +333,15 @@ footer a{color:var(--cream)}
           <button class="btn hear" id="hearBtn" type="button" aria-label="Hear it">
             <span class="eq"><i></i><i></i><i></i></span> <span class="lbl">hear it</span>
           </button>
-          <a class="btn solid" id="roLink" href="#bundle" target="_top">Explore the collection →</a>
+          <a class="btn" id="roLink" href="#bundle" target="_top">Explore the collection →</a>
         </div>
       </div>
+    </div>
+
+    <!-- top-of-page buy CTAs -->
+    <div class="hero-cta">
+      <a class="hero-buy" target="_top" href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">Buy the Osc Collection — $99</a>
+      <a class="hero-try" href="https://clayandkelsy.com/dem-osc/" target="_top">Try DEM-Osc free</a>
     </div>
   </header>
 
@@ -361,27 +376,12 @@ footer a{color:var(--cream)}
     </div>
   </section>
 
-  <!-- ═══════════ BUNDLE ═══════════ -->
-  <section class="wrap" id="bundle">
-    <div class="bundle reveal">
-      <div class="kick">The full set</div>
-      <h2 class="fx-rainbow">Get the whole spectrum.</h2>
-      <div class="price"><span class="was">$145</span><span class="acc">$99</span></div>
-      <div class="save">All five synths — <b>save $45</b> vs. buying separately.</div>
-      <!-- EDIT: bundle cart link (target=_top so it works inside the site iframe) -->
-      <a class="cta" id="bundleCta" target="_top"
-         href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">
-         Buy the Osc Collection — $99 →</a>
-      <span class="free">New here? Start with <a href="https://clayandkelsy.com/dem-osc/" target="_top">DEM-Osc — free</a>, a native taste of all five.</span>
-    </div>
-  </section>
-
   <!-- ═══════════ THE MAKERS ═══════════ -->
   <section class="wrap">
     <div class="makers-card reveal">
       <div class="kick">Who makes this</div>
       <h2>Built by two people, not a plugin factory.</h2>
-      <p class="makers-p">We're <b>Clay &amp; Kelsy</b> — a queer, woman-owned, two-artist duo. We don't just build these synths; we make the music with them. Every wave shape was sampled in our own studio, every preset played until it felt right. That's the part a big plugin company can't copy: these instruments have taste because they were made by people with something to say.</p>
+      <p class="makers-p">We're <b>Clay &amp; Kelsy</b> — a queer, woman-owned, two-artist duo. We don't just build these synths; we use them in our music. Every wave shape was sampled in our own studio, every preset played until it felt right.</p>
       <p class="makers-sub">The <b>music we make</b> has been featured in <a href="https://www.musicconnection.com/new-music-critique-clay-and-kelsy/" target="_blank" rel="noopener">Music Connection</a>, <a href="https://earmilk.com/2024/11/15/premiere-clay-and-kelsy-light-up-the-synth-pop-scene-with-debut-ep-i-am/" target="_blank" rel="noopener">EARMILK</a>, <a href="https://www.naludamagazine.com/clay-and-kelsy-interview-unveiling-i-am/" target="_blank" rel="noopener">Naluda</a>, <a href="https://v13.net/2025/01/clay-and-kelsy-mirror-single-premiere/" target="_blank" rel="noopener">V13</a> &amp; <a href="https://apricot-magazine.com/industrynews/exclusive-interview-with-clay-and-kelsy-discuss-their-debut-ep-i-am/" target="_blank" rel="noopener">Apricot</a> — Music Connection even called the Osc Collection &ldquo;worthy of your attention.&rdquo;</p>
     </div>
   </section>
@@ -414,6 +414,21 @@ footer a{color:var(--cream)}
           <li class="vcard" aria-hidden="true"><p class="vq">&ldquo;Packed full of analogue goodness &mdash; lush and warm.&rdquo;</p><p class="vwho"><span class="vchip" data-c="pro" aria-hidden="true">PC</span><b>Patrick C.</b> &middot; Verified buyer</p></li>
         </ul>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BUNDLE (bottom — the closing CTA, after the reviews) ═══════════ -->
+  <section class="wrap" id="bundle">
+    <div class="bundle reveal">
+      <div class="kick">The full set</div>
+      <h2 class="fx-rainbow">Get the whole spectrum.</h2>
+      <div class="price"><span class="was">$145</span><span class="acc">$99</span></div>
+      <div class="save">All five synths — <b>save $45</b> vs. buying separately.</div>
+      <!-- EDIT: bundle cart link (target=_top so it works inside the site iframe) -->
+      <a class="cta" id="bundleCta" target="_top"
+         href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">
+         Buy the Osc Collection — $99 →</a>
+      <span class="free">New here? Start with <a href="https://clayandkelsy.com/dem-osc/" target="_top">DEM-Osc — free</a>, a native taste of all five.</span>
     </div>
   </section>
 
