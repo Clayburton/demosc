@@ -1,0 +1,158 @@
+<!doctype html>
+<!-- ======================================================================
+  DEM-OSC — LIVE at clayandkelsy.com/dem-osc/ (served from github.com/Clayburton/demosc, folder dem-osc/; the older page
+  stays at the repo root as the archive). The free-synth ad landing page, rebuilt mobile-first on the Hook / Pro-Osc system. Read HANDOFF.md first. The download flow is UNCHANGED: every "Get DEM-Osc" button goes
+  to the WordPress checkout for the free product (#6322) in the TOP window (target=_top — this page runs
+  inside an iframe on clayandkelsy.com/dem-osc/; the checkout must be first-party so the cart works).
+  Copy is verbatim from the live page and the WordPress page; the few new lines are listed in HANDOFF.md.
+  Sections are marked ============ NAME ============ · styles.css: tokens first, one block per section
+  · app.js: the shared engine + the player + the cassette + the mobile bar.
+  ====================================================================== -->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DEM-Osc — Free synth for Mac (VST3 &amp; AU)</title>
+<meta name="description" content="Download DEM-Osc for free! Five oscillators sampled from real analog and digital hardware, four convolution spaces, 25 presets. Free for macOS.">
+<meta name="theme-color" content="#f0e8d7">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="DEM-Osc — back to top"><b>DEM-Osc</b><span class="tag">The Osc Collection · free</span></a>
+    <nav class="nav-links" aria-label="Sections"><a href="#hear">Hear it</a><a href="#inside">Inside</a><a href="#faq">Questions</a></nav>
+    <a class="pill-cta" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get it free</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO — the ask, then the tape ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="micro rise">The Osc Collection</p>
+      <h1 class="rise">DEM&#8209;Osc</h1>
+      <p class="tagline rise">She&rsquo;s free. Now she just <em>plays.</em></p>
+      <p class="lede rise">Five tape-warm oscillators, four convolution spaces, and twenty-five presets that already sound finished. A native synth for your DAW.</p>
+      <div class="get rise" id="get">
+        <a class="btn big" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc &mdash; Free &rarr;</a>
+        <a class="btn ghost" id="hearFirst" href="#hear"><i class="play-ico" aria-hidden="true"></i>Hear it first</a>
+      </div>
+      <p class="fine rise">Instant download &middot; <b>Mac only (for now)</b> &middot; VST3 &middot; AU</p>
+      <p class="phone-note rise" id="phoneNote">On your phone? Same button. Check out free and we&rsquo;ll email you the download link, so it&rsquo;s waiting when you&rsquo;re back at your computer.</p>
+      <ul class="facts rise" aria-label="The three things">
+        <li><b>Free</b>, no time limit</li>
+        <li><b>Full instrument</b>, nothing crippled</li>
+        <li><b>25 presets</b> that already sound finished</li>
+      </ul>
+    </div>
+    <figure class="tape" id="tape" aria-label="The DEM-Osc cassette. Tap it to hear a sound.">
+      <button class="tape-btn" id="tapeBtn" aria-label="Tap the tape to hear the next sound">
+        <img src="assets/cassette.webp" alt="A hand-drawn cassette labelled CKI Demo" width="1200" height="900" fetchpriority="high" decoding="async">
+      </button>
+      <figcaption><span class="dot" aria-hidden="true"></span><span id="tapeCap">tap to hear her</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HEAR IT — six sounds, one tap each ============ -->
+<section class="hear" id="hear">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="micro">Tap the tape</p>
+      <h2>One synth.<br>Wildly different voices.</h2>
+      <p class="sub">Six sounds, straight out of DEM-Osc &mdash; sub bass, glassy pad, electric keys, singing lead, lush strings, bright brass. Tap the cassette to cycle, or pick one:</p>
+    </div>
+    <div class="sounds reveal" role="group" aria-label="Sounds">
+      <button class="snd" data-src="assets/pad.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Pad</b><small>Winter Pad</small></button>
+      <button class="snd" data-src="assets/keys.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Keys</b><small>Dem EP</small></button>
+      <button class="snd" data-src="assets/bass.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Bass</b><small>Big Stack</small></button>
+      <button class="snd" data-src="assets/lead.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Lead</b><small>Tube Army</small></button>
+      <button class="snd" data-src="assets/strings.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Strings</b><small>Dem Ensemble</small></button>
+      <button class="snd" data-src="assets/brass.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Brass</b><small>1984</small></button>
+    </div>
+    <p class="hint reveal" id="hearHint">Tap a sound. It streams, nothing to download.</p>
+  </div>
+</section>
+
+<!-- ============ INSIDE — what's under the tape ============ -->
+<section class="inside" id="inside">
+  <div class="wrap inside-grid">
+    <div class="reveal">
+      <p class="micro">What&rsquo;s under the tape</p>
+      <h2>Five vintage oscillators,<br>one free plugin.</h2>
+      <p class="rl-plain">DEM-Osc takes one oscillator from each synth in our Osc Collection &mdash; saw, triangle, square, sync and chip &mdash; and stacks three at a time through four hand-built convolution spaces. Detune them, let each voice drift, and they melt into something warm and alive.</p>
+      <ul class="figs" aria-label="By the numbers">
+        <li><b>5</b><span>Oscillators</span></li><li><b>5</b><span>Wave shapes</span></li><li><b>4</b><span>Reverb spaces</span></li><li><b>25</b><span>Presets</span></li>
+      </ul>
+    </div>
+    <figure class="shot reveal">
+      <img src="assets/interface.webp" alt="The DEM-Osc plugin interface, every knob hand-drawn" width="1264" height="1056" loading="lazy" decoding="async">
+      <figcaption>Every knob, on one hand-drawn screen</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PLAYED, NOT CONFIGURED ============ -->
+<section class="played">
+  <div class="wrap narrow reveal">
+    <p class="micro">No menus. No manual.</p>
+    <h2>An instrument, not a settings page.</h2>
+    <p class="sub">Turn a knob, hear it move. Glide between notes, add a little vibrato, ride the mod wheel, let each voice slip just out of tune. It&rsquo;s built to be played, not configured.</p>
+    <ul class="chips" aria-label="What it has"><li>Key glide</li><li>Vibrato</li><li>Mod-wheel routing</li><li>Per-voice drift</li><li>Convolution reverb</li><li>Convolution FX</li></ul>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faqs" id="faq">
+  <div class="wrap narrow">
+    <div class="sec-head reveal"><p class="micro">Frequently asked</p><h2>Before you download.</h2></div>
+    <div class="faq reveal">
+      <details open><summary>Is DEM-Osc really free?<span class="faq-x" aria-hidden="true"></span></summary><p>Yes &mdash; completely free, with no time limit and no crippled features. It&rsquo;s a full instrument and the free doorway into our paid Osc Collection.</p></details>
+      <details><summary>What formats and OS does it support?<span class="faq-x" aria-hidden="true"></span></summary><p>DEM-Osc is a standalone synth in VST3 and AU formats, for macOS.</p></details>
+      <details><summary>What&rsquo;s inside?<span class="faq-x" aria-hidden="true"></span></summary><p>Five vintage oscillators sampled from real hardware, four convolution reverb spaces, and 25 handcrafted presets &mdash; with glide, vibrato, and mod-wheel routing.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GET IT ============ -->
+<section class="closing" id="getit">
+  <div class="wrap narrow reveal">
+    <p class="micro">Free today. Yours forever.</p>
+    <h2>Download it, load a preset, and lose an afternoon.</h2>
+    <p class="sub">When you want the other four oscillators, you&rsquo;ll know where we live.</p>
+    <div class="get"><a class="btn big" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc &mdash; Free &rarr;</a></div>
+    <p class="fine"><b>Mac only (for now)</b> &middot; adds to your cart &mdash; just add email &amp; check out &middot; or explore the <a href="https://clayandkelsy.com/shopcki/">full Osc Collection</a></p>
+    <p class="cki">DEM-Osc is made by <a href="https://clayandkelsy.com">Clay and Kelsy Instruments</a> &mdash; our cute little software company. We build the instruments and the tools we need to keep producing music. Our music has been streamed over 2 million times, and our instruments downloaded over 10,000 times.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <b class="foot-brand">Clay &amp; Kelsy Instruments</b>
+    <p>Los Angeles &middot; The Osc Collection &middot; Handmade synthesizers &amp; sample instruments</p>
+    <nav><a href="https://clayandkelsy.com">clayandkelsy.com</a><a href="https://clayandkelsy.com/shopcki/">The Osc Collection</a></nav>
+  </div>
+</footer>
+
+<!-- the thumb-zone bar: phones only, appears once the hero's button has scrolled away -->
+<div class="mob-bar" id="mobBar" aria-hidden="true">
+  <span class="mob-txt"><b>DEM-Osc</b> free &middot; Mac &middot; VST3 &middot; AU</span>
+  <a class="btn" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart tabindex="-1">Get it free &rarr;</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
+<script type="module" src="app.js?v=3"></script>
+</body>
+</html>
