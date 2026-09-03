@@ -75,7 +75,7 @@ h3 { font-size: 1.18rem; line-height: 1.25; }
 
 
 /* ---------- hero: the ask first, the tape beside it ---------- */
-.hero { min-height: 0; padding-top: clamp(20px, 4vw, 56px); padding-bottom: clamp(36px, 6vw, 80px); }
+.hero { min-height: 0; padding-top: clamp(44px, 6.5vw, 96px); padding-bottom: clamp(36px, 6vw, 80px); }   /* room above the eyebrow; no viewport stretch */
 .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
 .tagline em { color: var(--acc); font-style: italic; }
 .rise { opacity: 0; transform: translateY(16px); animation: rise .95s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 110ms + 60ms); }

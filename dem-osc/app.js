@@ -72,7 +72,8 @@ addEventListener("resize", () => { setVh(); tick(); });
 /* embedded: the hero fills what's visible under the C&K header when the page opens */
 function fitHero() {
   const hero = document.querySelector(".hero");
-  if (hero && IS_EMBEDDED) hero.style.minHeight = Math.max(560, host.vh - (host.top0 || 0)) + "px";
+  /* DEM-Osc: the hero is content-sized, never stretched to the viewport (that left a hole under it in the frame) */
+  if (hero && IS_EMBEDDED) hero.style.minHeight = "";
 }
 /* ---------- in-page links glide (scrollIntoView reaches the host page when embedded) ---------- */
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
