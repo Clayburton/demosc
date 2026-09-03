@@ -59,7 +59,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opa
 /* ---------- hero ---------- */
 /* generous top padding so the WordPress site menu (above the iframe) has room,
    then a little breathing space, then the headline */
-.hero{text-align:center;padding:clamp(84px,13vh,132px) 22px 8px;max-width:900px;margin:0 auto}
+.hero{text-align:center;padding:clamp(64px,9vh,104px) 22px 8px;max-width:1180px;margin:0 auto}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink-soft)}
 h1{font-family:var(--mono);font-weight:700;font-size:clamp(34px,7vw,68px);line-height:1.02;
    letter-spacing:-.02em;margin:12px 0 0}
@@ -315,6 +315,29 @@ footer a{color:var(--cream)}
 @supports not (background: linear-gradient(in oklch longer hue 90deg, red, blue)){
   .softbg{background:linear-gradient(135deg,#efe7d6,#ece2ea);animation:none} }  /* fallback */
 @media(prefers-reduced-motion:reduce){ .softbg{animation:none} }
+
+/* ── the two-column top: copy + CTAs left, the five interfaces fanned on the right ── */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(28px,4vw,56px);align-items:center;text-align:left;margin-bottom:clamp(36px,5vw,56px)}
+.hero-grid .lede{margin:16px 0 0}
+.hero-grid .hero-cta{justify-content:flex-start;margin:28px 0 0}
+.fan{position:relative;aspect-ratio:1.5;width:100%;isolation:isolate}
+.fan::before{content:"";position:absolute;inset:-6% -4%;border-radius:40%;z-index:-1;filter:blur(38px);opacity:.55;pointer-events:none;
+  background:radial-gradient(closest-side at 22% 30%,#3c8ed0 0,transparent 70%),radial-gradient(closest-side at 50% 70%,#d85fa6 0,transparent 70%),radial-gradient(closest-side at 80% 40%,#9a6ad0 0,transparent 70%),radial-gradient(closest-side at 60% 20%,#40b25f 0,transparent 70%)}
+.fan-card{position:absolute;top:0;left:0;width:62%;border-radius:12px;overflow:hidden;background:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 0 0 1px rgba(23,18,12,.09),0 24px 50px -22px rgba(23,18,12,.5);
+  transform:translate(calc(var(--i)*9.5%),calc(var(--i)*3.6%));z-index:calc(10 - var(--i));
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;
+  opacity:0;animation:fanIn .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.12s + var(--i)*.09s)}
+.fan-card img{display:block;width:100%;height:auto}
+.fan-card:hover,.fan-card:focus-visible{transform:translate(calc(var(--i)*9.5%),calc(var(--i)*3.6% - 10px));box-shadow:0 0 0 1px rgba(23,18,12,.12),0 36px 60px -22px rgba(23,18,12,.55);outline:none}
+@keyframes fanIn{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;text-align:center;gap:34px}
+  .hero-grid .lede{margin:16px auto 0}
+  .hero-grid .hero-cta{justify-content:center}
+  .fan{max-width:560px;margin:0 auto}
+}
+@media (prefers-reduced-motion:reduce){.fan-card{animation:none;opacity:1;transition:none}}
 </style>
 </head>
 <body>
@@ -324,10 +347,28 @@ footer a{color:var(--cream)}
 
   <!-- ═══════════ HERO ═══════════ -->
   <header class="hero">
+    <!-- ═══════════ TOP: copy left, the five interfaces right (frames are the synth pages' own aligned tab shots) ═══════════ -->
+    <div class="hero-grid">
+      <div class="hero-copy">
     <!-- EDIT: headline -->
-    <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
-    <!-- EDIT: hero paragraph -->
-    <p class="lede">Five distinctive synths built from real oscillators — from <b class="fx-crush">bit-crushed video games</b> to <b class="fx-grow">analog that fills the room</b>. Every shade of synth, all sharing one interface. <b class="fx-echo">Learn one, and you know them all.</b></p>
+      <h1>A <span class="spectrum">spectrum</span><br>of sound.</h1>
+      <!-- EDIT: hero paragraph -->
+      <p class="lede">Five distinctive synths built from real oscillators — from <b class="fx-crush">bit-crushed video games</b> to <b class="fx-grow">analog that fills the room</b>. Every shade of synth, all sharing one interface. <b class="fx-echo">Learn one, and you know them all.</b></p>
+
+      <!-- top-of-page buy CTAs -->
+      <div class="hero-cta">
+        <a class="hero-buy" target="_top" href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">Buy the Osc Collection — $99</a>
+        <a class="hero-try" href="https://clayandkelsy.com/dem-osc/" target="_top">Try DEM-Osc free</a>
+      </div>
+      </div>
+      <div class="fan" aria-label="The five instruments">
+        <a class="fan-card" style="--i:0" href="https://clayandkelsy.com/pro-osc/" target="_top" aria-label="Pro-Osc"><img src="../pro-osc/assets/tab-env-cut.webp" alt="Pro-Osc's hand-drawn interface" width="1100" height="906" fetchpriority="high" decoding="async"></a>
+        <a class="fan-card" style="--i:1" href="https://clayandkelsy.com/chip-osc/" target="_top" aria-label="Chip-Osc"><img src="../chip-osc/assets/tab-env-cut.webp" alt="Chip-Osc's hand-drawn interface" width="1100" height="906" decoding="async"></a>
+        <a class="fan-card" style="--i:2" href="https://clayandkelsy.com/jx-osc/" target="_top" aria-label="JX-Osc"><img src="../jx-osc/assets/tab-env-cut.webp" alt="JX-Osc's hand-drawn interface" width="1100" height="906" decoding="async"></a>
+        <a class="fan-card" style="--i:3" href="https://clayandkelsy.com/digi-osc/" target="_top" aria-label="Digi-Osc"><img src="../digi-osc/assets/tab-env-cut.webp" alt="Digi-Osc's hand-drawn interface" width="1100" height="906" decoding="async"></a>
+        <a class="fan-card" style="--i:4" href="https://clayandkelsy.com/moo-osc/" target="_top" aria-label="Moo-Osc"><img src="../moo-osc/assets/tab-env-cut.webp" alt="Moo-Osc's hand-drawn interface" width="1100" height="906" decoding="async"></a>
+      </div>
+    </div>
 
     <!-- ═══════════ THE CONSOLE ═══════════ -->
     <div class="console">
@@ -359,11 +400,6 @@ footer a{color:var(--cream)}
       </div>
     </div>
 
-    <!-- top-of-page buy CTAs -->
-    <div class="hero-cta">
-      <a class="hero-buy" target="_top" href="https://clayandkelsy.com/cart/?add-to-cart=2652&quantity[2040]=1&quantity[2041]=1&quantity[2037]=1&quantity[1817]=1&quantity[1149]=1">Buy the Osc Collection — $99</a>
-      <a class="hero-try" href="https://clayandkelsy.com/dem-osc/" target="_top">Try DEM-Osc free</a>
-    </div>
   </header>
 
   <!-- ═══════════ ONE INTERFACE ═══════════ -->
