@@ -88,10 +88,10 @@ document.querySelectorAll("a[data-host-go]").forEach(a => a.addEventListener("cl
   if (IS_EMBEDDED) {
     nav.classList.add("embedded");
     scrollHandlers.push(() => {
-      /* on a phone, drop the pinned bar below the WP admin bar (host sends its live coverage; 0 for
-         logged-out visitors, so their view is unchanged). Desktop is left exactly as it was. */
-      const drop = matchMedia("(max-width: 900px)").matches ? host.adminH : 0;
-      nav.style.transform = `translate3d(0,${vpTop() + drop}px,0)`;
+      /* drop the pinned bar below the WP admin bar so it never tucks under it. host.adminH is the bar's
+         LIVE on-screen coverage — 0 for logged-out visitors, so their view (mobile AND desktop) is
+         exactly unchanged; it only ever nudges the logged-in admin's own view to clear the bar. */
+      nav.style.transform = `translate3d(0,${vpTop() + host.adminH}px,0)`;
       nav.classList.toggle("pinned", vpTop() > 10);   /* works host-driven (−host.top) AND native-scroll */
     });
   } else {
