@@ -282,10 +282,10 @@ document.getElementById("themeToggle")?.addEventListener("click", () => {
 
 /* ---------- embedded: tell the host how tall we are, whenever that changes ---------- */
 if (IS_EMBEDDED) {
-  const foot = document.querySelector("footer");
+  const foot = document.querySelector("footer.foot") || document.querySelector("body > footer");   /* the PAGE footer — blockquotes and cards may have their own <footer> */
   let lastH = 0;
   const postHeight = () => {
-    const h = Math.ceil(foot ? foot.getBoundingClientRect().bottom + (window.scrollY || 0) : doc.scrollHeight);
+    const h = Math.ceil(Math.max(foot ? foot.getBoundingClientRect().bottom + (window.scrollY || 0) : 0, document.body.scrollHeight));
     if (h > 0 && Math.abs(h - lastH) > 4) { lastH = h; parent.postMessage({ hook: "h", h }, "*"); }
   };
   addEventListener("load", postHeight);
