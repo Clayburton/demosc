@@ -198,7 +198,9 @@ details[open] .faq-x::after { transform: rotate(0); }
 /* ---------- small screens ---------- */
 @media (max-width: 900px) {
   .hero-grid, .walk, .cols, .buy .wrap { grid-template-columns: 1fr; }
-  .walk-phone { position: relative; top: auto; }
+  /* the interface stacks ABOVE the steps on a phone; beat the .embedded rule (equal specificity,
+     later in source) that otherwise forces position:absolute and smushes it over the text */
+  .walk-phone, .walk-phone.embedded { position: relative; top: auto; left: auto; width: auto; }
   .walk-steps { grid-column: auto; }
   .walk-step { min-height: 0; padding: 1.4rem 0; opacity: 1; }
   .sounds { grid-template-columns: 1fr 1fr; }

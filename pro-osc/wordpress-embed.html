@@ -1,0 +1,85 @@
+<!-- ============================================================================
+     PRO-OSC — WordPress embed. Paste this WHOLE file as ONE Custom HTML block on
+     the /pro-osc/ page, replacing the old <iframe ... height:100vh ...> block.
+
+     Why this one: the old embed was a fixed 100vh window, so the page scrolled
+     INSIDE a porthole and the WordPress footer sat right below it — visible the
+     whole time. This one lets the iframe GROW to the page's real height, so there
+     is one clean scroll and the footer lands at the true bottom.
+
+     It also tells the page (a) where the viewport is, so its scroll effects track
+     the real page scroll, (b) how tall the WordPress admin bar currently is, so the
+     page can drop its little "Pro-Osc · Buy" bar below it on phones, and (c) it
+     paints this page the same colour as the embed so the iOS status bar matches.
+
+     To reuse for another synth: change ONLY the two lines marked  <-- CHANGE.
+     ============================================================================ -->
+<style>
+  /* one scrollbar on the page: the window's. */
+  html, body { overflow-x: clip; }
+  #ckosc-embed { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); width: 100vw; }
+  #ckosc-embed iframe { display: block; width: 100%; border: 0; height: 1400px; background: #f0e8d7; }
+</style>
+<div id="ckosc-embed">
+  <iframe id="ckosc-frame"
+    title="Pro-Osc — analog synth for Kontakt"
+    scrolling="no"
+    allow="autoplay; fullscreen; clipboard-write"
+    loading="eager"></iframe>
+</div>
+<script>
+(function () {
+  var ORIGIN = "https://clayburton.github.io";
+  var PATH   = "/demosc/pro-osc/";                 // <-- CHANGE for another synth (e.g. /demosc/chip-osc/)
+  var frame  = document.getElementById("ckosc-frame");
+  frame.src = ORIGIN + PATH + "?v=" + Date.now();  // load fresh each visit (beats the iframe-doc cache)
+
+  var lastH = 0;
+  window.addEventListener("message", function (e) {
+    if (e.origin !== ORIGIN || !e.data) return;
+    /* auto-grow: the page posts its content height; the 8px guard stops resize loops */
+    if (e.data.hook === "h" && typeof e.data.h === "number") {
+      var h = Math.round(e.data.h);
+      if (Math.abs(h - lastH) > 8) { lastH = h; frame.style.height = h + "px"; }
+    }
+    /* theme sync: paint this page (and the iOS status bar) the same colour as the page inside */
+    if (e.data.hook === "bg" && /^#[0-9a-fA-F]{6}$/.test(e.data.color || "")) {
+      frame.style.background = e.data.color;
+      document.documentElement.style.setProperty("background-color", e.data.color, "important");
+      document.body.style.setProperty("background-color", e.data.color, "important");
+    }
+  });
+
+  /* how much of the screen the WP admin bar currently covers (0 for logged-out visitors) */
+  function adminCover() {
+    var b = document.getElementById("wpadminbar");
+    if (!b) return 0;
+    var r = b.getBoundingClientRect();
+    return Math.max(0, Math.min(r.bottom, 80));
+  }
+
+  var queued = false;
+  function postViewport() {
+    queued = false;
+    if (!frame.contentWindow) return;
+    var r = frame.getBoundingClientRect();
+    frame.contentWindow.postMessage(
+      { hookHost: "vp", top: r.top, vh: window.innerHeight, adminH: adminCover() }, ORIGIN);
+  }
+  window.addEventListener("scroll", function () {
+    if (!queued) { queued = true; requestAnimationFrame(postViewport); }
+  }, { passive: true });
+  window.addEventListener("resize", postViewport);
+  frame.addEventListener("load", postViewport);
+  postViewport();
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script>
+(function () {  /* smooth, inertial scrolling on desktop — delete this block if it ever misbehaves */
+  if (!window.Lenis || !matchMedia("(pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
+  function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+})();
+</script>

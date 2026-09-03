@@ -23,7 +23,7 @@ if (IS_EMBEDDED) document.body.classList.add("embedded");
    Embedded: host.top = the frame's top edge in the host viewport (positive while the C&K header
    is above us, negative once we've scrolled past the top), host.vh = the host viewport height.
    An element's position relative to the host viewport is its frame position + host.top. */
-const host = { top: 0, vh: 0, top0: null, ready: false, nav: false };   /* nav: the host draws the menu bar itself */
+const host = { top: 0, vh: 0, top0: null, ready: false, nav: false, adminH: 0 };   /* adminH: live coverage of the WP admin bar (0 for visitors) */
 /* host-driven measurement only once an auto-grow host has actually posted a viewport message
    (host.ready); until then — standalone, or inside a fixed-height iframe that posts nothing —
    fall back to this document's own native scroll, so the page is never stuck invisible. */
@@ -52,6 +52,7 @@ if (IS_EMBEDDED) {
     if (d.hookHost !== "vp" || typeof d.top !== "number") return;
     if (d.nav && !host.nav) { host.nav = true; const n = document.getElementById("nav"); if (n) n.style.display = "none"; }
     host.top = d.top; if (typeof d.vh === "number" && d.vh > 0) host.vh = d.vh;
+    if (typeof d.adminH === "number") host.adminH = d.adminH;
     if (!host.ready) { host.ready = true; host.top0 = Math.max(0, d.top); fitHero(); }
     setVh(); tick();
   });
@@ -87,7 +88,10 @@ document.querySelectorAll("a[data-host-go]").forEach(a => a.addEventListener("cl
   if (IS_EMBEDDED) {
     nav.classList.add("embedded");
     scrollHandlers.push(() => {
-      nav.style.transform = `translate3d(0,${vpTop()}px,0)`;
+      /* on a phone, drop the pinned bar below the WP admin bar (host sends its live coverage; 0 for
+         logged-out visitors, so their view is unchanged). Desktop is left exactly as it was. */
+      const drop = matchMedia("(max-width: 900px)").matches ? host.adminH : 0;
+      nav.style.transform = `translate3d(0,${vpTop() + drop}px,0)`;
       nav.classList.toggle("pinned", vpTop() > 10);   /* works host-driven (−host.top) AND native-scroll */
     });
   } else {
@@ -151,7 +155,7 @@ document.getElementById("themeToggle")?.addEventListener("click", () => {
   if (IS_EMBEDDED) phone.classList.add("embedded");
   let cur = -1;
   scrollHandlers.push(() => {
-    if (!desktop()) return;
+    if (!desktop()) { phone.style.transform = ""; return; }   /* phone flows in normal position on mobile */
     const h = vpH(); let idx = 0;
     steps.forEach((s, i) => { if (relTop(s) < h * 0.55) idx = i; });
     if (idx !== cur) {
