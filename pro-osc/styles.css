@@ -133,6 +133,7 @@ h3 { font-size: 1.18rem; line-height: 1.25; }
 .walk { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: start; position: relative; }
 .walk-phone { position: sticky; top: calc(var(--nav-h) + var(--vh) * .16); margin: 0; }   /* sticks nearer the vertical middle */
 .walk-phone.embedded { position: absolute; top: 0; left: 0; width: calc(50% - clamp(14px, 2.5vw, 36px)); will-change: transform; }
+.walk-phone.hosted { visibility: hidden; transform: none !important; }   /* the host page draws it; this keeps the grid space */
 .walk-phone { border-radius: 14px; overflow: hidden; box-shadow: 0 30px 60px -30px var(--shadow), 0 0 0 1px var(--line); background: #fbf8f2; }
 .walk-phone { display: grid; }
 .walk-phone > * { grid-area: 1 / 1; }

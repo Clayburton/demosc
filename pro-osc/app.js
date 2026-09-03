@@ -23,7 +23,7 @@ if (IS_EMBEDDED) document.body.classList.add("embedded");
    Embedded: host.top = the frame's top edge in the host viewport (positive while the C&K header
    is above us, negative once we've scrolled past the top), host.vh = the host viewport height.
    An element's position relative to the host viewport is its frame position + host.top. */
-const host = { top: 0, vh: 0, top0: null, ready: false, nav: false, adminH: 0 };   /* adminH: live coverage of the WP admin bar (0 for visitors) */
+const host = { top: 0, vh: 0, top0: null, ready: false, nav: false, phone: false, adminH: 0 };   /* adminH: live coverage of the WP admin bar (0 for visitors) */
 /* host-driven measurement only once an auto-grow host has actually posted a viewport message
    (host.ready); until then — standalone, or inside a fixed-height iframe that posts nothing —
    fall back to this document's own native scroll, so the page is never stuck invisible. */
@@ -41,6 +41,24 @@ if (!IS_EMBEDDED && !reduced && !coarse && window.Lenis) {
   const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
 }
+/* ---------- the walkthrough interface, drawn by the host ----------
+   Pinned from host messages it always lands a frame late (jitter). When the host block says phone:true
+   we hide our copy (it keeps its grid space) and send the host what it needs to draw the same thing
+   with position:fixed on its own page: the section's top/bottom, the box, the frame per step, the
+   highlight box per step, and which step is on. The host clamps it like sticky would. */
+function postWalk() {
+  if (!IS_EMBEDDED || !host.phone) return;
+  const walk = document.querySelector(".walk"), phone = document.getElementById("walkPhone");
+  if (!walk || !phone || !matchMedia("(min-width: 900px)").matches) { parent.postMessage({ hook: "walk", off: true }, "*"); return; }
+  phone.classList.add("hosted");
+  const w = walk.getBoundingClientRect(), p = phone.getBoundingClientRect(), y0 = window.scrollY || 0;
+  const steps = {}, hl = {};
+  phone.querySelectorAll("img[data-step]").forEach(im => { steps[im.dataset.step] = { src: im.currentSrc || im.src }; });
+  phone.querySelectorAll(".hl[data-step]").forEach(b => { const s = b.style; hl[b.dataset.step] = { x: s.getPropertyValue("--x"), y: s.getPropertyValue("--y"), w: s.getPropertyValue("--w"), h: s.getPropertyValue("--h") }; });
+  parent.postMessage({ hook: "walk", top: w.top + y0, bottom: w.bottom + y0, left: p.left, width: p.width, aspect: 1100 / 906, navH: NAV_H, marginFrac: 0.16, steps, hl }, "*");
+}
+addEventListener("resize", postWalk);
+
 /* ---------- one pipe for everything that follows the page ---------- */
 const scrollHandlers = [];
 function tick() { for (const h of scrollHandlers) h(); }
@@ -51,6 +69,7 @@ if (IS_EMBEDDED) {
     if (d.hookHost === "go") { const t = d.id && document.querySelector(d.id); if (t) t.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }); return; }
     if (d.hookHost !== "vp" || typeof d.top !== "number") return;
     if (d.nav && !host.nav) { host.nav = true; const n = document.getElementById("nav"); if (n) n.style.display = "none"; }
+    if (d.phone && !host.phone) { host.phone = true; postWalk(); }   /* the host draws the walkthrough interface itself (zero lag) */
     host.top = d.top; if (typeof d.vh === "number" && d.vh > 0) host.vh = d.vh;
     if (typeof d.adminH === "number") host.adminH = d.adminH;
     if (!host.ready) { host.ready = true; host.top0 = Math.max(0, d.top); fitHero(); }
@@ -164,10 +183,11 @@ document.getElementById("themeToggle")?.addEventListener("click", () => {
       cur = idx; const key = String(idx);
       imgs.forEach(im => im.classList.toggle("on", im.dataset.step === key));
       steps.forEach((s, i) => s.classList.toggle("active", i === idx));
+      if (host.phone) parent.postMessage({ hook: "step", n: idx }, "*");
     }
     /* auto-grow host only: the frame never scrolls, so pin the phone by hand. In a fixed-window iframe
        (or standalone) the page scrolls natively, so native CSS position:sticky handles it — no jitter. */
-    if (host.ready && walk) {
+    if (host.ready && walk && !host.phone) {
       if (!phone.classList.contains("embedded")) phone.classList.add("embedded");
       const want = NAV_H + h * 0.05 - relTop(walk);
       const y = Math.max(0, Math.min(want, walk.getBoundingClientRect().height - phone.getBoundingClientRect().height));
@@ -286,7 +306,7 @@ if (IS_EMBEDDED) {
   let lastH = 0;
   const postHeight = () => {
     const h = Math.ceil(Math.max(foot ? foot.getBoundingClientRect().bottom + (window.scrollY || 0) : 0, document.body.scrollHeight));
-    if (h > 0 && Math.abs(h - lastH) > 4) { lastH = h; parent.postMessage({ hook: "h", h }, "*"); }
+    if (h > 0 && Math.abs(h - lastH) > 4) { lastH = h; parent.postMessage({ hook: "h", h }, "*"); postWalk(); }
   };
   addEventListener("load", postHeight);
   if ("ResizeObserver" in window) new ResizeObserver(postHeight).observe(document.body);
