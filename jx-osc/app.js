@@ -60,7 +60,7 @@ function postWalk() {
   const steps = {}, hl = {};
   phone.querySelectorAll("img[data-step]").forEach(im => { steps[im.dataset.step] = { src: im.currentSrc || im.src }; });
   phone.querySelectorAll(".hl[data-step]").forEach(b => { const s = b.style; hl[b.dataset.step] = { x: s.getPropertyValue("--x"), y: s.getPropertyValue("--y"), w: s.getPropertyValue("--w"), h: s.getPropertyValue("--h") }; });
-  parent.postMessage({ hook: "walk", top: w.top + y0, bottom: w.bottom + y0, left: p.left, width: p.width, aspect: 900 / 742, navH: NAV_H, marginFrac: 0.16, steps, hl }, "*");
+  parent.postMessage({ hook: "walk", top: w.top + y0, bottom: w.bottom + y0, left: p.left, width: p.width, aspect: 1100 / 906, navH: NAV_H, marginFrac: 0.16, steps, hl }, "*");
 }
 addEventListener("resize", postWalk);
 

@@ -3,8 +3,8 @@
   CHIP-OSC — built 2026-09-03 from the Pro-Osc v2 template (same three files, same host block pattern;
   read ../pro-osc-v2/HANDOFF.md for how the system works). Copy is verbatim from the live Chip-Osc pages
   (WordPress + demosc). Buy buttons add product 1817 to the cart; "Osc Collection" links browse /shopcki/.
-  No tab screenshots exist for Chip yet, so the hero shows the one interface frame; when Clay supplies tab
-  shots, run ../pro-osc-v2/tools/tabs.py and add data-cycle frames — the cycle code is already here.
+  Tab frames (assets/tab-*.webp) come from Clay's screenshots via ../pro-osc-v2/tools/tabs.py; the hero cycles them
+  and the walkthrough shows each feature's page. interface.webp is kept only as the source of the measured coordinates.
   ====================================================================== -->
 <html lang="en" data-theme="light">
 <head>
@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://clayburton.github.io">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 
@@ -58,11 +58,15 @@
     </div>
     <figure class="rig" id="rig" aria-label="The Chip-Osc interface, alive while a sound plays">
       <div class="frames">
-      <img data-cycle="0" class="on" src="assets/interface.webp" alt="Chip-Osc's hand-drawn interface: three oscillator selectors with 20 digital wave shapes, panning, attack and release, a cut-off slider, and tabs for envelope, reverb and FX, LFO and mod wheel, stepped sequencer, and vibrato" width="900" height="741" fetchpriority="high" decoding="async">
+      <img data-cycle="0" class="on" src="assets/tab-env-cut.webp" alt="The main page: three oscillator selectors, panning, attack and release, and the cut-off slider" width="1100" height="904" fetchpriority="high" decoding="async">
+      <img data-cycle="1" class="" src="assets/tab-reverb-fx.webp" alt="The Reverb/FX page: 30 convolution spaces" width="1100" height="904" decoding="async">
+      <img data-cycle="2" class="" src="assets/tab-c-lfo.webp" alt="The Cut-Off LFO and mod-wheel command center" width="1100" height="904" decoding="async">
+      <img data-cycle="3" class="" src="assets/tab-stepped-sequencer.webp" alt="The note-triggered stepped sequencer" width="1100" height="904" decoding="async">
+      <img data-cycle="4" class="" src="assets/tab-vib-misc.webp" alt="Vibrato, glide, slop and spread" width="1100" height="904" decoding="async">
       <i class="glow" aria-hidden="true"></i>
       <i class="cut" aria-hidden="true"></i>
       </div>
-      <figcaption>Every knob, on one hand-drawn screen &middot; <span id="rigCap">tap a sound and it moves</span></figcaption>
+      <figcaption><span id="rigTab">Env/Cut</span> &middot; every knob, on one hand-drawn screen &middot; <span id="rigCap">tap a sound and it moves</span></figcaption>
     </figure>
   </div>
 </section>
@@ -105,17 +109,17 @@
     </div>
     <div class="walk">
       <figure class="walk-phone" id="walkPhone" aria-hidden="true">
-        <img data-step="0" class="on" src="assets/interface.webp" alt="" width="900" height="741" decoding="async">
-        <img data-step="1" class="" src="assets/interface.webp" alt="" width="900" height="741" decoding="async">
-        <img data-step="2" class="" src="assets/interface.webp" alt="" width="900" height="741" decoding="async">
-        <img data-step="3" class="" src="assets/interface.webp" alt="" width="900" height="741" decoding="async">
-        <img data-step="4" class="" src="assets/interface.webp" alt="" width="900" height="741" decoding="async">
+        <img data-step="0" class="on" src="assets/tab-env-cut.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="1" class="" src="assets/tab-reverb-fx.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="2" class="" src="assets/tab-stepped-sequencer.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="3" class="" src="assets/tab-c-lfo.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="4" class="" src="assets/tab-vib-misc.webp" alt="" width="1100" height="904" decoding="async">
         <!-- frames sit on the control each feature is about: percentages of the interface, measured from the image -->
-        <i class="hl" data-step="0" style="--x:.5%;--y:2.5%;--w:66%;--h:40.5%"></i>
-        <i class="hl" data-step="1" style="--x:20.5%;--y:56.5%;--w:17%;--h:6%"></i>
-        <i class="hl" data-step="2" style="--x:58.5%;--y:56.5%;--w:19%;--h:6%"></i>
-        <i class="hl" data-step="3" style="--x:38.5%;--y:56.5%;--w:18.5%;--h:6%"></i>
-        <i class="hl" data-step="4" style="--x:78.5%;--y:56.5%;--w:15.5%;--h:6%"></i>
+        <i class="hl" data-step="0" style="--x:0.4%;--y:2.8%;--w:66%;--h:40.5%"></i>
+        <i class="hl" data-step="1" style="--x:20.4%;--y:56.8%;--w:17%;--h:6%"></i>
+        <i class="hl" data-step="2" style="--x:58.4%;--y:56.8%;--w:19%;--h:6%"></i>
+        <i class="hl" data-step="3" style="--x:38.4%;--y:56.8%;--w:18.5%;--h:6%"></i>
+        <i class="hl" data-step="4" style="--x:78.4%;--y:56.8%;--w:15.5%;--h:6%"></i>
       </figure>
       <ol class="walk-steps">
         <li class="walk-step" data-step="0"><span class="fig">20</span><h3>Wave shapes, three at a time</h3><p>Three oscillator selectors, each with 20 digital shapes from a digital hybrid synth &mdash; plus per-oscillator pitch and pan.</p></li>
@@ -208,6 +212,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script type="module" src="app.js?v=1"></script>
+<script type="module" src="app.js?v=2"></script>
 </body>
 </html>
