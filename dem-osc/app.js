@@ -198,6 +198,18 @@ document.querySelectorAll("a[data-cart]").forEach(a => a.addEventListener("click
   try { if (IS_EMBEDDED) parent.postMessage({ hook: "event", name: "free_synth_click" }, "*"); } catch (_) {}
 }));
 
+/* ---------- two versions: Windows visitors are offered the Kontakt version first (#2042, Mac and Windows);
+   everyone else gets the Mac plugin (#6322) first. The card that matches this computer is marked.
+   An iPad asking for the desktop site says "Macintosh", so a touch screen is never called a Mac. ---------- */
+(() => {
+  const uad = navigator.userAgentData, plat = (uad && uad.platform) || navigator.platform || "", ua = navigator.userAgent || "";
+  const win = /^win/i.test(plat) || /Windows NT/.test(ua);
+  const mac = !win && !(navigator.maxTouchPoints > 1) && (/^mac/i.test(plat) || /Macintosh/.test(ua));
+  if (win) document.body.classList.add("os-win");
+  const card = win ? document.querySelector(".way--k") : mac ? document.querySelector(".way--p") : null;
+  if (card) card.classList.add("is-yours");
+})();
+
 /* ---------- hear it: one player, streaming, tap to play, one at a time ---------- */
 (() => {
   const btns = [...document.querySelectorAll(".snd")]; if (!btns.length) return;

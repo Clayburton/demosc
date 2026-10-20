@@ -2,7 +2,7 @@
 <!-- ======================================================================
   DEM-OSC — LIVE at clayandkelsy.com/dem-osc/ (served from github.com/Clayburton/demosc, folder dem-osc/; the older page
   stays at the repo root as the archive). The free-synth ad landing page, rebuilt mobile-first on the Hook / Pro-Osc system. Read HANDOFF.md first. The download flow is UNCHANGED: every "Get DEM-Osc" button goes
-  to the WordPress checkout for the free product (#6322) in the TOP window (target=_top — this page runs
+  to the WordPress checkout for the free product in the TOP window: #6322 is the Mac plugin, #2042 the Kontakt version (Mac and Windows; Windows visitors are offered it first, app.js "two versions") (target=_top — this page runs
   inside an iframe on clayandkelsy.com/dem-osc/; the checkout must be first-party so the cart works).
   Copy is verbatim from the live page and the WordPress page; the few new lines are listed in HANDOFF.md.
   Sections are marked ============ NAME ============ · styles.css: tokens first, one block per section
@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -28,8 +28,9 @@
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top" aria-label="DEM-Osc — back to top"><b>DEM-Osc</b><span class="tag">The Osc Collection · free</span></a>
-    <nav class="nav-links" aria-label="Sections"><a href="#hear">Hear it</a><a href="#inside">Inside</a><a href="#faq">Questions</a></nav>
-    <a class="pill-cta" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get it free</a>
+    <nav class="nav-links" aria-label="Sections"><a href="#hear">Hear it</a><a href="#inside">Inside</a><a href="#versions">Mac or Windows</a><a href="#faq">Questions</a></nav>
+    <a class="pill-cta for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get it free</a>
+    <a class="pill-cta for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>Get it free</a>
   </div>
 </header>
 
@@ -44,10 +45,12 @@
       <p class="tagline rise">She&rsquo;s free. Now she just <em>plays.</em></p>
       <p class="lede rise">Five tape-warm oscillators, four convolution spaces, and twenty-five presets that already sound finished. A native synth for your DAW.</p>
       <div class="get rise" id="get">
-        <a class="btn big" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc &mdash; Free &rarr;</a>
+        <a class="btn big for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc &mdash; Free &rarr;</a>
+        <a class="btn big for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc for Kontakt, free &rarr;</a>
         <a class="btn ghost" id="hearFirst" href="#hear"><i class="play-ico" aria-hidden="true"></i>Hear it first</a>
       </div>
-      <p class="fine rise">Instant download &middot; <b>Mac only (for now)</b> &middot; VST3 &middot; AU</p>
+      <p class="fine rise for-mac">Instant download &middot; <b>Mac</b> &middot; VST3 &middot; AU &middot; <a href="#versions">On Windows? Get it in Kontakt</a></p>
+      <p class="fine rise for-win">Runs in the free Kontakt Player &middot; <b>Mac &amp; Windows</b> &middot; <a href="#versions">On a Mac? Get the plugin</a></p>
       <p class="phone-note rise" id="phoneNote">On your phone? Same button. Check out free and we&rsquo;ll email you the download link, so it&rsquo;s waiting when you&rsquo;re back at your computer.</p>
       <ul class="facts rise" aria-label="The three things">
         <li><b>Free</b>, no time limit</li>
@@ -112,13 +115,48 @@
   </div>
 </section>
 
+<!-- ============ TWO VERSIONS — side A, side B ============ -->
+<section class="versions" id="versions">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="micro">Two ways to play it</p>
+      <h2>Both free.<br>Pick your setup.</h2>
+      <p class="sub">The plugin is the newest DEM-Osc, made for Mac. The Kontakt version is the original, and it runs on Windows too, in the same free player as the rest of the Osc Collection.</p>
+    </div>
+    <div class="ways reveal">
+      <article class="way way--p">
+        <p class="way-side"><span class="reels" aria-hidden="true"><i></i><i></i></span>Side A<span class="yours">Your computer</span></p>
+        <h3>The plugin</h3>
+        <p class="way-what">VST3 &amp; AU &middot; Mac</p>
+        <ul>
+          <li>The newest version</li>
+          <li>Download it, drag it into your plugins folder, play</li>
+          <li>No extra software, no account</li>
+        </ul>
+        <a class="btn" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get the plugin, free &rarr;</a>
+      </article>
+      <article class="way way--k">
+        <p class="way-side"><span class="reels" aria-hidden="true"><i></i><i></i></span>Side B<span class="yours">Your computer</span></p>
+        <h3>In Kontakt</h3>
+        <p class="way-what">Kontakt Player &middot; Mac &amp; Windows</p>
+        <ul>
+          <li>The original version</li>
+          <li>Runs in the free Kontakt Player</li>
+          <li>Add it in Native Access with the serial we email you</li>
+        </ul>
+        <a class="btn ghost" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>Get it for Kontakt, free &rarr;</a>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section class="faqs" id="faq">
   <div class="wrap narrow">
     <div class="sec-head reveal"><p class="micro">Frequently asked</p><h2>Before you download.</h2></div>
     <div class="faq reveal">
       <details open><summary>Is DEM-Osc really free?<span class="faq-x" aria-hidden="true"></span></summary><p>Yes. It&rsquo;s yours to keep, with no trial and no timer. A few of the deeper effects are saved for the paid Osc Collection, and DEM-Osc is the free way in.</p></details>
-      <details><summary>What formats and OS does it support?<span class="faq-x" aria-hidden="true"></span></summary><p>DEM-Osc is a standalone synth in VST3 and AU formats, for macOS.</p></details>
+      <details><summary>What formats and OS does it support?<span class="faq-x" aria-hidden="true"></span></summary><p>There are two versions, and both are free. The plugin is VST3 and AU for macOS. The Kontakt version runs in the free Kontakt Player on Mac and Windows, and you add it in Native Access with the serial we email you.</p></details>
       <details><summary>What&rsquo;s inside?<span class="faq-x" aria-hidden="true"></span></summary><p>Five vintage oscillators sampled from real hardware, four convolution reverb spaces, and 25 handcrafted presets &mdash; with glide, vibrato, and mod-wheel routing.</p></details>
     </div>
   </div>
@@ -130,8 +168,9 @@
     <p class="micro">Free today. Yours forever.</p>
     <h2>Download it, load a preset, and lose an afternoon.</h2>
     <p class="sub">When you want the other four oscillators, you&rsquo;ll know where we live.</p>
-    <div class="get"><a class="btn big" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc &mdash; Free &rarr;</a></div>
-    <p class="fine"><b>Mac only (for now)</b> &middot; adds to your cart &mdash; just add email &amp; check out &middot; or explore the <a href="https://clayandkelsy.com/shopcki/">full Osc Collection</a></p>
+    <div class="get"><a class="btn big for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc &mdash; Free &rarr;</a><a class="btn big for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>Get DEM&#8209;Osc for Kontakt, free &rarr;</a></div>
+    <p class="fine for-mac"><b>The Mac plugin</b> &middot; adds to your cart, just add email &amp; check out &middot; <a href="#versions">On Windows? Get it in Kontakt</a> &middot; or explore the <a href="https://clayandkelsy.com/shopcki/">full Osc Collection</a></p>
+    <p class="fine for-win"><b>The Kontakt version</b> &middot; Mac &amp; Windows &middot; adds to your cart, just add email &amp; check out &middot; <a href="#versions">On a Mac? Get the plugin</a> &middot; or explore the <a href="https://clayandkelsy.com/shopcki/">full Osc Collection</a></p>
     <p class="cki">DEM-Osc is made by <a href="https://clayandkelsy.com">Clay and Kelsy Instruments</a> &mdash; our cute little software company. We build the instruments and the tools we need to keep producing music. Our music has been streamed over 2 million times, and our instruments downloaded over 10,000 times.</p>
   </div>
 </section>
@@ -148,11 +187,13 @@
 
 <!-- the thumb-zone bar: phones only, appears once the hero's button has scrolled away -->
 <div class="mob-bar" id="mobBar" aria-hidden="true">
-  <span class="mob-txt"><b>DEM-Osc</b> free &middot; Mac &middot; VST3 &middot; AU</span>
-  <a class="btn" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart tabindex="-1">Get it free &rarr;</a>
+  <span class="mob-txt for-mac"><b>DEM-Osc</b> free &middot; Mac &middot; VST3 &middot; AU</span>
+  <span class="mob-txt for-win"><b>DEM-Osc</b> free &middot; in Kontakt</span>
+  <a class="btn for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart tabindex="-1">Get it free &rarr;</a>
+  <a class="btn for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart tabindex="-1">Get it free &rarr;</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script type="module" src="app.js?v=4"></script>
+<script type="module" src="app.js?v=5"></script>
 </body>
 </html>
