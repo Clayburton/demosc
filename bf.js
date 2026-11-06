@@ -43,13 +43,19 @@
     document.querySelectorAll('.price').forEach(function (p) {
       if (text(p) === '$29') { strike(p, '$29', '$15', 'ck-bf-was'); }
     });
-    document.querySelectorAll('.fine').forEach(function (f) { swap(f, '$99', '$49'); swap(f, 'save $46', 'save $96'); });
+    /* the Collection compares with its everyday $99, never $145 (Hermes's final call, made for Clay on Nov 6) */
+    document.querySelectorAll('.fine').forEach(function (f) { swap(f, '$99', '$49'); swap(f, 'save $46', 'save $50'); });
 
-    /* the Collection page: both buy buttons, the big price, the saving, and the five synth chips */
+    /* the Collection page: both buy buttons, the big price ($99 crossed out, $49), the saving, and the five synth chips */
     document.querySelectorAll('.hero-buy, #bundleCta').forEach(function (a) { swap(a, '$99', '$49'); });
     var acc = document.querySelector('.price .acc');
-    if (acc && text(acc) === '$99') { acc.textContent = '$49'; }
-    document.querySelectorAll('.save').forEach(function (s) { swap(s, 'save $46', 'save $96'); });
+    if (acc && text(acc) === '$99') {
+      acc.textContent = '$49';
+      var was = acc.parentNode.querySelector('.was'); if (was && text(was) === '$145') { was.textContent = '$99'; }
+    }
+    /* "All five synths, save $46 vs. buying separately." becomes "All five synths, save $50." because at
+       sale prices the five bought separately are $75, so "vs. buying separately" would not be true */
+    document.querySelectorAll('.save').forEach(function (s) { swap(s, 'save $46', 'save $50'); swap(s, ' vs. buying separately.', '.'); });
     document.querySelectorAll('.chip .pr').forEach(function (p) {
       if (text(p) === '$29') { strike(p, '$29', '$15', 'ck-bf-was-s'); }
     });
