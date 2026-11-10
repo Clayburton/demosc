@@ -8,7 +8,7 @@
   var START = Date.UTC(2026, 10, 27, 8, 0, 0);   /* Nov 27 00:00 Pacific */
   var END = Date.UTC(2026, 11, 2, 7, 59, 59);    /* Dec 1 23:59:59 Pacific */
   var WORDS_OK = false;                          /* true once Kelsy has approved the words below */
-  var W = { label: 'Black Friday · half off through Tuesday' };
+  var W = { label: 'Black Friday: half off through Tuesday' };   /* no separator dot (Clay's rule set, 2026-11-10) */
 
   var preview = /(^|[#&])bf-preview\b/.test(location.hash);
   var now = Date.now();
