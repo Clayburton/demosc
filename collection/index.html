@@ -395,7 +395,7 @@ footer a{color:var(--cream)}
           <button class="btn hear" id="hearBtn" type="button" aria-label="Hear it">
             <span class="eq"><i></i><i></i><i></i></span> <span class="lbl">hear it</span>
           </button>
-          <a class="btn" id="roLink" href="#bundle">Explore the collection ↓</a>
+          <a class="btn" id="roLink" href="#bundle">See all five together ↓</a>
         </div>
       </div>
     </div>
@@ -556,7 +556,7 @@ footer a{color:var(--cream)}
   var DEFAULT = { name:'The Osc Collection', tag:'every shade of synth', color:'#7a3ff2', wave:'blend', note:'the collection',
     spec:'<b>5</b> synths · <b>1</b> shared interface · <b>30</b> impulse responses each',
     blurb:'Hover any instrument above to meet it. Each one is sampled from real hardware (vintage analog, 80s classics, digital hybrids, chiptune and eurorack), then wrapped in the same hand-built interface. Once you learn one, you already know the rest.',
-    url:'#bundle', link:'Explore the collection ↓' };
+    url:'#bundle', link:'See all five together ↓' };
 
   /* ══════════ build the chips + table ══════════ */
   var chips = document.getElementById('chips');
@@ -599,7 +599,7 @@ footer a{color:var(--cream)}
     roBlurb.textContent = it.blurb;
     roLink.href = it.url;
     if (it.url.charAt(0) === '#') { roLink.removeAttribute('target'); } else { roLink.target = '_top'; }   /* a #section scrolls this page; a synth page opens in the top window (Wren, 2026-11-10) */
-    roLink.textContent = idx==null ? DEFAULT.link : ('Explore '+it.name);
+    roLink.textContent = idx==null ? DEFAULT.link : ('Go to the '+it.name+' page');
     chipEls.forEach(function(c,i){ c.classList.toggle('on', i===idx); });
     waveType = it.wave; targetWave = it.wave;
     if(typeof syncHear==='function') syncHear();
@@ -809,6 +809,6 @@ footer a{color:var(--cream)}
   fan.addEventListener('pointerup',end); fan.addEventListener('pointercancel',end);
 })();
 </script>
-<script src="../bf.js?v=1" defer></script>
+<script src="../bf.js?v=2" defer></script>
 </body>
 </html>
