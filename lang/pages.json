@@ -423,6 +423,14 @@
    ],
    "es": [
     [
+     "https://songwriting.clayandkelsy.com/\"",
+     "https://songwriting.clayandkelsy.com/es.html\""
+    ],
+    [
+     "ORIGIN + \"/?v=\"",
+     "ORIGIN + \"/es.html?v=\""
+    ],
+    [
      "ct=site",
      "ct=es-page"
     ]
