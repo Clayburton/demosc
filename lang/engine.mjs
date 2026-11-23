@@ -10,7 +10,7 @@ const VOID = new Set('area base br col embed hr img input link meta source track
 const RAW = new Set(['script', 'style', 'textarea', 'title']);
 const SKIP = new Set(['svg', 'math', 'iframe', 'video', 'audio', 'canvas', 'object', 'code', 'pre']);
 const INLINE = new Set('a abbr b bdi bdo br cite data del dfn em i ins kbd mark q s samp small span strong sub sup time u var wbr img font'.split(' '));
-const ATTRS = new Set(['alt', 'title', 'placeholder', 'aria-label', 'aria-description', 'label']);
+const ATTRS = new Set(['alt', 'title', 'placeholder', 'aria-label', 'aria-description', 'label', 'data-label']);
 const META = new Set(['description', 'og:title', 'og:description', 'twitter:title', 'twitter:description', 'og:image:alt', 'twitter:image:alt']);
 // Words that look like prose but are code: key names, schema types, headers. Never offered for translation.
 const CODEWORDS = /^(Escape|Enter|Tab|Backspace|Delete|Space|Shift|Control|Alt|Meta|Home|End|PageUp|PageDown|Arrow(Up|Down|Left|Right)|Content-Type|Accept|Authorization|Cache-Control|Object|Array|String|Number|Boolean|Date|Math|JSON|Promise|Error|Event|CustomEvent|Image|Audio|Infinity|NaN|Product|Offer|AggregateOffer|Organization|Person|Thing|WebPage|WebSite|BreadcrumbList|ListItem|AggregateRating|Rating|Review|Brand|SoftwareApplication|MusicGroup|MusicAlbum|MusicRecording|ImageObject|VideoObject|FAQPage|Question|Answer|Article|BlogPosting|CollectionPage|ItemList|InStock|OutOfStock|PreOrder|USD|Mac|Windows|MacOS|macOS|iOS)$/;
@@ -108,7 +108,7 @@ function fromPlaceholders(tr, tags) {
 function prose(v) {
   v = (v || '').replace(/\{\d+\}/g, 'x');
   if (!v || !letters(v)) return false;
-  if (/:\/\/|^[\/.#\[@]|^[\w-]+\s*:\s*[^\s]+;?$|=>|[{};]|^\$|^[a-z][\w-]*$|\.(png|jpe?g|webp|svg|mp[34]|js|css|json|woff2?)$/i.test(v)) return false;
+  if (/:\/\/|^[\/.#\[@]|^[\w-]+\s*:\s*[^\s]+;?$|=>|[{};]|^\$|\.(png|jpe?g|webp|svg|mp[34]|js|css|json|woff2?)$/i.test(v) || /^[a-z][\w-]*$/.test(v)) return false;
   return /\s/.test(v.trim()) || /^[A-Z][a-z]{2,}/.test(v) || /[^\x00-\x7F]/.test(v);
 }
 

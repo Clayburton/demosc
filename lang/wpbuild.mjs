@@ -69,7 +69,7 @@ export async function run(cfg) {
   const tpl = cfg.template || src.j.template || 'template-page-builder-no-sidebar.php';
   const reps = replacements(cfg.lang, cfg).concat(cfg.extraReplace || []);
   const r = translate(raw, d, { replace: reps });
-  const cjk = cfg.lang === 'ja' || cfg.lang === 'zh' ? '<!-- wp:html --><style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}</style><!-- /wp:html -->\n' : '';
+  const cjk = cfg.lang === 'ja' || cfg.lang === 'zh' ? '<!-- wp:html --><style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}#ck-plugins .ckp-h1{white-space:nowrap;font-size:clamp(44px,9vw,104px)}</style><!-- /wp:html -->\n' : '';
   const content = MARK(cfg.lang, cfg.en) + '\n' + cjk + r.out;
   const t = cfg.head || {};
   const title = t.title ? (d[norm(t.title)] || t.title) : (d[norm(src.j.title.raw)] || src.j.title.raw);
