@@ -1,0 +1,182 @@
+<!doctype html>
+<!-- ======================================================================
+  DEM-OSC — LIVE at clayandkelsy.com/dem-osc/ (served from github.com/Clayburton/demosc, folder dem-osc/; the older page
+  stays at the repo root as the archive). The free-synth ad landing page, rebuilt mobile-first on the Hook / Pro-Osc system. Read HANDOFF.md first. The download flow is UNCHANGED: every "Get DEM-Osc" button goes
+  to the WordPress checkout for the free product in the TOP window: #6322 is the Mac plugin, #2042 the Kontakt version (Mac and Windows; Windows visitors are offered it first, app.js "two versions") (target=_top — this page runs
+  inside an iframe on clayandkelsy.com/dem-osc/; the checkout must be first-party so the cart works).
+  Copy is verbatim from the live page and the WordPress page; the few new lines are listed in HANDOFF.md.
+  Sections are marked ============ NAME ============ · styles.css: tokens first, one block per section
+  · app.js: the shared engine + the player + the cassette + the mobile bar.
+  ====================================================================== -->
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DEM-Osc：Mac 用の無料シンセ（VST3・AU）</title>
+<meta name="description" content="DEM-Osc を無料でダウンロード！本物のアナログ・デジタル機材からサンプリングした5つのオシレーター、4つのコンボリューション空間、25のプリセット。macOS 用、無料。">
+<meta name="theme-color" content="#f0e8d7">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/demosc/fonts.css">
+<link rel="stylesheet" href="styles.css?v=6">
+<style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="DEM-Osc、ページの先頭へ"><b>DEM-Osc</b><span class="tag">Osc Collection から、無料で</span></a>
+    <nav class="nav-links" aria-label="セクション"><a href="#hear">聴く</a><a href="#inside">中身</a><a href="#versions">Mac か Windows か</a><a href="#faq">よくある質問</a></nav>
+    <a class="pill-cta for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>無料で入手</a>
+    <a class="pill-cta for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>無料で入手</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO — the ask, then the tape ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 class="rise">DEM&#8209;Osc</h1>
+      <p class="tagline rise">無料になりました。あとは<em>弾くだけ。</em></p>
+      <p class="lede rise">テープのように温かい5つのオシレーター、4つのコンボリューション空間、そして最初から完成した音がする25のプリセット。DAW で使えるネイティブ・シンセです。</p>
+      <div class="get rise" id="get"><a class="btn big for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>DEM‑Osc を無料で入手</a> <a class="btn big for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>Kontakt 版 DEM‑Osc を無料で入手</a> <a class="btn ghost" id="hearFirst" href="#hear"><i class="play-ico" aria-hidden="true"></i>まずは聴いてみる</a></div>
+      <p class="fine rise for-mac">すぐにダウンロード · <b>Mac</b> · VST3 · AU。<a href="#versions">Windows の方は Kontakt 版を</a></p>
+      <p class="fine rise for-win">無料の Kontakt Player で動作、<b>Mac・Windows</b>。<a href="#versions">Mac の方はプラグインを</a></p>
+      <p class="phone-note rise" id="phoneNote">スマホで見ていますか？ボタンは同じです。無料で購入手続きをすると、ダウンロードリンクをメールでお送りします。パソコンに戻ったときには、もう届いています。</p>
+      <ul class="facts rise" aria-label="3つのポイント">
+        <li><b>無料</b>、時間制限なし</li>
+        <li><b>無料でずっと使える</b>、期限なし</li>
+        <li><b>25のプリセット</b>は、最初から完成した音</li>
+      </ul>
+    </div>
+    <figure class="tape" id="tape" aria-label="DEM-Osc のカセット。タップするとサウンドが聴けます。">
+      <button class="tape-btn" id="tapeBtn" aria-label="テープをタップして次のサウンドを聴く">
+        <img src="assets/cassette.webp" alt="CKI Demo と書かれた手描きのカセット" width="1200" height="900" fetchpriority="high" decoding="async">
+      </button>
+      <figcaption><span class="dot" aria-hidden="true"></span><span id="tapeCap">タップして聴いてみて</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HEAR IT — six sounds, one tap each ============ -->
+<section class="hear" id="hear">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>テープをタップ</h2>
+      <p class="sub">DEM-Osc から直接、6つのサウンド：サブベース、ガラスのようなパッド、エレクトリック・キー、歌うようなリード、豊かなストリングス、明るいブラス。カセットをタップして切り替えるか、ひとつ選んでください：</p>
+    </div>
+    <div class="sounds reveal" role="group" aria-label="サウンド">
+      <button class="snd" data-src="assets/pad.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>パッド</b><small>Winter Pad</small></button>
+      <button class="snd" data-src="assets/keys.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>キー</b><small>Dem EP</small></button>
+      <button class="snd" data-src="assets/bass.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>ベース</b><small>Big Stack</small></button>
+      <button class="snd" data-src="assets/lead.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>リード</b><small>Tube Army</small></button>
+      <button class="snd" data-src="assets/strings.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>ストリングス</b><small>Dem Ensemble</small></button>
+      <button class="snd" data-src="assets/brass.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>ブラス</b><small>1984</small></button>
+    </div>
+    <p class="hint reveal" id="hearHint">サウンドをタップ。ストリーミング再生なので、ダウンロードは不要です。</p>
+  </div>
+</section>
+
+<!-- ============ INSIDE — what's under the tape ============ -->
+<section class="inside" id="inside">
+  <div class="wrap inside-grid">
+    <div class="reveal">
+      <h2><span class="ck-ph">ヴィンテージ・</span><span class="ck-ph">オシレーター5つを、</span><br><span class="ck-ph">ひとつの</span><span class="ck-ph">無料プラグインに。</span></h2>
+      <p class="rl-plain">DEM-Osc は、Osc Collection の各シンセからオシレーターをひとつずつ（ソウ、トライアングル、スクエア、シンク、チップ）集め、3つ同時に重ねて、手作りの4つのコンボリューション空間に通します。デチューンして、ボイスごとにゆらがせれば、温かく生き生きとしたものに溶け合います。</p>
+      <ul class="figs" aria-label="数字で見る">
+        <li><b>5</b><span>オシレーター</span></li><li><b>5</b><span>波形</span></li><li><b>4</b><span>リバーブ空間</span></li><li><b>25</b><span>プリセット</span></li>
+      </ul>
+    </div>
+    <figure class="shot reveal">
+      <img src="assets/interface.webp" alt="ノブがすべて手描きの DEM-Osc プラグイン画面" width="1264" height="1056" loading="lazy" decoding="async">
+      <figcaption>すべてのノブを、手描きの1画面に</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PLAYED, NOT CONFIGURED ============ -->
+<section class="played">
+  <div class="wrap narrow reveal">
+    <h2>設定画面ではなく、楽器。</h2>
+    <p class="sub">ノブを回せば、音が動く。ノートの間をグライドし、ビブラートを少し加え、モジュレーション・ホイールを操り、ボイスごとにほんの少しチューニングをずらす。設定するためではなく、弾くために作りました。</p>
+    <ul class="chips" aria-label="搭載機能"><li>キー・グライド</li><li>ビブラート</li><li>モジュレーション・ホイールのルーティング</li><li>ボイスごとのドリフト</li><li>コンボリューション・リバーブ</li><li>コンボリューション FX</li></ul>
+  </div>
+</section>
+
+<!-- ============ TWO VERSIONS — side A, side B ============ -->
+<section class="versions" id="versions">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>2通りの使い方</h2>
+      <p class="sub">プラグインは最新の DEM-Osc で、Mac 用です。Kontakt 版はオリジナルで、Windows でも動きます。Osc Collection のほかの音源と同じ、無料のプレーヤーで。</p>
+    </div>
+    <div class="ways reveal">
+      <article class="way way--p">
+        <p class="way-side"><span class="reels" aria-hidden="true"><i></i><i></i></span>A面<span class="yours">あなたのパソコン</span></p>
+        <h3>プラグイン</h3>
+        <p class="way-what">VST3・AU · Mac</p>
+        <ul>
+          <li>最新バージョン</li>
+          <li>ダウンロードして、プラグインフォルダにドラッグすれば、すぐ弾けます</li>
+          <li>追加のソフトもアカウントも不要</li>
+        </ul>
+        <a class="btn" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>プラグインを無料で入手</a>
+      </article>
+      <article class="way way--k">
+        <p class="way-side"><span class="reels" aria-hidden="true"><i></i><i></i></span>B面<span class="yours">あなたのパソコン</span></p>
+        <h3>Kontakt 版</h3>
+        <p class="way-what">Kontakt Player · Mac・Windows</p>
+        <ul>
+          <li>オリジナル・バージョン</li>
+          <li>無料の Kontakt Player で動作</li>
+          <li>メールでお送りするシリアルで、Native Access に追加</li>
+        </ul>
+        <a class="btn ghost" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>Kontakt 版を無料で入手</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faqs" id="faq">
+  <div class="wrap narrow">
+    <div class="sec-head reveal"><h2>ダウンロードの前に。</h2></div>
+    <div class="faq reveal">
+      <details open><summary>DEM-Osc は本当に無料？<span class="faq-x" aria-hidden="true"></span></summary><p>はい。体験版でも期限付きでもなく、ずっとあなたのものです。より深いエフェクトのいくつかは有料の Osc Collection 用に取ってあり、DEM-Osc はその無料の入り口です。</p></details>
+      <details><summary>対応フォーマットと OS は？<span class="faq-x" aria-hidden="true"></span></summary><p>2つのバージョンがあり、どちらも無料です。プラグインは macOS 用の VST3 と AU。Kontakt 版は Mac と Windows の無料 Kontakt Player で動き、メールでお送りするシリアルで Native Access に追加します。</p></details>
+      <details><summary>中身は？<span class="faq-x" aria-hidden="true"></span></summary><p>本物のハードウェアからサンプリングした5つのヴィンテージ・オシレーター、4つのコンボリューション・リバーブ空間、手作りのプリセット25種。グライド、ビブラート、モジュレーション・ホイールのルーティング付き。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GET IT ============ -->
+<section class="closing" id="getit">
+  <div class="wrap narrow reveal">
+    <h2>ダウンロードして、プリセットを読み込んで、午後をまるごと溶かしてください。</h2>
+    <p class="sub">残り4つのオシレーターが欲しくなったら、どこに来ればいいかはもうおわかりですね。</p>
+    <div class="get"><a class="btn big for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>DEM‑Osc を無料で入手</a><a class="btn big for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>Kontakt 版 DEM‑Osc を無料で入手</a></div>
+    <p class="fine for-mac"><b>Mac 用プラグイン</b>：カートに追加されるので、メールアドレスを入力して購入手続きをするだけ。<a href="#versions">Windows の方は Kontakt 版を</a>。または <a href="https://clayandkelsy.com/ja/osc-collection/">Osc Collection のすべて</a>をご覧ください。</p>
+    <p class="fine for-win"><b>Kontakt 版</b>、Mac・Windows：カートに追加されるので、メールアドレスを入力して購入手続きをするだけ。<a href="#versions">Mac の方はプラグインを</a>。または <a href="https://clayandkelsy.com/ja/osc-collection/">Osc Collection のすべて</a>をご覧ください。</p>
+    <p class="cki">DEM-Osc を作っているのは、私たちふたりの小さなソフトウェア会社、<a href="https://clayandkelsy.com">Clay and Kelsy Instruments</a> です。音楽を作り続けるために必要な楽器とツールを、自分たちで作っています。私たちの音楽は200万回以上ストリーミングされ、楽器は1万回以上ダウンロードされています。</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <b class="foot-brand">Clay &amp; Kelsy Instruments</b>
+    <p>ロサンゼルス発、手作りのシンセサイザーとサンプル音源</p>
+    <nav><a href="https://clayandkelsy.com">clayandkelsy.com</a><a href="https://clayandkelsy.com/ja/osc-collection/">Osc Collection</a></nav>
+  </div>
+</footer>
+
+<!-- the thumb-zone bar: phones only, appears once the hero's button has scrolled away -->
+<div class="mob-bar" id="mobBar" aria-hidden="true"><span class="mob-txt for-mac"><b>DEM-Osc</b> 無料 · Mac · VST3 · AU</span> <span class="mob-txt for-win"><b>DEM-Osc</b> 無料 · Kontakt 版</span> <a class="btn for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart tabindex="-1">無料で入手</a> <a class="btn for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart tabindex="-1">無料で入手</a></div>
+
+<script src="/demosc/vendor/lenis-1-dist-lenis.min.js" defer></script>
+<script type="module" src="app.js?v=5"></script>
+</body>
+</html>

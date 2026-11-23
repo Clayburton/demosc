@@ -1,0 +1,204 @@
+<!doctype html>
+<!-- ======================================================================
+  DIGI-OSC — built 2026-09-03 from the Pro-Osc v2 template by stamp-osc.py (same three files, same host block
+  pattern; read ../pro-osc-v2/HANDOFF.md for how the system works). Copy is verbatim from the live Digi-Osc pages
+  (WordPress + demosc). Buy buttons add product 2041 to the cart; "Osc Collection" links browse /shopcki/.
+  Tab frames (assets/tab-*.webp) come from Clay's screenshots via ../pro-osc-v2/tools/tabs.py; the hero cycles them
+  and the walkthrough shows each feature's page. interface.webp is kept only as the source of the measured coordinates.
+  ====================================================================== -->
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digi-Osc: sintetizador digital para Kontakt, 81 presets</title>
+<meta name="description" content="Digi-Osc está construido a partir de tres sintetizadores digitales y módulos eurorack: brillante, hermoso, digital. 81 presets hechos a mano para Kontakt, NKS completo. $29.">
+<meta name="theme-color" content="#f0e8d7">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://clayburton.github.io">
+<link rel="stylesheet" href="/demosc/fonts.css">
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+
+<!-- ============ NAV (follows the page; hidden under the C&K bar when embedded) ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Digi-Osc, volver arriba"><b>Digi-Osc</b><span class="tag">Digital, de la Osc Collection</span></a>
+    <nav class="nav-links" aria-label="Secciones"><a href="#hear">Escúchalo</a><a href="#inside">Por dentro</a><a href="#reviews">Reseñas</a><a href="#buy">Comprar</a></nav>
+    <a class="pill-cta" href="https://clayandkelsy.com/cart/?add-to-cart=2041" target="_top">Comprar $29</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO — the interface in use ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="micro rise">Digital, de la Osc Collection</p>
+      <h1 class="rise">Digi&#8209;Osc</h1>
+      <p class="tagline rise">Tres sintetizadores digitales y eurorack, un patio de juegos perfecto hasta el último píxel.</p>
+      <p class="lede rise">Construido a partir de los osciladores en bruto de tres sintetizadores digitales y módulos eurorack y envuelto en una interfaz dibujada a mano. Brillante, hermoso y digital, en 81 presets hechos a mano sin relleno.</p>
+      <div class="buy-row rise"><span class="price">$29</span> <a class="btn" href="https://clayandkelsy.com/cart/?add-to-cart=2041" target="_top">Comprar Digi-Osc</a> <a class="btn ghost" id="hearFirst" href="#hear"><i class="play-ico" aria-hidden="true"></i>Escúchalo primero</a></div>
+      <p class="fine rise">O llévate los cinco en la <a href="https://clayandkelsy.com/es/osc-collection/" target="_top">Osc Collection por $99</a>. ¿Primera vez aquí? <a href="https://clayandkelsy.com/es/dem-osc/" target="_top">Prueba DEM-Osc gratis</a>.</p>
+      <ul class="facts rise" aria-label="Lo esencial">
+        <li>Funciona en el <b>Kontakt Player gratuito</b></li>
+        <li><b>macOS</b> y <b>Windows</b></li>
+        <li><b>81 presets</b>, sin relleno</li>
+      </ul>
+    </div>
+    <figure class="rig" id="rig" aria-label="La interfaz de Digi-Osc, en movimiento mientras suena un sonido">
+      <div class="frames">
+      <img data-cycle="0" class="on" src="assets/tab-env-cut.webp" alt="La página principal: tres selectores de oscilador, paneo, ataque y release, y el deslizador de cut-off" width="1100" height="908" fetchpriority="high" decoding="async">
+      <img data-cycle="1" class="" src="assets/tab-reverb-fx.webp" alt="La página Reverb/FX: 30 espacios de convolución" width="1100" height="908" decoding="async">
+      <img data-cycle="2" class="" src="assets/tab-c-lfo.webp" alt="El LFO de Cut-Off y el centro de mando de la rueda de modulación" width="1100" height="908" decoding="async">
+      <img data-cycle="3" class="" src="assets/tab-stepped-sequencer.webp" alt="El secuenciador por pasos activado por notas" width="1100" height="908" decoding="async">
+      <img data-cycle="4" class="" src="assets/tab-vib-misc.webp" alt="Vibrato, glide, slop y spread" width="1100" height="908" decoding="async">
+      <i class="glow" aria-hidden="true"></i>
+      <i class="cut" aria-hidden="true"></i>
+      </div>
+      <figcaption><span id="rigTab">Env/Cut</span>: cada perilla, en una sola pantalla dibujada a mano. <span id="rigCap">Toca un sonido y se mueve.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HEAR IT — the sounds, streaming, one tap ============ -->
+<section class="hear" id="hear">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Sonidos reales,<br>directo de Digi‑Osc.</h2>
+      <p class="sub">Cuatro presets y un tema completo. Cada sonido de abajo se hizo solo con Digi-Osc.</p>
+    </div>
+    <div class="sounds reveal" role="group" aria-label="Sonidos">
+      <button class="snd" data-src="assets/digi-1.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Preset 1</b></button>
+      <button class="snd" data-src="assets/digi-2.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Preset 2</b></button>
+      <button class="snd" data-src="assets/digi-3.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Preset 3</b></button>
+      <button class="snd" data-src="assets/digi-4.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Preset 4</b></button>
+      <button class="snd song" data-src="assets/song.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Digital Dreams</b><small>Un tema completo (1:20): todo, salvo la batería, es Digi-Osc.</small></button>
+    </div>
+    <p class="hint reveal" id="hearHint">Toca un sonido. Se reproduce en streaming, no hay nada que descargar.</p>
+  </div>
+</section>
+
+<!-- ============ THEN YOU HEAR IT ============ -->
+<section class="then" id="then">
+  <div class="wrap narrow">
+    <p class="big rl">Se ve juguetón. Y luego lo escuchas.</p>
+    <p class="big rl">Cada perilla está dibujada a mano, y lo que suena debajo son tres sintetizadores digitales y módulos eurorack reales, muestreados forma por forma y pasados por espacios reales.</p>
+    <blockquote class="quote rl"><p>"El sonido aquí es serio... me gusta mucho."</p><footer>Folia Soundstudio, en una reseña titulada <em>"JOKE or a REAL DEAL?"</em> Su conclusión: va en serio.</footer></blockquote>
+  </div>
+</section>
+
+<!-- ============ INSIDE — the interface stays, the features scroll ============ -->
+<section class="inside" id="inside">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Lo que hay bajo el capó</h2>
+    </div>
+    <div class="walk">
+      <figure class="walk-phone" id="walkPhone" aria-hidden="true">
+        <img data-step="0" class="on" src="assets/tab-env-cut.webp" alt="" width="1100" height="908" decoding="async">
+        <img data-step="1" class="" src="assets/tab-reverb-fx.webp" alt="" width="1100" height="908" decoding="async">
+        <img data-step="2" class="" src="assets/tab-stepped-sequencer.webp" alt="" width="1100" height="908" decoding="async">
+        <img data-step="3" class="" src="assets/tab-c-lfo.webp" alt="" width="1100" height="908" decoding="async">
+        <img data-step="4" class="" src="assets/tab-vib-misc.webp" alt="" width="1100" height="908" decoding="async">
+        <!-- frames sit on the control each feature is about: percentages of the interface, measured from the image -->
+        <i class="hl" data-step="0" style="--x:0.4%;--y:2.5%;--w:66%;--h:40.5%"></i>
+        <i class="hl" data-step="1" style="--x:20.4%;--y:56.5%;--w:17%;--h:6%"></i>
+        <i class="hl" data-step="2" style="--x:58.4%;--y:56.5%;--w:19%;--h:6%"></i>
+        <i class="hl" data-step="3" style="--x:38.4%;--y:56.5%;--w:18.5%;--h:6%"></i>
+        <i class="hl" data-step="4" style="--x:78.4%;--y:56.5%;--w:15.5%;--h:6%"></i>
+      </figure>
+      <ol class="walk-steps">
+        <li class="walk-step" data-step="0"><span class="fig">22</span><h3>Formas de onda, de tres en tres</h3><p>Tres selectores de oscilador, cada uno con 22 formas digitales de tres sintetizadores y eurorack, además de afinación y paneo por oscilador.</p></li>
+        <li class="walk-step" data-step="1"><span class="fig">30</span><h3>Espacios de convolución incluidos</h3><p>Síntesis cruzada a través de nuestras reverbs de hardware y efectos eurorack favoritos: 15 reverbs y 15 FX, listos para convolucionar tu sonido.</p></li>
+        <li class="walk-step" data-step="2"><span class="fig">&#8635;</span><h3>Un secuenciador por pasos con una vuelta de tuerca</h3><p>Solo avanza cuando llega una nota y cambia la forma de onda cargada en cada nota para dar vida a melodías y acordes.</p></li>
+        <li class="walk-step" data-step="3"><span class="fig">&#8767;</span><h3>LFO de Cut-Off y un centro de mando en la rueda de modulación</h3><p>Un LFO dedicado al filtro con muchísimas formas, además de un centro de control que asigna muchos parámetros a la vez a tu rueda de modulación.</p></li>
+        <li class="walk-step" data-step="4"><span class="fig">&asymp;</span><h3>Vibrato, glide, slop y spread</h3><p>Vibrato clásico con velocidad y fade-in, además de glide polifónico, slop de afinación y spread de paneo para que todo suene vivo y humano.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEE IT MOVE (video loads only when asked) ============ -->
+<section class="see" id="see">
+  <div class="wrap narrow">
+    <div class="sec-head reveal"><h2>Mira Digi‑Osc en acción.</h2></div>
+    <button class="yt reveal" id="yt" data-id="NpmGiXKpUf4" aria-label="Reproducir el video de Digi-Osc">
+      <img src="https://i.ytimg.com/vi/NpmGiXKpUf4/hqdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <span class="yt-play" aria-hidden="true"></span>
+    </button>
+    <p class="hint reveal">Un vistazo de cerca a Digi-Osc: brillante, electrónico y para tocarlo sin parar. <a href="https://www.youtube.com/watch?v=NpmGiXKpUf4" target="_blank" rel="noopener">Ver en YouTube ↗</a></p>
+  </div>
+</section>
+
+<!-- ============ THE DETAILS ============ -->
+<section class="details" id="details">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Todo lo que incluye.</h2></div>
+    <div class="cols reveal">
+      <div><h3>Características principales</h3><ul class="ticks">
+        <li>81 presets hechos a mano, sin relleno</li>
+        <li>22 formas de onda digitales de tres sintetizadores digitales y módulos eurorack</li>
+        <li>30 respuestas de impulso propias (15 reverbs + 15 FX eurorack)</li>
+        <li>Secuenciador por pasos activado por notas</li>
+        <li>LFO de Cut-Off, Vibrato, Pitch Slop y Glide polifónico</li>
+        <li>Compatibilidad total con NKS: Maschine y Komplete Kontrol</li></ul></div>
+      <div><h3>Requisitos</h3><ul class="ticks">
+        <li>Instalación y descarga con Native Access</li>
+        <li>Funciona en el Kontakt 6+ Player gratuito, Kontakt 6 y 7 completos, Komplete Kontrol o Maschine 2</li>
+        <li>macOS y Windows</li></ul>
+        <a class="btn ghost small" href="https://www.native-instruments.com/products/kontakt-player" target="_blank" rel="noopener">Descarga el Kontakt Player gratuito ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>A los productores les encanta.</h2></div>
+    <ul class="quotes reveal two">
+      <li><span class="stars" aria-label="Cinco estrellas">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>"La calidad, el sonido y la pura alegría que estos sintetizadores le dan a la producción musical son de verdad un soplo de aire fresco, el tesoro escondido de la década."</p><footer><b>Sean Tobin</b> Comprador verificado · Osc Collection</footer></li>
+      <li><span class="stars" aria-label="Cinco estrellas">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>"Sonidos analógicos auténticos. Los gráficos y el diseño son de primera, y los presets son un gran punto de partida para la exploración sonora. Sin duda, una obra hecha con amor."</p><footer><b>CarloAlberto Villani Rigo</b> Comprador verificado · Osc Collection</footer></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ THE MAKERS ============ -->
+<section class="makers">
+  <div class="wrap narrow reveal">
+    <p class="cki">Digi-Osc está hecho por <a href="https://clayandkelsy.com" target="_top">Clay and Kelsy Instruments</a>, nuestra pequeña y adorable empresa de software. Creamos los instrumentos y las herramientas que necesitamos para seguir produciendo música. Nuestra música se ha reproducido más de 2 millones de veces, y nuestros instrumentos se han descargado más de 10,000 veces.</p>
+  </div>
+</section>
+
+<!-- ============ BUY + FAQ ============ -->
+<section class="buy" id="buy">
+  <div class="wrap">
+    <div class="buy-card reveal">
+      <h2>Consigue Digi‑Osc.</h2>
+      <div class="buy-row"><span class="price">$29</span><a class="btn" href="https://clayandkelsy.com/cart/?add-to-cart=2041" target="_top">Comprar Digi-Osc</a></div>
+      <p class="fine">O llévate los cinco, la <a href="https://clayandkelsy.com/es/osc-collection/" target="_top">Osc Collection por $99</a> (ahorra $46). ¿Primera vez aquí? <a href="https://clayandkelsy.com/es/dem-osc/" target="_top">DEM-Osc es gratis.</a></p>
+    </div>
+    <div class="faq reveal">
+      <details><summary>¿Necesito tener Kontakt?<span class="faq-x" aria-hidden="true"></span></summary><p>No. Digi-Osc funciona en el Kontakt Player gratuito. Instálalo con Native Access.</p></details>
+      <details><summary>¿Qué sistemas operativos son compatibles?<span class="faq-x" aria-hidden="true"></span></summary><p>macOS y Windows, con compatibilidad total con NKS para Maschine y Komplete Kontrol.</p></details>
+      <details><summary>¿Qué incluye?<span class="faq-x" aria-hidden="true"></span></summary><p>Tres osciladores con 22 formas de onda digitales, 30 espacios de convolución, un secuenciador por pasos activado por notas y 81 presets hechos a mano: brillante, hermoso y digital.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <b class="foot-brand">Clay &amp; Kelsy Instruments</b>
+    <p>Osciladores reales, carácter real.</p>
+    <nav><a href="https://clayandkelsy.com" target="_top">clayandkelsy.com</a><a href="https://clayandkelsy.com/es/osc-collection/" target="_top">La Osc Collection</a></nav>
+  </div>
+</footer>
+
+<script src="/demosc/vendor/lenis-1-dist-lenis.min.js" defer></script>
+<script type="module" src="app.js?v=2"></script>
+<script src="../bf.js?v=2" defer></script>
+</body>
+</html>

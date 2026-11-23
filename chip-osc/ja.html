@@ -1,0 +1,205 @@
+<!doctype html>
+<!-- ======================================================================
+  CHIP-OSC — built 2026-09-03 from the Pro-Osc v2 template (same three files, same host block pattern;
+  read ../pro-osc-v2/HANDOFF.md for how the system works). Copy is verbatim from the live Chip-Osc pages
+  (WordPress + demosc). Buy buttons add product 1817 to the cart; "Osc Collection" links browse /shopcki/.
+  Tab frames (assets/tab-*.webp) come from Clay's screenshots via ../pro-osc-v2/tools/tabs.py; the hero cycles them
+  and the walkthrough shows each feature's page. interface.webp is kept only as the source of the measured coordinates.
+  ====================================================================== -->
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chip-Osc：Kontakt 用チップチューン＆デジタルシンセ（プリセット81種）</title>
+<meta name="description" content="Chip-Osc は Kontakt 用のデジタル・ハイブリッド・シンセ。8ビットのチップチューンからダークなシネマティックまで。手作りのプリセット81種、20の波形、NKS 完全対応。29ドル。">
+<meta name="theme-color" content="#f0e8d7">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://clayburton.github.io">
+<link rel="stylesheet" href="/demosc/fonts.css">
+<link rel="stylesheet" href="styles.css?v=3">
+<style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}</style>
+</head>
+<body>
+
+<!-- ============ NAV (follows the page; hidden under the C&K bar when embedded) ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Chip-Osc、ページの先頭へ"><b>Chip-Osc</b><span class="tag">Osc Collection のチップチューン</span></a>
+    <nav class="nav-links" aria-label="セクション"><a href="#hear">聴く</a><a href="#inside">中身</a><a href="#reviews">レビュー</a><a href="#buy">購入</a></nav>
+    <a class="pill-cta" href="https://clayandkelsy.com/cart/?add-to-cart=1817" target="_top">購入 29ドル</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO — the interface in use ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="micro rise">Osc Collection のチップチューン</p>
+      <h1 class="rise">Chip&#8209;Osc</h1>
+      <p class="tagline rise">デジタル・ハイブリッド・シンセ。8ビットから不気味な音まで。</p>
+      <p class="lede rise">デジタル・ハイブリッド・シンセの生のオシレーターから作り、手描きのインターフェースに収めました。定番のチップチューンから、深くダークなシネマティック・サウンドスケープまで。無駄のない手作りのプリセット81種。</p>
+      <div class="buy-row rise"><span class="price">29ドル</span> <a class="btn" href="https://clayandkelsy.com/cart/?add-to-cart=1817" target="_top">Chip-Osc を購入</a> <a class="btn ghost" id="hearFirst" href="#hear"><i class="play-ico" aria-hidden="true"></i>まずは聴いてみる</a></div>
+      <p class="fine rise">5つすべてなら <a href="https://clayandkelsy.com/ja/osc-collection/" target="_top">Osc Collection（99ドル）</a>で。初めての方は、まず <a href="https://clayandkelsy.com/ja/dem-osc/" target="_top">DEM-Osc を無料で</a>。</p>
+      <ul class="facts rise" aria-label="3つのポイント">
+        <li><b>無料の Kontakt Player</b> で動作</li>
+        <li><b>macOS</b>・<b>Windows</b></li>
+        <li><b>プリセット81種</b>、無駄なし</li>
+      </ul>
+    </div>
+    <figure class="rig" id="rig" aria-label="音が鳴っている間に動く Chip-Osc の画面">
+      <div class="frames">
+      <img data-cycle="0" class="on" src="assets/tab-env-cut.webp" alt="メインページ：3つのオシレーター・セレクター、パン、アタックとリリース、カットオフ・スライダー" width="1100" height="904" fetchpriority="high" decoding="async">
+      <img data-cycle="1" class="" src="assets/tab-reverb-fx.webp" alt="Reverb/FX ページ：30のコンボリューション空間" width="1100" height="904" decoding="async">
+      <img data-cycle="2" class="" src="assets/tab-c-lfo.webp" alt="カットオフ LFO とモジュレーション・ホイールのコマンドセンター" width="1100" height="904" decoding="async">
+      <img data-cycle="3" class="" src="assets/tab-stepped-sequencer.webp" alt="ノートでトリガーするステップ・シーケンサー" width="1100" height="904" decoding="async">
+      <img data-cycle="4" class="" src="assets/tab-vib-misc.webp" alt="ビブラート、グライド、スロップ、スプレッド" width="1100" height="904" decoding="async">
+      <i class="glow" aria-hidden="true"></i>
+      <i class="cut" aria-hidden="true"></i>
+      </div>
+      <figcaption><span id="rigTab">Env/Cut</span>：すべてのノブを、手描きの1画面に。<span id="rigCap">サウンドをタップすると動きます。</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HEAR IT — the sounds, streaming, one tap ============ -->
+<section class="hear" id="hear">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Chip‑Osc から届く、<br>本物のサウンド。</h2>
+      <p class="sub">4つのプリセットとフルトラック。下のサウンドはすべて Chip-Osc だけで作りました。</p>
+    </div>
+    <div class="sounds reveal" role="group" aria-label="サウンド">
+      <button class="snd" data-src="assets/chip-1.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>プリセット 1</b></button>
+      <button class="snd" data-src="assets/chip-2.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>プリセット 2</b></button>
+      <button class="snd" data-src="assets/chip-3.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>プリセット 3</b></button>
+      <button class="snd" data-src="assets/chip-4.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>プリセット 4</b></button>
+      <button class="snd song" data-src="assets/song.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>Chip Girl</b><small>フルトラック（1:20）：ドラム以外の音はすべて Chip-Osc。</small></button>
+    </div>
+    <p class="hint reveal" id="hearHint">サウンドをタップ。ストリーミング再生なので、ダウンロードは不要です。</p>
+  </div>
+</section>
+
+<!-- ============ THEN YOU HEAR IT ============ -->
+<section class="then" id="then">
+  <div class="wrap narrow">
+    <p class="big rl">見た目はかわいい。でも、聴けばわかる。</p>
+    <p class="big rl">ノブはすべて手描き。その下で鳴っているのは本物のデジタル・ハイブリッド・シンセで、波形をひとつずつサンプリングし、本物の空間に通しています。</p>
+    <blockquote class="quote rl"><p>「このサウンドは本気だ…すごく気に入った。」</p><footer>Folia Soundstudio、レビューのタイトルは<em>「JOKE or a REAL DEAL?」</em>。その結論は本物。</footer></blockquote>
+  </div>
+</section>
+
+<!-- ============ INSIDE — the interface stays, the features scroll ============ -->
+<section class="inside" id="inside">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>その中身</h2>
+    </div>
+    <div class="walk">
+      <figure class="walk-phone" id="walkPhone" aria-hidden="true">
+        <img data-step="0" class="on" src="assets/tab-env-cut.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="1" class="" src="assets/tab-reverb-fx.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="2" class="" src="assets/tab-stepped-sequencer.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="3" class="" src="assets/tab-c-lfo.webp" alt="" width="1100" height="904" decoding="async">
+        <img data-step="4" class="" src="assets/tab-vib-misc.webp" alt="" width="1100" height="904" decoding="async">
+        <!-- frames sit on the control each feature is about: percentages of the interface, measured from the image -->
+        <i class="hl" data-step="0" style="--x:0.4%;--y:2.8%;--w:66%;--h:40.5%"></i>
+        <i class="hl" data-step="1" style="--x:20.4%;--y:56.8%;--w:17%;--h:6%"></i>
+        <i class="hl" data-step="2" style="--x:58.4%;--y:56.8%;--w:19%;--h:6%"></i>
+        <i class="hl" data-step="3" style="--x:38.4%;--y:56.8%;--w:18.5%;--h:6%"></i>
+        <i class="hl" data-step="4" style="--x:78.4%;--y:56.8%;--w:15.5%;--h:6%"></i>
+      </figure>
+      <ol class="walk-steps">
+        <li class="walk-step" data-step="0"><span class="fig">20</span><h3>波形を、3つ同時に</h3><p>3つのオシレーター・セレクターには、それぞれデジタル・ハイブリッド・シンセから集めた20のデジタル波形。オシレーターごとにピッチとパンも設定できます。</p></li>
+        <li class="walk-step" data-step="1"><span class="fig">30</span><h3>コンボリューション空間を内蔵</h3><p>お気に入りのアウトボード・リバーブとユーロラック・エフェクトを通したクロス・シンセシス：リバーブ15種と FX 15種で、あなたの音を畳み込みます。</p></li>
+        <li class="walk-step" data-step="2"><span class="fig">&#8635;</span><h3>ひとひねりあるステップ・シーケンサー</h3><p>ノートが来たときだけステップが進み、ノートごとに読み込む波形を切り替えて、メロディやコードに命を吹き込みます。</p></li>
+        <li class="walk-step" data-step="3"><span class="fig">&#8767;</span><h3>カットオフ LFO と、モジュレーション・ホイールのコマンドセンター</h3><p>形の豊富なフィルター専用 LFO に加えて、多くのパラメーターを一度にモジュレーション・ホイールへ割り当てられるコントロールセンター。</p></li>
+        <li class="walk-step" data-step="4"><span class="fig">&asymp;</span><h3>ビブラート、グライド、スロップ、スプレッド</h3><p>スピードとフェードイン付きの定番ビブラートに、ポリフォニック・グライド、ピッチ・スロップ、パン・スプレッド。すべてを生き生きと、人間らしく保ちます。</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEE IT MOVE (video loads only when asked) ============ -->
+<section class="see" id="see">
+  <div class="wrap narrow">
+    <div class="sec-head reveal"><h2>Chip‑Osc の動きを見る。</h2></div>
+    <button class="yt reveal" id="yt" data-id="RGn8CFdfMDE" aria-label="Chip-Osc の動画を再生">
+      <img src="https://i.ytimg.com/vi/RGn8CFdfMDE/hqdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <span class="yt-play" aria-hidden="true"></span>
+    </button>
+    <p class="hint reveal">Chip-Osc をもっと詳しく：チップチューンのリードからダークなシネマティック・パッドまで。<a href="https://www.youtube.com/watch?v=RGn8CFdfMDE" target="_blank" rel="noopener">YouTube で開く ↗</a></p>
+  </div>
+</section>
+
+<!-- ============ THE DETAILS ============ -->
+<section class="details" id="details">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>中身のすべて。</h2></div>
+    <div class="cols reveal">
+      <div><h3>主な機能</h3><ul class="ticks">
+        <li>手作りのプリセット81種、無駄なし</li>
+        <li>デジタル・ハイブリッド・シンセから20のデジタル波形</li>
+        <li>30のカスタム・インパルス・レスポンス（リバーブ15種＋ユーロラック FX 15種）</li>
+        <li>ノートでトリガーするステップ・シーケンサー</li>
+        <li>カットオフ LFO、ビブラート、ピッチ・スロップ、ポリフォニック・グライド</li>
+        <li>NKS 完全対応：Maschine と Komplete Kontrol</li></ul></div>
+      <div><h3>動作環境</h3><ul class="ticks">
+        <li>Native Access でインストール・ダウンロード</li>
+        <li>無料の Kontakt Player（6以降）、製品版 Kontakt 6・7、Komplete Kontrol、Maschine 2 で動作</li>
+        <li>macOS・Windows</li></ul>
+        <a class="btn ghost small" href="https://www.native-instruments.com/products/kontakt-player" target="_blank" rel="noopener">無料の Kontakt Player を入手 ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2><span class="ck-ph">プロデューサーに</span><span class="ck-ph">愛されて。</span></h2></div>
+    <ul class="quotes reveal two">
+      <li><span class="stars" aria-label="星5つ">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>「これらのシンセが音楽制作にもたらすクオリティ、サウンド、そして純粋な喜びは、本当に新鮮。この10年で最高の掘り出し物。」</p><footer><b>Sean Tobin</b> 購入者 · Chip-Osc</footer></li>
+      <li><span class="stars" aria-label="星5つ">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>「本物のアナログサウンド。グラフィックもデザインも一流で、プリセットは音の探求の素晴らしい出発点。間違いなく愛情のこもった作品。」</p><footer><b>CarloAlberto Villani Rigo</b> 購入者 · Osc Collection</footer></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ THE MAKERS ============ -->
+<section class="makers">
+  <div class="wrap narrow reveal">
+    <p class="cki">Chip-Osc を作っているのは、私たちふたりの小さなソフトウェア会社、<a href="https://clayandkelsy.com" target="_top">Clay and Kelsy Instruments</a> です。音楽を作り続けるために必要な楽器とツールを、自分たちで作っています。私たちの音楽は200万回以上ストリーミングされ、楽器は1万回以上ダウンロードされています。</p>
+  </div>
+</section>
+
+<!-- ============ BUY + FAQ ============ -->
+<section class="buy" id="buy">
+  <div class="wrap">
+    <div class="buy-card reveal">
+      <h2>Chip‑Osc を手に入れる。</h2>
+      <div class="buy-row"><span class="price">29ドル</span><a class="btn" href="https://clayandkelsy.com/cart/?add-to-cart=1817" target="_top">Chip-Osc を購入</a></div>
+      <p class="fine">5つすべてなら <a href="https://clayandkelsy.com/ja/osc-collection/" target="_top">Osc Collection（99ドル）</a>で、46ドルお得。初めての方へ：<a href="https://clayandkelsy.com/ja/dem-osc/" target="_top">DEM-Osc は無料です。</a></p>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Kontakt を持っていないと使えませんか？<span class="faq-x" aria-hidden="true"></span></summary><p>いいえ。Chip-Osc は無料の Kontakt Player で動きます。Native Access でインストールしてください。</p></details>
+      <details><summary>対応 OS は？<span class="faq-x" aria-hidden="true"></span></summary><p>macOS と Windows に対応。Maschine と Komplete Kontrol 向けに NKS に完全対応した Kontakt 音源です。</p></details>
+      <details><summary>中身は？<span class="faq-x" aria-hidden="true"></span></summary><p>20のデジタル波形を持つ3つのオシレーター、30のコンボリューション空間、ノートでトリガーするステップ・シーケンサー、そして手作りのプリセット81種。8ビットのチップチューンからダークなシネマティックまで。</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <b class="foot-brand">Clay &amp; Kelsy Instruments</b>
+    <p>本物のオシレーター、本物の個性。</p>
+    <nav><a href="https://clayandkelsy.com" target="_top">clayandkelsy.com</a><a href="https://clayandkelsy.com/ja/osc-collection/" target="_top">Osc Collection</a></nav>
+  </div>
+</footer>
+
+<script src="/demosc/vendor/lenis-1-dist-lenis.min.js" defer></script>
+<script type="module" src="app.js?v=2"></script>
+<script src="../bf.js?v=2" defer></script>
+</body>
+</html>

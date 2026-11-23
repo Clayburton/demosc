@@ -1,0 +1,182 @@
+<!doctype html>
+<!-- ======================================================================
+  DEM-OSC — LIVE at clayandkelsy.com/dem-osc/ (served from github.com/Clayburton/demosc, folder dem-osc/; the older page
+  stays at the repo root as the archive). The free-synth ad landing page, rebuilt mobile-first on the Hook / Pro-Osc system. Read HANDOFF.md first. The download flow is UNCHANGED: every "Get DEM-Osc" button goes
+  to the WordPress checkout for the free product in the TOP window: #6322 is the Mac plugin, #2042 the Kontakt version (Mac and Windows; Windows visitors are offered it first, app.js "two versions") (target=_top — this page runs
+  inside an iframe on clayandkelsy.com/dem-osc/; the checkout must be first-party so the cart works).
+  Copy is verbatim from the live page and the WordPress page; the few new lines are listed in HANDOFF.md.
+  Sections are marked ============ NAME ============ · styles.css: tokens first, one block per section
+  · app.js: the shared engine + the player + the cassette + the mobile bar.
+  ====================================================================== -->
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DEM-Osc：免费的 Mac 合成器（VST3 和 AU）</title>
+<meta name="description" content="免费下载 DEM-Osc！五个振荡器采样自真实的模拟和数字硬件，四个卷积空间，25 个预置音色。macOS 版免费。">
+<meta name="theme-color" content="#f0e8d7">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/demosc/fonts.css">
+<link rel="stylesheet" href="styles.css?v=6">
+<style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="DEM-Osc，回到顶部"><b>DEM-Osc</b><span class="tag">免费，出自 Osc Collection</span></a>
+    <nav class="nav-links" aria-label="页面导航"><a href="#hear">试听</a><a href="#inside">功能</a><a href="#versions">Mac 还是 Windows</a><a href="#faq">常见问题</a></nav>
+    <a class="pill-cta for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>免费获取</a>
+    <a class="pill-cta for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>免费获取</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO — the ask, then the tape ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 class="rise">DEM&#8209;Osc</h1>
+      <p class="tagline rise">她是免费的。现在，她只管<em>演奏。</em></p>
+      <p class="lede rise">五个带着磁带温度的振荡器、四个卷积空间，还有二十五个一出来就像成品的预置音色。为你的 DAW 打造的原生合成器。</p>
+      <div class="get rise" id="get"><a class="btn big for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>免费获取 DEM‑Osc</a> <a class="btn big for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>免费获取 Kontakt 版 DEM‑Osc</a> <a class="btn ghost" id="hearFirst" href="#hear"><i class="play-ico" aria-hidden="true"></i>先听一听</a></div>
+      <p class="fine rise for-mac">即刻下载 · <b>Mac</b> · VST3 · AU。<a href="#versions">用 Windows？获取 Kontakt 版</a></p>
+      <p class="fine rise for-win">在免费的 Kontakt Player 中运行，<b>Mac 和 Windows</b>。<a href="#versions">用 Mac？获取插件版</a></p>
+      <p class="phone-note rise" id="phoneNote">在用手机？点同一个按钮就行。免费结账后，我们会把下载链接发到你的邮箱，等你回到电脑前，它就在那里等你。</p>
+      <ul class="facts rise" aria-label="三个要点">
+        <li><b>免费</b>，没有时间限制</li>
+        <li><b>免费，永久归你</b>，没有倒计时</li>
+        <li><b>25 个预置音色</b>，一出来就像成品</li>
+      </ul>
+    </div>
+    <figure class="tape" id="tape" aria-label="DEM-Osc 磁带。点它听一个声音。">
+      <button class="tape-btn" id="tapeBtn" aria-label="点磁带，听下一个声音">
+        <img src="assets/cassette.webp" alt="手绘磁带，标签上写着 CKI Demo" width="1200" height="900" fetchpriority="high" decoding="async">
+      </button>
+      <figcaption><span class="dot" aria-hidden="true"></span><span id="tapeCap">点一下听听她</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ HEAR IT — six sounds, one tap each ============ -->
+<section class="hear" id="hear">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>点磁带</h2>
+      <p class="sub">六个声音，直接出自 DEM-Osc：次低音贝斯、玻璃质感的铺底、电钢琴、会唱歌的主音、丰满的弦乐、明亮的铜管。点磁带轮流播放，或者选一个：</p>
+    </div>
+    <div class="sounds reveal" role="group" aria-label="声音">
+      <button class="snd" data-src="assets/pad.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>铺底</b><small>Winter Pad</small></button>
+      <button class="snd" data-src="assets/keys.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>键盘</b><small>Dem EP</small></button>
+      <button class="snd" data-src="assets/bass.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>贝斯</b><small>Big Stack</small></button>
+      <button class="snd" data-src="assets/lead.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>主音</b><small>Tube Army</small></button>
+      <button class="snd" data-src="assets/strings.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>弦乐</b><small>Dem Ensemble</small></button>
+      <button class="snd" data-src="assets/brass.mp3" aria-pressed="false"><span class="pb" aria-hidden="true"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>铜管</b><small>1984</small></button>
+    </div>
+    <p class="hint reveal" id="hearHint">点一个声音即可在线播放，无需下载。</p>
+  </div>
+</section>
+
+<!-- ============ INSIDE — what's under the tape ============ -->
+<section class="inside" id="inside">
+  <div class="wrap inside-grid">
+    <div class="reveal">
+      <h2><span class="ck-ph">五个复古振荡器，</span><br><span class="ck-ph">尽在这款</span><span class="ck-ph">免费插件里。</span></h2>
+      <p class="rl-plain">DEM-Osc 从我们 Osc Collection 的每款合成器中各取一个振荡器（锯齿波、三角波、方波、同步和芯片音色），每次叠三个，再通过四个手工打造的卷积空间。给它们失谐，让每个声部自由漂移，它们就会融成温暖而鲜活的声音。</p>
+      <ul class="figs" aria-label="数字一览">
+        <li><b>5</b><span>振荡器</span></li><li><b>5</b><span>波形</span></li><li><b>4</b><span>混响空间</span></li><li><b>25</b><span>预置音色</span></li>
+      </ul>
+    </div>
+    <figure class="shot reveal">
+      <img src="assets/interface.webp" alt="DEM-Osc 插件界面，每个旋钮都是手绘的" width="1264" height="1056" loading="lazy" decoding="async">
+      <figcaption>所有旋钮，都在一个手绘界面上</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PLAYED, NOT CONFIGURED ============ -->
+<section class="played">
+  <div class="wrap narrow reveal">
+    <h2>这是乐器，不是设置页面。</h2>
+    <p class="sub">转一个旋钮，就能听到它在变。在音符之间滑音，加一点颤音，推推调制轮，让每个声部稍稍跑调。它是拿来演奏的，不是拿来配置的。</p>
+    <ul class="chips" aria-label="功能一览"><li>按键滑音</li><li>颤音</li><li>调制轮路由</li><li>每声部漂移</li><li>卷积混响</li><li>卷积效果</li></ul>
+  </div>
+</section>
+
+<!-- ============ TWO VERSIONS — side A, side B ============ -->
+<section class="versions" id="versions">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>两种玩法</h2>
+      <p class="sub">插件版是最新的 DEM-Osc，为 Mac 打造。Kontakt 版是最初的版本，也能在 Windows 上运行，用的是和 Osc Collection 其他乐器一样的免费播放器。</p>
+    </div>
+    <div class="ways reveal">
+      <article class="way way--p">
+        <p class="way-side"><span class="reels" aria-hidden="true"><i></i><i></i></span>A 面<span class="yours">你的电脑</span></p>
+        <h3>插件版</h3>
+        <p class="way-what">VST3 和 AU · Mac</p>
+        <ul>
+          <li>最新版本</li>
+          <li>下载，拖进插件文件夹，开弹</li>
+          <li>无需额外软件，无需账号</li>
+        </ul>
+        <a class="btn" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>免费获取插件版</a>
+      </article>
+      <article class="way way--k">
+        <p class="way-side"><span class="reels" aria-hidden="true"><i></i><i></i></span>B 面<span class="yours">你的电脑</span></p>
+        <h3>Kontakt 版</h3>
+        <p class="way-what">Kontakt Player · Mac 和 Windows</p>
+        <ul>
+          <li>最初的版本</li>
+          <li>在免费的 Kontakt Player 中运行</li>
+          <li>用我们通过邮件发给你的序列号，在 Native Access 中添加</li>
+        </ul>
+        <a class="btn ghost" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>免费获取 Kontakt 版</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faqs" id="faq">
+  <div class="wrap narrow">
+    <div class="sec-head reveal"><h2>下载之前。</h2></div>
+    <div class="faq reveal">
+      <details open><summary>DEM-Osc 真的免费吗？<span class="faq-x" aria-hidden="true"></span></summary><p>是的。它永久归你，没有试用期，也没有倒计时。少数更深入的效果留给付费的 Osc Collection，而 DEM-Osc 是免费的入门之选。</p></details>
+      <details><summary>支持哪些格式和操作系统？<span class="faq-x" aria-hidden="true"></span></summary><p>有两个版本，都免费。插件版是 macOS 上的 VST3 和 AU。Kontakt 版在 Mac 和 Windows 上的免费 Kontakt Player 中运行，用我们通过邮件发给你的序列号在 Native Access 中添加即可。</p></details>
+      <details><summary>里面有什么？<span class="faq-x" aria-hidden="true"></span></summary><p>五个采样自真实硬件的复古振荡器、四个卷积混响空间、25 个手工制作的预置音色，还有滑音、颤音和调制轮路由。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GET IT ============ -->
+<section class="closing" id="getit">
+  <div class="wrap narrow reveal">
+    <h2>下载它，载入预置音色，整个下午就这么过去了。</h2>
+    <p class="sub">等你想要另外四个振荡器时，你知道去哪儿找我们。</p>
+    <div class="get"><a class="btn big for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart>免费获取 DEM‑Osc</a><a class="btn big for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart>免费获取 Kontakt 版 DEM‑Osc</a></div>
+    <p class="fine for-mac"><b>Mac 插件版</b>：会加入购物车，只需填写邮箱并结账。<a href="#versions">用 Windows？获取 Kontakt 版</a>，或者看看<a href="https://clayandkelsy.com/zh/osc-collection/">完整的 Osc Collection</a>。</p>
+    <p class="fine for-win"><b>Kontakt 版</b>，Mac 和 Windows：会加入购物车，只需填写邮箱并结账。<a href="#versions">用 Mac？获取插件版</a>，或者看看<a href="https://clayandkelsy.com/zh/osc-collection/">完整的 Osc Collection</a>。</p>
+    <p class="cki">DEM-Osc 由 <a href="https://clayandkelsy.com">Clay and Kelsy Instruments</a> 出品，这是我们可爱的小软件公司。我们制作自己持续做音乐所需要的乐器和工具。我们的音乐已被播放超过 200 万次，我们的乐器已被下载超过 1 万次。</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <b class="foot-brand">Clay &amp; Kelsy Instruments</b>
+    <p>来自洛杉矶的手工合成器和采样乐器</p>
+    <nav><a href="https://clayandkelsy.com">clayandkelsy.com</a><a href="https://clayandkelsy.com/zh/osc-collection/">Osc Collection</a></nav>
+  </div>
+</footer>
+
+<!-- the thumb-zone bar: phones only, appears once the hero's button has scrolled away -->
+<div class="mob-bar" id="mobBar" aria-hidden="true"><span class="mob-txt for-mac"><b>DEM-Osc</b> 免费 · Mac · VST3 · AU</span> <span class="mob-txt for-win"><b>DEM-Osc</b> 免费 · Kontakt 版</span> <a class="btn for-mac" href="https://clayandkelsy.com/checkout/?add-to-cart=6322&amp;quantity=1" target="_top" data-cart tabindex="-1">免费获取</a> <a class="btn for-win" href="https://clayandkelsy.com/checkout/?add-to-cart=2042&amp;quantity=1" target="_top" data-cart tabindex="-1">免费获取</a></div>
+
+<script src="/demosc/vendor/lenis-1-dist-lenis.min.js" defer></script>
+<script type="module" src="app.js?v=5"></script>
+</body>
+</html>

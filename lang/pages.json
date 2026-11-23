@@ -1,0 +1,383 @@
+[
+ {
+  "en": 306,
+  "type": "pages",
+  "slug": "es",
+  "langs": [
+   "es"
+  ],
+  "parent0": true,
+  "head": {
+   "title": "Clay and Kelsy – Music, Instruments & Design",
+   "description": "Clay and Kelsy are a Los Angeles duo — interactive album experiences, instruments, hand-painted 3D-printed art relics. Music, Instruments & Design."
+  }
+ },
+ {
+  "en": 6922,
+  "type": "pages",
+  "slug": "plugins",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Synths, Free Plugins & Apps | Clay and Kelsy",
+   "description": "Every instrument and effect we make, in one place. Press play on any of them."
+  }
+ },
+ {
+  "en": 720,
+  "type": "pages",
+  "slug": "pro-osc",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Pro-Osc – Analog Synth for Kontakt (83 Presets)",
+   "description": "Pro-Osc is a vintage-era analog synth sampled into a modern Kontakt instrument. 83 handcrafted presets, 30 convolution spaces, full NKS. $29."
+  }
+ },
+ {
+  "en": 1606,
+  "type": "pages",
+  "slug": "moo-osc",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Moo-Osc - Classic Analog Synth for Kontakt (84 presets)",
+   "description": "Moo-Osc is built from three classic analog synths — heavy, creamy basses and timeless leads. 84 handcrafted presets for Kontakt, full NKS. $29."
+  }
+ },
+ {
+  "en": 1611,
+  "type": "pages",
+  "slug": "digi-osc",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Digi-Osc – Digital Synth for Kontakt (81 Presets)",
+   "description": "Digi-Osc is built from three digital synths and eurorack modules — bright, beautiful, digital. 81 handcrafted presets for Kontakt, full NKS. $29."
+  }
+ },
+ {
+  "en": 1622,
+  "type": "pages",
+  "slug": "jx-osc",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "JX-Osc - 80's Analog Synth for Kontakt (81 Presets)",
+   "description": "JX-Osc is an 80s-era analog synth for Kontakt — lush strings, brass and pads with signature chorus shimmer. 81 handcrafted presets, full NKS. $29."
+  }
+ },
+ {
+  "en": 1624,
+  "type": "pages",
+  "slug": "chip-osc",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Chip-Osc - Chiptune & Digital Synth for Kontakt",
+   "description": "Chip-Osc is a digital hybrid synth for Kontakt, from 8-bit chiptune to dark cinematic. 81 handcrafted presets, 20 wave shapes, full NKS. $29."
+  }
+ },
+ {
+  "en": 2021,
+  "type": "pages",
+  "slug": "dem-osc",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Dem-Osc - Free Synth for Mac (VST3/AU)",
+   "description": "Download Dem-Osc for free! Five oscillators sampled from real analog and digital hardware, four convolution spaces, 25 presets. Free for MacOS."
+  }
+ },
+ {
+  "en": 658,
+  "type": "pages",
+  "slug": "freethings",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Free Things – Free Synths & Kontakt Instruments",
+   "description": "Instruments Clay and Kelsy made and gave away — DEM-Osc plus free Kontakt samples (gr808 kick, aGong, and more), as featured on Pianobook."
+  }
+ },
+ {
+  "en": 106,
+  "type": "pages",
+  "slug": "aboutus",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "About – Clay and Kelsy",
+   "description": "Meet Clay and Kelsy, the Los Angeles duo behind the music, the software instruments, the Songwriting app, and the designs."
+  }
+ },
+ {
+  "en": 110,
+  "type": "pages",
+  "slug": "contact-us",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Contact Us - Clay and Kelsy",
+   "description": "Get in touch with Clay and Kelsy about our synths, music, or hand-painted 3D-printed designs — or just to say hello. Subscribe for new releases and drops."
+  }
+ },
+ {
+  "en": 1334,
+  "type": "pages",
+  "slug": "install-guide-faq",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Install Guide & FAQ - Clay and Kelsy",
+   "description": "[ install guide ] Getting set up. There are two ways our instruments install, depending on which one you have. Find yours below. The free synth takes about a minute, the Kontakt instruments a few more. the quick one DEM-Osc Our free synth installs itself. Download it, drag it into your plugins folder, done. No"
+  }
+ },
+ {
+  "en": 4429,
+  "type": "pages",
+  "slug": "press",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Press & Features – Clay and Kelsy",
+   "description": "Interviews and features on artists Clay and Kelsy — press coverage of the queer duo, their music, and the small instrument company they run in Los Angeles."
+  }
+ },
+ {
+  "en": 227,
+  "type": "pages",
+  "slug": "music",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "Clay and Kelsy / Music",
+   "description": "Clay and Kelsy, the synth-pop duo heard on Apple TV's The Morning Show — explore the interactive \"I am\" album and \"Retrospective,\" a point-and-click music world."
+  }
+ },
+ {
+  "en": 6307,
+  "type": "pages",
+  "slug": "i-am",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "head": {
+   "title": "I am – An Interactive Album by Clay and Kelsy",
+   "description": "\"I am\" is a 5-song EP by Clay and Kelsy reimagined as an interactive experience — click each petal to play through the songs."
+  }
+ },
+ {
+  "en": 7231,
+  "type": "posts",
+  "slug": "how-to-write-a-song-for-someone",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "How to Write a Song for Someone (Even If You Don't Play) - Clay and Kelsy",
+   "description": "How to write a song for someone you love, even if you don't play an instrument: one moment, your own details, recorded on your phone."
+  }
+ },
+ {
+  "en": 7165,
+  "type": "posts",
+  "slug": "gifts-for-songwriters",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "Gifts for Songwriters 2026: Books, Headphones, Guitar and Desk Gear - Clay and Kelsy",
+   "description": "Gifts for songwriters: Songwriting for iPhone and iPad, lyric books, headphones, guitar gear and pedals, and desk gear."
+  }
+ },
+ {
+  "en": 7145,
+  "type": "posts",
+  "slug": "best-songwriting-apps",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "The Best Songwriting Apps of 2026 - Clay and Kelsy",
+   "description": "The songwriting apps we actually use, from catching an idea to finishing a demo, with honest notes on each. One is ours, and it’s marked."
+  },
+  "pre": {
+   "ja": [
+    [
+     "(y === 1 ? ' does this' : ' do this') + (p ? ', ' + more[p] + ' partly.' : '.')",
+     "'が対応' + (p ? '、' + more[p] + 'が一部対応' : '') + '。'"
+    ]
+   ],
+   "zh": [
+    [
+     "(y === 1 ? ' does this' : ' do this') + (p ? ', ' + more[p] + ' partly.' : '.')",
+     "' 能做到' + (p ? '，' + more[p] + '部分做到' : '') + '。'"
+    ]
+   ],
+   "es": [
+    [
+     "(y === 1 ? ' does this' : ' do this') + (p ? ', ' + more[p] + ' partly.' : '.')",
+     "(y === 1 ? ' lo hace' : ' lo hacen') + (p ? ', ' + more[p] + ' en parte.' : '.')"
+    ]
+   ]
+  }
+ },
+ {
+  "en": 7122,
+  "type": "posts",
+  "slug": "songwriting-iphone-duo",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "Songwriting on iPhone Duo - Clay and Kelsy",
+   "description": "Songwriting by Clay and Kelsy on iPhone Duo: open it flat and your recording and layers sit beside your words. Write and record without much scrolling. Free to start."
+  }
+ },
+ {
+  "en": 7054,
+  "type": "posts",
+  "slug": "magdalena-bay-watching-tv-synth-solo",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "How the \"Watching T.V.\" Synth Solo Was Made",
+   "description": "The synth solo in Magdalena Bay's \"Watching T.V.\" sounds like a spaceship taking off. We took it apart and rebuilt it with Digi-Osc, one of our own synths."
+  }
+ },
+ {
+  "en": 7040,
+  "type": "posts",
+  "slug": "capture-a-song-idea",
+  "langs": [
+   "ja",
+   "zh",
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "How to Capture a Song Idea Before You Forget It",
+   "description": "The rule is simple: capture first, judge later. Here’s how to actually do that."
+  }
+ },
+ {
+  "en": 6867,
+  "type": "posts",
+  "slug": "medusa-sicilian-flag",
+  "langs": [
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "Why Is Medusa on the Sicilian Flag? (And why nobody took her down) - Clay and Kelsy",
+   "description": "She was displayed to stop something, and nobody ever took her down. The head on Sicily's flag is a gorgoneion, a face fixed at doorways for 2,500 years."
+  }
+ },
+ {
+  "en": 6721,
+  "type": "posts",
+  "slug": "minerva-in-the-odyssey",
+  "langs": [
+   "es"
+  ],
+  "template": "template-page-builder-no-sidebar.php",
+  "head": {
+   "title": "Athena's Roman Name Is Minerva (And Why Your Odyssey Uses It)",
+   "description": "Minerva is the Roman name for Athena, the goddess who guides and protects Odysseus throughout Homer's Odyssey. Here's her role, and why some translations call her Minerva."
+  }
+ },
+ {
+  "en": 6974,
+  "type": "pages",
+  "slug": "hot-mess",
+  "langs": [
+   "es"
+  ],
+  "head": {
+   "title": "Hot Mess - Clay and Kelsy",
+   "description": "Warm saturation to full chaotic breakup. Twenty equations shape your sound, and the display draws them live."
+  }
+ },
+ {
+  "en": 1826,
+  "type": "pages",
+  "slug": "osc-collection",
+  "langs": [
+   "es"
+  ],
+  "head": {
+   "title": "Clay and Kelsy Instruments - Osc Collection",
+   "description": "The Osc Collection is one of a kind. Featuring 5 powerful VST synthesizers and a unique demo version by Clay and Kelsy Instruments."
+  }
+ },
+ {
+  "en": 6891,
+  "type": "pages",
+  "slug": "songwriting",
+  "langs": [
+   "es"
+  ],
+  "head": {
+   "title": "Songwriting by Clay and Kelsy",
+   "description": "Songwriting by Clay and Kelsy is the app for getting a song idea down before it’s gone. Loop it, layer it, write the words and export. On iPhone, iPad and Apple Watch."
+  }
+ }
+]
