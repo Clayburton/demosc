@@ -69,7 +69,7 @@ export async function run(cfg) {
   const tpl = cfg.template || src.j.template || 'template-page-builder-no-sidebar.php';
   const reps = replacements(cfg.lang, cfg).concat(cfg.extraReplace || []);
   const r = translate(raw, d, { replace: reps });
-  const cjk = cfg.lang === 'ja' || cfg.lang === 'zh' ? '<!-- wp:html --><style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}#ck-plugins .ckp-h1{white-space:nowrap;font-size:clamp(44px,9vw,104px)}</style><!-- /wp:html -->\n' : '';
+  const cjk = cfg.lang === 'ja' || cfg.lang === 'zh' ? '<!-- wp:html --><style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}#ck-plugins .ckp-h1{white-space:nowrap;font-size:clamp(44px,9vw,104px)}.livingIntro .h{font-size:clamp(34px,9vw,52px);line-height:1.25;max-width:none}</style><!-- /wp:html -->\n' : '';
   const content = MARK(cfg.lang, cfg.en) + '\n' + cjk + r.out;
   const t = cfg.head || {};
   const title = t.title ? (d[norm(t.title)] || t.title) : (d[norm(src.j.title.raw)] || src.j.title.raw);
@@ -98,14 +98,14 @@ export async function run(cfg) {
 
 /* Build every page of the manifest for one language, one after another (results gather in window.__R).
    parents: {ja: 7489, zh: 7474, es: <id>}. only: optional list of English ids. */
-export async function runAll(lang, parents, only, v) {
+export async function runAll(lang, parents, only, v, adopt) {
   const m = await fetch(BASE + 'pages.json?v=' + v, { cache: 'no-store' }).then(r => r.json());
   window.__R = window.__R || {}; const out = window.__R[lang] = [];
   for (const e of m) {
     if (!e.langs.includes(lang) || (only && !only.includes(e.en))) continue;
     try {
-      out.push(await run({ en: e.en, type: e.type, lang, slug: e.slug || e.path, parent: e.parent0 ? 0 : parents[lang],
-        template: e.template, head: e.head, pre: e.pre, v }));
+      out.push(await run({ en: e.en, type: e.type, lang, slug: (e.slugs && e.slugs[lang]) || e.slug, parent: e.parent0 ? 0 : parents[lang],
+        template: e.template, head: e.head, pre: e.pre, extraReplace: (e.extra || {})[lang] || [], adopt: !!adopt, v }));
     } catch (err) { out.push({ en: e.en, error: String(err).slice(0, 120) }); }
   }
   out.push({ done: true });

@@ -4,12 +4,19 @@
   "type": "pages",
   "slug": "es",
   "langs": [
-   "es"
+   "es",
+   "ja",
+   "zh"
   ],
   "parent0": true,
   "head": {
    "title": "Clay and Kelsy – Music, Instruments & Design",
    "description": "Clay and Kelsy are a Los Angeles duo — interactive album experiences, instruments, hand-painted 3D-printed art relics. Music, Instruments & Design."
+  },
+  "slugs": {
+   "es": "es",
+   "ja": "ja",
+   "zh": "zh"
   }
  },
  {
@@ -349,7 +356,9 @@
   "type": "pages",
   "slug": "hot-mess",
   "langs": [
-   "es"
+   "es",
+   "ja",
+   "zh"
   ],
   "head": {
    "title": "Hot Mess - Clay and Kelsy",
@@ -361,7 +370,9 @@
   "type": "pages",
   "slug": "osc-collection",
   "langs": [
-   "es"
+   "es",
+   "ja",
+   "zh"
   ],
   "head": {
    "title": "Clay and Kelsy Instruments - Osc Collection",
@@ -373,11 +384,49 @@
   "type": "pages",
   "slug": "songwriting",
   "langs": [
-   "es"
+   "es",
+   "ja",
+   "zh"
   ],
   "head": {
    "title": "Songwriting by Clay and Kelsy",
    "description": "Songwriting by Clay and Kelsy is the app for getting a song idea down before it’s gone. Loop it, layer it, write the words and export. On iPhone, iPad and Apple Watch."
+  },
+  "extra": {
+   "ja": [
+    [
+     "https://songwriting.clayandkelsy.com/\"",
+     "https://songwriting.clayandkelsy.com/ja.html\""
+    ],
+    [
+     "ORIGIN + \"/?v=\"",
+     "ORIGIN + \"/ja.html?v=\""
+    ],
+    [
+     "ct=site",
+     "ct=ja-page"
+    ]
+   ],
+   "zh": [
+    [
+     "https://songwriting.clayandkelsy.com/\"",
+     "https://songwriting.clayandkelsy.com/zh.html\""
+    ],
+    [
+     "ORIGIN + \"/?v=\"",
+     "ORIGIN + \"/zh.html?v=\""
+    ],
+    [
+     "ct=site",
+     "ct=zh-page"
+    ]
+   ],
+   "es": [
+    [
+     "ct=site",
+     "ct=es-page"
+    ]
+   ]
   }
  }
 ]

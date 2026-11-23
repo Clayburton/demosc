@@ -26,7 +26,10 @@ export function norm(s) {
   return decode(s).replace(/[\u2018\u2019\u201B\u2032]/g, "'").replace(/[\u201C\u201D\u2033]/g, '"').replace(/[\u2013\u2014\u2212]/g, '-')
     .replace(/\u2026/g, '...').replace(/[\u00A0\u2009\u202F]/g, ' ').replace(/\s+/g, ' ').trim();
 }
-const letters = s => /[A-Za-z\u00C0-\u024F]/.test(s);
+// Words are found by their Latin letters; units(html, {anyScript:true}) also counts Japanese, Chinese and Korean text
+// (used to line a translated page up against its English original).
+let ANY = false;
+const letters = s => (ANY ? /[A-Za-z\u00C0-\u024F\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af\uff10-\uff5a]/ : /[A-Za-z\u00C0-\u024F]/).test(s);
 
 export function parse(html) {
   const root = { tag: '#root', start: 0, cs: 0, ce: html.length, end: html.length, children: [], parent: null, attrStr: '' };
@@ -92,7 +95,7 @@ function toPlaceholders(html, frag) {
   });
   return { text, tags };
 }
-function fromPlaceholders(tr, tags) {
+function fromPlaceholders(tr, tags, allowDrop) {
   const used = new Set(); let ok = true; const closers = {};
   // closing tag names come from the opening tag at that number
   const out = tr.replace(/<(\/?)(\d+)(\/?)>/g, (m, close, num, self) => {
@@ -101,7 +104,7 @@ function fromPlaceholders(tr, tags) {
     if (close) { const nm = (t.match(/^<([a-zA-Z][\w:-]*)/) || [])[1]; return '</' + nm + '>'; }
     used.add(i); return t;
   });
-  if (used.size !== tags.length) ok = false;
+  if (used.size !== tags.length && !allowDrop) ok = false;
   return ok ? out : null;
 }
 
@@ -149,6 +152,10 @@ function jsToKey(raw, q) {
 /* units(html, opts) -> [{kind, key, s, e, ...}] in document order.
    opts.region: a class name; only words inside the first element with that class (e.g. 'entry-content'). */
 export function units(html, opts = {}) {
+  ANY = !!opts.anyScript;
+  try { return unitsInner(html, opts); } finally { ANY = false; }
+}
+function unitsInner(html, opts) {
   const root = parse(html); const out = [];
   let top = root;
   if (opts.region) {
@@ -249,7 +256,9 @@ export function translate(html, dict, opts = {}) {
         const tv = dict[norm(v)]; if (typeof tv !== 'string' || tv === norm(v)) return m;
         const qc = v1 !== undefined ? '"' : "'"; return sp + name + '=' + qc + escAttr(tv, qc) + qc;
       }));
-      rep = fromPlaceholders(tr, tags);
+      // A translation may leave out a link on purpose (the Chinese pages drop the design links): it starts with <!--drop-->.
+      const drop = tr.startsWith('<!--drop-->');
+      rep = drop ? fromPlaceholders(tr.slice(11), tags, true) : fromPlaceholders(tr, tags);
       if (rep === null) { bad.push(u.key); continue; }
     } else if (u.kind === 'text') rep = tr.replace(/&(?![a-z#0-9]+;)/gi, '&amp;').replace(/<(?!\/span>|span class="ck-ph">)/g, '&lt;');
     else if (u.kind === 'attr') rep = escAttr(tr, u.quote || '"');
