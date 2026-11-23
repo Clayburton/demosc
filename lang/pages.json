@@ -435,6 +435,36 @@
      "ct=es-page"
     ]
    ]
+  },
+  "pre": {
+   "ja": [
+    [
+     ",\n    {\n     \"@type\": \"Offer\",\n     \"name\": \"Songwriting Unlimited, monthly\",\n     \"price\": \"7.99\",\n     \"priceCurrency\": \"USD\"\n    }",
+     ""
+    ],
+    [
+     ",\n    {\n     \"@type\": \"Offer\",\n     \"name\": \"Songwriting Unlimited, yearly\",\n     \"price\": \"29.99\",\n     \"priceCurrency\": \"USD\"\n    }",
+     ""
+    ],
+    [
+     ",\n    {\n     \"@type\": \"Offer\",\n     \"name\": \"Songwriting Unlimited, lifetime\",\n     \"price\": \"79.99\",\n     \"priceCurrency\": \"USD\"\n    }",
+     ""
+    ]
+   ],
+   "zh": [
+    [
+     ",\n    {\n     \"@type\": \"Offer\",\n     \"name\": \"Songwriting Unlimited, monthly\",\n     \"price\": \"7.99\",\n     \"priceCurrency\": \"USD\"\n    }",
+     ""
+    ],
+    [
+     ",\n    {\n     \"@type\": \"Offer\",\n     \"name\": \"Songwriting Unlimited, yearly\",\n     \"price\": \"29.99\",\n     \"priceCurrency\": \"USD\"\n    }",
+     ""
+    ],
+    [
+     ",\n    {\n     \"@type\": \"Offer\",\n     \"name\": \"Songwriting Unlimited, lifetime\",\n     \"price\": \"79.99\",\n     \"priceCurrency\": \"USD\"\n    }",
+     ""
+    ]
+   ]
   }
  }
 ]
