@@ -51,6 +51,8 @@ export function replacements(lang, opts = {}) {
     }
   }
   if (!opts.noFrames) for (const g of GH) for (const end of ['"', "'"]) out.push(['https://clayburton.github.io/' + g + end, 'https://clayburton.github.io/' + g + lang + '.html' + end]);
+  // Dates a page script writes (the journal rail) come out in the page's language (Japanese audit, 2026-11-23).
+  out.push(["toLocaleDateString('en-US'", "toLocaleDateString('" + { ja: 'ja-JP', zh: 'zh-CN', es: 'es-MX' }[lang] + "'"]);
   if (lang === 'ja') out.push(['https://apps.apple.com/app/', 'https://apps.apple.com/jp/app/']);
   if (lang === 'zh') out.push(['https://apps.apple.com/app/', 'https://apps.apple.com/cn/app/']);
   return out;
