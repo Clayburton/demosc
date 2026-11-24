@@ -74,8 +74,11 @@ export async function run(cfg) {
   const cjk = cfg.lang === 'ja' || cfg.lang === 'zh' ? '<!-- wp:html --><style id="ck-cjk-lines">.ck-ph{white-space:nowrap;display:inline-block}html[lang] #ck-plugins .ckp-h1{white-space:nowrap;font-size:clamp(44px,7.4vw,104px)}html[lang] .livingIntro .h{font-size:clamp(34px,9vw,52px);line-height:1.25;max-width:none}</style><!-- /wp:html -->\n' : '';
   const content = MARK(cfg.lang, cfg.en) + '\n' + cjk + r.out;
   const t = cfg.head || {};
-  const title = t.title ? (d[norm(t.title)] || t.title) : (d[norm(src.j.title.raw)] || src.j.title.raw);
-  const desc = t.description ? (d[norm(t.description)] || null) : null;
+  // A search title or description may be translated under 'title|<English>' / 'desc|<English>', so a page whose title is
+  // also a heading somewhere ('Songwriting by Clay and Kelsy') keeps the plain words in the heading (Sage, 2026-11-23).
+  const T = x => d['title|' + norm(x)] || d[norm(x)] || x;
+  const title = t.title ? T(t.title) : T(src.j.title.raw);
+  const desc = t.description ? (d['desc|' + norm(t.description)] || d[norm(t.description)] || null) : null;
   const pageTitle = title.replace(/\s*[|｜]\s*Clay and Kelsy\s*$/, '');
   const result = { lang: cfg.lang, en: cfg.en, slug: cfg.slug, preMissing, applied: r.applied, missing: r.missing.length, bad: r.bad.length, missingKeys: r.missing.slice(0, 8).map(k => k.slice(0, 70)), badKeys: r.bad.slice(0, 5).map(k => k.slice(0, 70)) };
   if (cfg.dry) return result;
