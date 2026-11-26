@@ -198,16 +198,71 @@ document.querySelectorAll("a[data-cart]").forEach(a => a.addEventListener("click
   try { if (IS_EMBEDDED) parent.postMessage({ hook: "event", name: "free_synth_click" }, "*"); } catch (_) {}
 }));
 
-/* ---------- two versions: Windows visitors are offered the Kontakt version first (#2042, Mac and Windows);
-   everyone else gets the Mac plugin (#6322) first. The card that matches this computer is marked.
+/* ---------- two versions, and a switch for which computer it is for (Wren, 2026-11-26; Clay: "make it more obvious
+   which operating system the button's downloading it for"). Windows computers had been taking the Mac-only plugin
+   and coming back for the Kontakt version (14 of 34 free orders, Aug to Nov 2026). We guess from the browser
+   (Windows gets the Kontakt version #2042, everything else the Mac plugin #6322), and a Mac / Windows switch by the
+   main button, and above the two cards, lets anyone change it; the choice is remembered. On Windows the plugin card
+   keeps its facts but loses its button, so a Windows computer is never offered the Mac-only download. The switch's
+   label is the page's own "Your computer" in each language, so no copy needs a new translation.
    An iPad asking for the desktop site says "Macintosh", so a touch screen is never called a Mac. ---------- */
 (() => {
   const uad = navigator.userAgentData, plat = (uad && uad.platform) || navigator.platform || "", ua = navigator.userAgent || "";
-  const win = /^win/i.test(plat) || /Windows NT/.test(ua);
-  const mac = !win && !(navigator.maxTouchPoints > 1) && (/^mac/i.test(plat) || /Macintosh/.test(ua));
-  if (win) document.body.classList.add("os-win");
-  const card = win ? document.querySelector(".way--k") : mac ? document.querySelector(".way--p") : null;
-  if (card) card.classList.add("is-yours");
+  const isWin = /^win/i.test(plat) || /Windows NT/.test(ua);
+  const isMac = !isWin && !(navigator.maxTouchPoints > 1) && (/^mac/i.test(plat) || /Macintosh/.test(ua));
+  let saved = null; try { saved = localStorage.getItem("demosc-os"); } catch (_) {}
+  if (saved !== "mac" && saved !== "win") saved = null;
+  const label = ((document.querySelector(".yours") || {}).textContent || "").trim();
+  const picks = [];
+  let chosen = !!saved;
+  function set(os, byHand) {
+    const win = os === "win";
+    if (byHand) { chosen = true; document.body.classList.add("os-picked"); try { localStorage.setItem("demosc-os", os); } catch (_) {} }
+    document.body.classList.toggle("os-win", win);
+    document.querySelectorAll(".way").forEach(w => w.classList.remove("is-yours"));
+    const sure = chosen || (win ? isWin : isMac);   /* a phone is not marked as anyone's computer until they pick */
+    const card = document.querySelector(win ? ".way--k" : ".way--p");
+    if (card && sure) card.classList.add("is-yours");
+    picks.forEach(g => g.querySelectorAll("button[data-os]").forEach(b => {
+      const on = b.dataset.os === os;
+      b.setAttribute("aria-checked", on ? "true" : "false");
+      b.tabIndex = on ? 0 : -1;
+    }));
+  }
+  function makePick() {
+    const g = document.createElement("div");
+    g.className = "os-pick";
+    g.setAttribute("role", "radiogroup");
+    if (label) g.setAttribute("aria-label", label);
+    const reels = '<span class="reels" aria-hidden="true"><i></i><i></i></span>';
+    g.innerHTML = (label ? '<span class="os-label" aria-hidden="true"></span>' : "") +
+      '<span class="os-seg"><button type="button" role="radio" data-os="mac">' + reels + 'Mac</button>' +
+      '<button type="button" role="radio" data-os="win">' + reels + 'Windows</button></span>';
+    if (label) g.querySelector(".os-label").textContent = label;
+    g.addEventListener("click", e => { const b = e.target.closest("button[data-os]"); if (b) set(b.dataset.os, true); });
+    g.addEventListener("keydown", e => {   /* arrow keys move between the two, like any radio group */
+      if (!/^Arrow(Left|Right|Up|Down)$/.test(e.key)) return;
+      e.preventDefault();
+      const next = document.body.classList.contains("os-win") ? "mac" : "win";
+      set(next, true);
+      const b = g.querySelector('button[data-os="' + next + '"]'); if (b) b.focus();
+    });
+    picks.push(g);
+    return g;
+  }
+  const get = document.getElementById("get");
+  if (get) get.parentNode.insertBefore(makePick(), get);
+  const ways = document.querySelector(".versions .ways");
+  if (ways) ways.parentNode.insertBefore(makePick(), ways);
+  /* "On Windows? Get it in Kontakt" and "On a Mac? Get the plugin" flip the switch where you are, instead of scrolling away */
+  /* (caught on the way down, before the page's own smooth-scroll handler on every #link) */
+  document.addEventListener("click", e => {
+    const a = e.target.closest ? e.target.closest('.fine a[href="#versions"]') : null;
+    if (!a) return;
+    e.preventDefault(); e.stopPropagation();
+    set(a.closest(".for-mac") ? "win" : "mac", true);
+  }, true);
+  set(saved || (isWin ? "win" : "mac"), false);
 })();
 
 /* ---------- hear it: one player, streaming, tap to play, one at a time ---------- */
