@@ -114,7 +114,8 @@ h3 { font-size: 1.18rem; line-height: 1.25; }
 .chips { list-style: none; margin: 1.4rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
 .chips li { font-family: var(--mono); font-size: .84rem; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: .5em 1em; }
 
-/* ---------- the thumb-zone bar (phones only) ---------- */
+/* ---------- the closing bar (phones only): a plain row at the very bottom of the page, under the footer. It never
+   floats over anything; Clay, Nov 26: it covered the cassette, "Can that be at the bottom so you scroll down to that?" ---------- */
 .mob-bar { display: none; }
 @media (max-width: 720px) {
   .phone-note { display: block; }
@@ -122,12 +123,10 @@ h3 { font-size: 1.18rem; line-height: 1.25; }
   .get .btn.big { width: 100%; justify-content: center; min-height: 52px; }
   .get .btn.ghost { width: 100%; justify-content: center; min-height: 48px; }
   .figs { grid-template-columns: repeat(2, 1fr); }
-  .mob-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; align-items: center; gap: 12px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--bg) 88%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid var(--line); transform: translateY(110%); transition: transform .35s var(--ease); }
-  .mob-bar.show { transform: none; }
+  .mob-bar { display: flex; align-items: center; gap: 12px; padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); }
   .mob-bar .mob-txt { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); line-height: 1.2; }
   .mob-bar .mob-txt b { color: var(--ink); display: block; font-size: .9rem; }
   .mob-bar .btn { margin-left: auto; white-space: nowrap; min-height: 46px; }
-  body.has-bar { padding-bottom: 80px; }
 }
 
 /* ---------- hear it: the sound strip ---------- */
@@ -180,18 +179,13 @@ body.os-win .way--p .btn { display: none; }
 body.os-win .way--p { background: transparent; border-style: dashed; box-shadow: none; }
 
 /* ---------- which computer: the Mac / Windows switch above the main button and above the two cards (Nov 26).
-   The chosen side gets the accent, and its little reels turn, like the tape playing that side. ---------- */
+   The chosen side gets the accent; just the words, Mac and Windows (Clay, Nov 26). ---------- */
 .os-pick { display: flex; flex-wrap: wrap; align-items: center; gap: .55em .9em; margin: 1.7rem 0 1rem; }
 .os-label { font-family: var(--mono); font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
 .os-seg { display: inline-flex; gap: 4px; padding: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; }
-.os-seg button { display: inline-flex; align-items: center; gap: .6em; font-family: var(--mono); font-weight: 700; font-size: .9rem; color: var(--ink-soft); background: transparent; border: 0; border-radius: 999px; padding: .5em 1.1em .5em .8em; min-height: 40px; cursor: pointer; transition: background-color .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease); }
+.os-seg button { display: inline-flex; align-items: center; gap: .6em; font-family: var(--mono); font-weight: 700; font-size: .9rem; color: var(--ink-soft); background: transparent; border: 0; border-radius: 999px; padding: .5em 1.2em; min-height: 40px; cursor: pointer; transition: background-color .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease); }
 .os-seg button:hover { color: var(--ink); }
 .os-seg button[aria-checked="true"] { background: var(--acc); color: var(--on-acc); box-shadow: 0 8px 18px -12px var(--acc-deep); }
-.os-seg .reels { padding: 3px 5px; gap: 4px; border-radius: 5px; }
-.os-seg .reels i { width: 9px; height: 9px; border-top-color: transparent; }
-.os-seg button[aria-checked="true"] .reels { background: transparent; border-color: rgba(247,243,234,.45); }
-.os-seg button[aria-checked="true"] .reels i { border-color: var(--on-acc); border-top-color: transparent; animation: osReel 1.8s linear infinite; }
-@keyframes osReel { to { transform: rotate(360deg); } }
 .versions .os-pick { margin: 0 0 1.4rem; }
 /* after a pick, the lines that swap in show at once (the hero's entrance fade only plays when the page opens) */
 body.os-picked .rise { opacity: 1; transform: none; animation: none; }
@@ -200,7 +194,6 @@ body.os-picked .rise { opacity: 1; transform: none; animation: none; }
   .os-seg { width: 100%; }
   .os-seg button { flex: 1; justify-content: center; min-height: 44px; }
 }
-@media (prefers-reduced-motion: reduce) { .os-seg button[aria-checked="true"] .reels i { animation: none; } }
 .way--k .btn.ghost:hover { background: var(--bg); }
 @media (max-width: 720px) {
   .ways { grid-template-columns: 1fr; }

@@ -186,12 +186,7 @@ document.getElementById("themeToggle")?.addEventListener("click", () => {
   btn.addEventListener("click", () => { const b = document.querySelectorAll(".snd"); if (!b.length) return; i = (i + 1) % b.length; b[i].click(); });
 })();
 
-/* ---------- the phone bar: shows once the hero's button has scrolled away; phones only (CSS) ---------- */
-(() => {
-  const bar = document.getElementById("mobBar"), get = document.getElementById("get"); if (!bar || !get) return;
-  document.body.classList.add("has-bar");
-  scrollHandlers.push(() => bar.classList.toggle("show", relBottom(get) < 0));
-})();
+/* the phone bar (#mobBar) is a plain row at the bottom of the page now, so it needs no script (Clay, Nov 26) */
 
 /* ---------- the download buttons: the same free checkout, in the top window; tell the host for analytics ---------- */
 document.querySelectorAll("a[data-cart]").forEach(a => a.addEventListener("click", () => {
@@ -234,10 +229,9 @@ document.querySelectorAll("a[data-cart]").forEach(a => a.addEventListener("click
     g.className = "os-pick";
     g.setAttribute("role", "radiogroup");
     if (label) g.setAttribute("aria-label", label);
-    const reels = '<span class="reels" aria-hidden="true"><i></i><i></i></span>';
     g.innerHTML = (label ? '<span class="os-label" aria-hidden="true"></span>' : "") +
-      '<span class="os-seg"><button type="button" role="radio" data-os="mac">' + reels + 'Mac</button>' +
-      '<button type="button" role="radio" data-os="win">' + reels + 'Windows</button></span>';
+      '<span class="os-seg"><button type="button" role="radio" data-os="mac">Mac</button>' +
+      '<button type="button" role="radio" data-os="win">Windows</button></span>';
     if (label) g.querySelector(".os-label").textContent = label;
     g.addEventListener("click", e => { const b = e.target.closest("button[data-os]"); if (b) set(b.dataset.os, true); });
     g.addEventListener("keydown", e => {   /* arrow keys move between the two, like any radio group */
